@@ -24,17 +24,17 @@ function update(myboard) {
     - Clears canvas context.
     - Calls update of every active object in the game
     - Prints new canvas with updated information of each object
-    It's called 50 times per second.
+    It's called 20 times per second.
     */
     let context = document.getElementById("game").getContext("2d");
     context.clearRect(0, 0, 640, 640);
 
-    myboard.elements.array.forEach(element => {
+    myboard.elements.forEach(element => {
         element.update();
     });
 }
 
-function printImage(image, ){
+function printSprite(image, sprite){
     let context = document.getElementById("game").getContext("2d");
-
+    context.drawImage(image, sprite[0], sprite[1], 64, 64, 128, 128, 64, 64);
 }

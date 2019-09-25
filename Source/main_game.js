@@ -15,7 +15,7 @@ class Game {
         //Attribute "world" of Game:
         //Consists of an array with the information of all the board. 
 
-        this.elements = new Array(0);
+        this.elements = [];
         //Attribute "elements" of Game:
         //Consists of an array with all the active elements in scene.
         //Used for rendering and other options.
@@ -35,4 +35,6 @@ class Game {
 var unnamed = new Game();
 create();
 unnamed.create(10, 10);
-setInterval(function () {update(unnamed)}, 20);
+setInterval(function () {update(unnamed)}, 50);
+var myPlayer = new Player();
+unnamed.addElement(myPlayer);
