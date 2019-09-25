@@ -29,9 +29,42 @@ function update(myboard) {
     let context = document.getElementById("game").getContext("2d");
     context.clearRect(0, 0, 640, 640);
 
+    printWorld(myboard);
+
     myboard.elements.forEach(element => {
         element.update();
     });
+}
+
+function printWorld(myboard){
+    let x = myboard.world.length;
+    let y = myboard.world[0].length;
+    let image = myboard.tileSheet;
+    for (var i = 0; i < x; i++){
+        for (var j = 0; j < y; j++){
+            printTile(myboard.tileSheet, myboard.world[i][j], [i*64, j*64]);
+        }
+    }
+}
+
+function printTile(image, type, position){
+    let context = document.getElementById("game").getContext("2d");
+    let sprite = [0, 0];
+    switch(type){
+        case 0:
+            //Floor tile
+            sprite = [0, 186];
+        break;
+        case 1:
+            //Wall tile
+            sprite = [0, 0];
+        break;
+        case 2:
+            //Hole tile
+            sprite = [558, 186];
+        break;
+    }
+    context.drawImage(image, sprite[0], sprite[1], 62, 62, position[0], position[1], 64, 64);
 }
 
 function printSprite(image, sprite){
