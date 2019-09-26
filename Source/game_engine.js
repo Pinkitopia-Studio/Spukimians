@@ -3,6 +3,9 @@
 In this file, all game engine functions are located.
 
 */
+
+var mouseX, mouseY;
+
 function create () {
     /*
     Function CREATE:
@@ -67,7 +70,36 @@ function printTile(image, type, position){
     context.drawImage(image, sprite[0], sprite[1], 62, 62, position[0], position[1], 64, 64);
 }
 
-function printSprite(image, sprite){
+function printSprite(image, sprite, printPosition){
     let context = document.getElementById("game").getContext("2d");
-    context.drawImage(image, sprite[0], sprite[1], 64, 64, 128, 128, 64, 64);
+    context.drawImage(image, sprite[0], sprite[1], 64, 64, printPosition[0], printPosition[1], 64, 64);
+}
+
+function mouseMovement(event) {
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+}
+
+function mouseRelease (event) {
+    let newX = event.clientX;
+    let newY = event.clientY;
+
+    let diffX = mouseX-newX;
+    let diffY = mouseY-newY;
+
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+        //If the swipe was larger on X axis, move Left or Right
+        if (diffX > 0){
+            myPlayer.move(4); //Move left
+        } else {
+            myPlayer.move(2); //Move Right
+        }
+    } else {
+        //Else, the swipe was larger on Y axis, so move Up or Down
+        if (diffY > 0){
+            myPlayer.move(3); //Move down
+        } else {
+            myPlayer.move(1); //Move up
+        }
+    }
 }

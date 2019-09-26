@@ -23,7 +23,7 @@ class Game {
             this.world[i][y-1] = 1;
         }
 
-        this.world[3][4] = 2;
+        this.world[4][4] = 2;
         this.world[3][6] = 2;
         this.world[5][4] = 2;
         this.world[8][7] = 2;
@@ -48,6 +48,10 @@ class Game {
         this.elements.push(element);
     }
 
+    checkTile(x, y){
+        return (this.world[x][y] == 0);
+    }
+
 
 }
 
@@ -57,3 +61,6 @@ unnamed.create(10, 10);
 setInterval(function () {update(unnamed)}, 50);
 var myPlayer = new Player();
 unnamed.addElement(myPlayer);
+
+window.onmousedown = mouseMovement;
+window.onmouseup = mouseRelease;
