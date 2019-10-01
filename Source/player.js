@@ -38,6 +38,7 @@ class Player {
             break;
         }
         if (change) this.nextMove = direction;
+        return change;
     }
 
     update () {
@@ -85,10 +86,13 @@ class Player {
         
         this.lastMoved+=this.velocity; //Add that the player has moved
         if (this.lastMoved >= 64){
-            //If it has moved 64 pixels, its a tile so stop.
+            //If it has moved 64 pixels, its a tile, so stop.
             this.lastMoved = 0;
             this.moving = 0;
             this.velocity = 0;
+            //The player stops moving, so send a signal to all ghosts in board to move
+            if (!(this instanceof Enemy)) unnamed.sendEnemySignal();
+            
         }
         if (this.lastMoved == 0 && this.nextMove != 0){
             //If the player is stopped and has a next move available, start moving in

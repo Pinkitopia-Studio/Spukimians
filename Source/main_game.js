@@ -27,6 +27,8 @@ class Game {
         this.world[3][6] = 2;
         this.world[5][4] = 2;
         this.world[8][7] = 2;
+        this.world[3][5] = 2;
+        this.world[5][5] = 2;
         //Attribute "world" of Game:
         //Consists of an array with the information of all the board. 
 
@@ -44,12 +46,21 @@ class Game {
         /*
         FUNCTION addElement:
         - Adds an element to the world
+        - While an element is in this array, it's rendered in scene.
         */
         this.elements.push(element);
     }
 
     checkTile(x, y){
         return (this.world[x][y] == 0);
+    }
+
+    sendEnemySignal () {
+        this.elements.forEach(element => {
+            if (element instanceof Enemy){
+                element.automaticMove();
+            }
+        });
     }
 
 
@@ -64,3 +75,6 @@ unnamed.addElement(myPlayer);
 
 window.onmousedown = mouseMovement;
 window.onmouseup = mouseRelease;
+
+var myEnemy = new Enemy();
+unnamed.addElement(myEnemy);
