@@ -3,8 +3,21 @@ MAIN GAME JAVASCRIPT. This file calls all functions and contains the MAIN GAME.
 */
 
 class Game {
+    
+    constructor () {
+        this.activeWorld = true;
+        this.menu = 0;
+        this.activeMenu = false;
+
+        this.elements = [];
+        //Attribute "elements" of Game:
+        //Consists of an array with all the active elements in scene.
+        //Used for rendering and other options.
+    }
 
     create (x, y) {
+
+        this.activeWorld = true;
         /*
         FUNCTION create:
         */
@@ -32,10 +45,7 @@ class Game {
         //Attribute "world" of Game:
         //Consists of an array with the information of all the board. 
 
-        this.elements = [];
-        //Attribute "elements" of Game:
-        //Consists of an array with all the active elements in scene.
-        //Used for rendering and other options.
+        
 
         this.tileSheet = new Image();
         this.tileSheet.src = "Assets/exampleTileset.png";

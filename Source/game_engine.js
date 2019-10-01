@@ -32,7 +32,13 @@ function update(myboard) {
     let context = document.getElementById("game").getContext("2d");
     context.clearRect(0, 0, 640, 640);
 
-    printWorld(myboard);
+    if (myboard.activeWorld){
+        //If the world is active (Signifies that a level is being played)
+        printWorld(myboard);
+    } 
+    else if (myboard.activeMenu) {
+        printMenu(myboard);
+    }
 
     myboard.elements.forEach(element => {
         element.update();
@@ -75,14 +81,32 @@ function printSprite(image, sprite, printPosition){
     context.drawImage(image, sprite[0], sprite[1], 64, 64, printPosition[0], printPosition[1], 64, 64);
 }
 
+function printMenu () {
+    //This function prints the background and the buttons of the menu
+    let context = document.getElementById("game").getContext("2d");
+    let backgroundImage = new Image();
+    backgroundImage.src = "Assets/logo2.png";
+    context.drawImage(backgroundImage, 900, 0, 640, 640, 0, 0, 640, 640);
+}
+
 function mouseMovement(event) {
     mouseX = event.clientX;
     mouseY = event.clientY;
 }
 
 function mouseRelease (event) {
-    let newX = event.clientX;
-    let newY = event.clientY;
+
+    if (unnamed.activeWorld){
+        let newX = event.clientX;
+        let newY = event.clientY;
+        movePlayer(newX, newY);
+    } else {
+        menuClick(newX, nexY);
+    }
+    
+}
+
+function movePlayer (newX, newY) {
 
     let diffX = mouseX-newX;
     let diffY = mouseY-newY;
@@ -111,4 +135,8 @@ function shuffleArray(array) {
         array[i] = array[j];
         array[j] = temp;
     }
+}
+
+function menuClick (x, y) {
+    //This function receives the position where user has clicked
 }
