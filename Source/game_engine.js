@@ -5,6 +5,11 @@ In this file, all game engine functions are located.
 */
 
 var mouseX, mouseY;
+//TECLAS DE TECLADO
+var up = false,
+    down = false,
+    right = false,
+    left = false;
 
 function create () {
     /*
@@ -19,6 +24,7 @@ function create () {
     canvas.setAttribute('style', "position: absolute;  left: 30%; top: 10%; border:2px");
     document.body.appendChild(canvas);
 
+    
 }
 
 function update(myboard) {
@@ -43,6 +49,8 @@ function update(myboard) {
     myboard.elements.forEach(element => {
         element.update();
     });
+
+   
 }
 
 function printWorld(myboard){
@@ -106,6 +114,62 @@ function mouseRelease (event) {
     
 }
 
+document.addEventListener('keydown', press);
+document.addEventListener('keyup', release);
+
+function press(e){
+    if(e.keyCode === 40 /*up*/ || e.keyCode === 83 /*w*/ || e.keyCode === 90 /*z*/ ){
+        up = true;
+    }
+    if(e.keyCode === 39 /*right*/ || e.keyCode === 68 /*d*/){
+        right = true;
+    }
+    if(e.keyCode === 38 /*down*/ || e.keyCode === 87 /*s*/){
+        down = true;
+    }
+    if(e.keyCode === 37 /*left*/ || e.keyCode === 65 /*a*/ || e.keyCode === 81 /*q*/ ){
+        left = true;
+    }
+    
+}
+
+function release(e){
+    if(e.keyCode === 40 /*up*/ || e.keyCode === 83 /*w*/ || e.keyCode === 90 /*z*/ ){
+        up = false;
+        movePlayerKeys(1);
+    }
+    if(e.keyCode === 39 /*right*/ || e.keyCode === 68 /*d*/){
+        right = false;
+        movePlayerKeys(2);
+    }
+    if(e.keyCode === 38 /*down*/ || e.keyCode === 87 /*s*/){
+        down = false;
+        movePlayerKeys(3);
+    }
+    if(e.keyCode === 37 /*left*/ || e.keyCode === 65 /*a*/ || e.keyCode === 81 /*q*/ ){
+        left = false;
+        movePlayerKeys(4);
+    }
+    
+}
+
+function movePlayerKeys(k){
+    switch(k){
+        case 1:
+            myPlayer.move(1);
+            break;
+        case 2:
+            myPlayer.move(2);
+            break;
+        case 3:
+            myPlayer.move(3);
+            break;
+        case 4:
+            myPlayer.move(4);
+            break;
+    }
+}
+
 function movePlayer (newX, newY) {
 
     let diffX = mouseX-newX;
@@ -126,6 +190,11 @@ function movePlayer (newX, newY) {
             myPlayer.move(1); //Move up
         }
     }
+
+    
+       
+    
+    
 }
 
 function shuffleArray(array) {

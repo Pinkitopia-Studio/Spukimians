@@ -6,7 +6,7 @@ class Player {
         this.moving = 1;
         /*
         Attribute "moving": 0 = idle
-        1 - 4 = moving to a direction (1N, 2E, 3S, 4W)
+        1 - 4 = moving to a direction (1S, 2E, 3N, 4W)
         */
        this.lastSprite = 0;
        this.x = 128;
@@ -22,6 +22,8 @@ class Player {
 
        this.nextIdle = 0; //Velocidad en que cambian los sprites de la animación de idle
        this.nextWalk = 0; //Velocidad en que cambian los sprites de la animación de andar
+
+       this.lastDirection = 1; //1S, 2E, 3N, 4W
     }
 
     move (direction) {
@@ -54,32 +56,47 @@ class Player {
                 case 1:
                     this.y+=this.velocity;
                     spritePos = [(this.lastSprite+4)*64, 0];
+                    this.lastDirection = 1;
                 break;
                 case 2:
                     this.x+=this.velocity;
                     spritePos = [(this.lastSprite+4)*64, 64];
+                    this.lastDirection = 2;
                 break;
                 case 3:
                     this.y-=this.velocity;
                     spritePos = [(this.lastSprite+4)*64, 128];
+                    this.lastDirection = 3;
                 break;
                 case 4:
                     this.x-=this.velocity;
                     spritePos = [(this.lastSprite+4)*64, 192];
+                    this.lastDirection = 4;
                 break;
                 
             }
 
             this.nextWalk++;
         }else{
-            spritePos = [this.lastSprite * 64, 0];
+            switch(this.lastDirection){
+                case 1:
+                    spritePos = [this.lastSprite * 64, 0];
+                    break;
+                case 2:
+                    spritePos = [this.lastSprite * 64, 64];
+                    break;
+                case 3:
+                    spritePos = [this.lastSprite * 64, 128];
+                    break;
+                case 4:
+                    spritePos = [this.lastSprite * 64, 192];
+                    break;
+            }
+            
 
             this.nextIdle++;
         }
         
-        
-        
-
         if(this.nextWalk == 2){ //determinación de la velocidad de la animación de andar
             this.lastSprite = this.lastSprite + 1;
             this.nextWalk = 0;
@@ -131,7 +148,7 @@ class Player {
             //That direction.
             this.moving = this.nextMove;
             this.nextMove = 0;
-            //this.lastSprite = 0;
+            this.lastSprite = 0;
             this.velocity = 2;
         }
         printSprite(this.spriteSheet, spritePos, [this.x, this.y]);
