@@ -2,7 +2,7 @@ class Player {
 
     constructor () {
         this.spriteSheet = new Image();
-        this.spriteSheet.src = "Assets/exampleSpriteSheet_Sans.png";
+        this.spriteSheet.src = "Assets/girlSpriteSheet64.png";
         this.moving = 1;
         /*
         Attribute "moving": 0 = idle
@@ -11,7 +11,7 @@ class Player {
        this.lastSprite = 0;
        this.x = 128;
        this.y = 128;
-       this.velocity = 1;
+       this.velocity = 2;
        this.lastMoved = 0;
        /*
        Attribute "lastMoved" indicates how many pixels has the player moved since it started moving.
@@ -42,27 +42,40 @@ class Player {
     }
 
     update () {
-        this.lastSprite = (this.lastSprite+1)%9;
+        this.lastSprite = (this.lastSprite) % 4; //cambiado para los nuevos sprites
         let spritePos = [0, 0];
-        switch(this.moving) {
-            case 1:
-                this.y+=this.velocity;
-                spritePos = [this.lastSprite*64, 128];
-            break;
-            case 2:
-                this.x+=this.velocity;
-                spritePos = [this.lastSprite*64, 192];
-            break;
-            case 3:
-                this.y-=this.velocity;
-                spritePos = [this.lastSprite*64, 0];
-            break;
-            case 4:
-                this.x-=this.velocity;
-                spritePos = [this.lastSprite*64, 64];
-            break;
+        
+        if(this.moving > 0){
             
+            switch(this.moving) {
+                case 1:
+                    this.y+=this.velocity;
+                    spritePos = [(this.lastSprite+4)*64, 0];
+                break;
+                case 2:
+                    this.x+=this.velocity;
+                    spritePos = [(this.lastSprite+4)*64, 64];
+                break;
+                case 3:
+                    this.y-=this.velocity;
+                    spritePos = [(this.lastSprite+4)*64, 128];
+                break;
+                case 4:
+                    this.x-=this.velocity;
+                    spritePos = [(this.lastSprite+4)*64, 192];
+                break;
+                
+            }
         }
+        else{
+            this.lastSprite = 0;
+
+        }
+        
+        this.lastSprite = this.lastSprite + 1;
+        
+            
+        
         if (this.lastMoved == 0 && this.moving > 0){
             //When starting a new movement to a new tile, reflect it in player's data
             //It's starting a new movement when it's moving and it does not have a previous
@@ -100,7 +113,7 @@ class Player {
             this.moving = this.nextMove;
             this.nextMove = 0;
             this.lastSprite = 0;
-            this.velocity = 1;
+            this.velocity = 2;
         }
         printSprite(this.spriteSheet, spritePos, [this.x, this.y]);
     }

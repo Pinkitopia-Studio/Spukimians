@@ -78,7 +78,7 @@ function printTile(image, type, position){
 
 function printSprite(image, sprite, printPosition){
     let context = document.getElementById("game").getContext("2d");
-    context.drawImage(image, sprite[0], sprite[1], 64, 64, printPosition[0], printPosition[1], 64, 64);
+    context.drawImage(image, sprite[0], sprite[1], 64, 64, printPosition[0], printPosition[1] - 16, 64, 64);
 }
 
 function printMenu () {
