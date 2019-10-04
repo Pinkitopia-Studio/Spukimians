@@ -6,10 +6,12 @@ In this file, all game engine functions are located.
 
 var mouseX, mouseY;
 //TECLAS DE TECLADO
-var up = false,
-    down = false,
-    right = false,
-    left = false;
+up = false,
+down = false,
+right = false,
+left = false;
+
+var esc = false;
 
 function create () {
     /*
@@ -26,7 +28,7 @@ function create () {
 
     
 }
-
+//MAIN LOOP
 function update(myboard) {
     /*
     FUNCTION UPDATE:
@@ -38,6 +40,8 @@ function update(myboard) {
     let context = document.getElementById("game").getContext("2d");
     context.clearRect(0, 0, 640, 640);
 
+    
+    
     if (myboard.activeWorld){
         //If the world is active (Signifies that a level is being played)
         printWorld(myboard);
@@ -45,10 +49,19 @@ function update(myboard) {
     else if (myboard.activeMenu) {
         printMenu(myboard);
     }
+    
 
     myboard.elements.forEach(element => {
-        element.update();
+        element.update(myboard);
     });
+
+    if(esc){ 
+        myboard.activePause = true;
+        
+    }else{
+        myboard.activePause = false;
+        
+    }
 
    
 }
@@ -61,6 +74,9 @@ function printWorld(myboard){
         for (var j = 0; j < y; j++){
             printTile(myboard.tileSheet, myboard.world[i][j], [i*64, j*64]);
         }
+    }
+    if(myboard.activePause){
+        printBackground("pause");
     }
 }
 
@@ -89,12 +105,27 @@ function printSprite(image, sprite, printPosition){
     context.drawImage(image, sprite[0], sprite[1], 64, 64, printPosition[0], printPosition[1] - 16, 64, 64);
 }
 
+function printImage(src, pos, size){
+    let image = new Image();
+    image.src = "Assets/"+src+".png";
+    let context = document.getElementById("game").getContext("2d");
+    context.drawImage(image, pos[0], pos[1], size[0], size[1]);
+}
+
 function printMenu () {
     //This function prints the background and the buttons of the menu
+    printBackground("menuBackground"); 
+}
+
+function printBackground(background){
     let context = document.getElementById("game").getContext("2d");
     let backgroundImage = new Image();
-    backgroundImage.src = "Assets/logo2.png";
-    context.drawImage(backgroundImage, 900, 0, 640, 640, 0, 0, 640, 640);
+    backgroundImage.src = "Assets/"+background+".png";
+    context.drawImage(backgroundImage, 0, 0, 640, 640, 0, 0, 640, 640);
+}
+
+function printLevelSelector(){
+    //TODO LO DEL LEVEL SELECTOR AQUI.
 }
 
 function mouseMovement(event) {
@@ -114,9 +145,6 @@ function mouseRelease (event) {
     
 }
 
-document.addEventListener('keydown', press);
-document.addEventListener('keyup', release);
-
 function press(e){
     if(e.keyCode === 40 /*up*/ || e.keyCode === 83 /*w*/ || e.keyCode === 90 /*z*/ ){
         up = true;
@@ -129,6 +157,19 @@ function press(e){
     }
     if(e.keyCode === 37 /*left*/ || e.keyCode === 65 /*a*/ || e.keyCode === 81 /*q*/ ){
         left = true;
+    }
+
+    //Escape
+    if(e.keyCode === 27){
+        console.log("Escape pulsado");
+        if(esc){
+            esc = false;
+            
+        }else{
+            esc = true;
+            
+        }
+
     }
     
 }

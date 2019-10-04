@@ -8,6 +8,8 @@ class Game {
         this.activeWorld = true;
         this.menu = 0;
         this.activeMenu = false;
+        this.activePause = false;
+        this.activeLevelSelector = false;
 
         this.elements = [];
         //Attribute "elements" of Game:
@@ -17,6 +19,7 @@ class Game {
 
     create (x, y) {
 
+        
         this.activeWorld = true;
         /*
         FUNCTION create:
@@ -61,6 +64,10 @@ class Game {
         this.elements.push(element);
     }
 
+    eraseElements(){
+        this.elements = [];
+    }
+
     checkTile(x, y){
         return (this.world[x][y] == 0);
     }
@@ -85,6 +92,13 @@ unnamed.addElement(myPlayer);
 
 window.onmousedown = mouseMovement;
 window.onmouseup = mouseRelease;
+window.onkeydown = press;
+window.onkeyup = release;
+
 
 var myEnemy = new Enemy();
 unnamed.addElement(myEnemy);
+
+var play = new Button("ui/PlayOFF", 0, 0, 292, 292, "ui/PlayON");
+play.create();
+unnamed.addElement(play);
