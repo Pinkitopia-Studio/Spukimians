@@ -19,6 +19,9 @@ class Player {
        this.nextMove = 0;
        this.tileX = 2;
        this.tileY = 2;
+
+       this.nextIdle = 0; //Velocidad en que cambian los sprites de la animación de idle
+       this.nextWalk = 0; //Velocidad en que cambian los sprites de la animación de andar
     }
 
     move (direction) {
@@ -66,13 +69,29 @@ class Player {
                 break;
                 
             }
-        }
-        else{
-            this.lastSprite = 0;
 
+            this.nextWalk++;
+        }else{
+            spritePos = [this.lastSprite * 64, 0];
+
+            this.nextIdle++;
         }
         
-        this.lastSprite = this.lastSprite + 1;
+        
+        
+
+        if(this.nextWalk == 2){ //determinación de la velocidad de la animación de andar
+            this.lastSprite = this.lastSprite + 1;
+            this.nextWalk = 0;
+        }
+
+        if(this.nextIdle == 4){
+            this.lastSprite = this.lastSprite + 1;
+            this.nextIdle = 0;
+        }
+
+        
+        
         
             
         
@@ -112,7 +131,7 @@ class Player {
             //That direction.
             this.moving = this.nextMove;
             this.nextMove = 0;
-            this.lastSprite = 0;
+            //this.lastSprite = 0;
             this.velocity = 2;
         }
         printSprite(this.spriteSheet, spritePos, [this.x, this.y]);
