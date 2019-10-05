@@ -90,6 +90,8 @@ setInterval(function () {update(unnamed)}, 50);
 var myPlayer = new Player();
 unnamed.addElement(myPlayer);
 
+var canvas = getCanvas();
+window.onmousemove = mouseOver;
 window.onmousedown = mouseMovement;
 window.onmouseup = mouseRelease;
 window.onkeydown = press;
@@ -100,5 +102,6 @@ var myEnemy = new Enemy();
 unnamed.addElement(myEnemy);
 
 var play = new Button("ui/PlayOFF", 0, 0, 292, 292, "ui/PlayON");
+
 play.create();
 unnamed.addElement(play);

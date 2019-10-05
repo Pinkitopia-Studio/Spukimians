@@ -5,11 +5,13 @@ In this file, all game engine functions are located.
 */
 
 var mouseX, mouseY;
+
+var mousePosX, mousePosY;
 //TECLAS DE TECLADO
-up = false,
-down = false,
-right = false,
-left = false;
+var up = false,
+    down = false,
+    right = false,
+    left = false;
 
 var esc = false;
 
@@ -23,7 +25,9 @@ function create () {
     canvas.id = "game";
     canvas.setAttribute("width",640);
     canvas.setAttribute("height",640);
-    canvas.setAttribute('style', "position: absolute;  left: 30%; top: 10%; border:2px");
+    canvas.setAttribute("x", 410);
+    canvas.setAttribute("y", 100);
+    canvas.setAttribute('style', "position: absolute;  left: 410px; top: 100px; border:2px");
     document.body.appendChild(canvas);
 
     
@@ -109,7 +113,8 @@ function printImage(src, pos, size){
     let image = new Image();
     image.src = "Assets/"+src+".png";
     let context = document.getElementById("game").getContext("2d");
-    context.drawImage(image, pos[0], pos[1], size[0], size[1]);
+    var img = context.drawImage(image, pos[0], pos[1], size[0], size[1]);
+    return img;
 }
 
 function printMenu () {
@@ -124,6 +129,11 @@ function printBackground(background){
     context.drawImage(backgroundImage, 0, 0, 640, 640, 0, 0, 640, 640);
 }
 
+function getCanvas(){
+    var canvas = document.getElementById("game");
+    return canvas;
+}
+
 function printLevelSelector(){
     //TODO LO DEL LEVEL SELECTOR AQUI.
 }
@@ -131,6 +141,11 @@ function printLevelSelector(){
 function mouseMovement(event) {
     mouseX = event.clientX;
     mouseY = event.clientY;
+}
+
+function mouseOver(event){
+    mousePosX = event.clientX;
+    mousePosY = event.clientY;
 }
 
 function mouseRelease (event) {
