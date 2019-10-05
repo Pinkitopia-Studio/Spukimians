@@ -10,13 +10,14 @@ class SceneManager {
         //SCENES
         var menu = new Menu();
         var game = new Game();
+        var levelSelector = new LevelSelector();
 
         menu.create();
 
         this.menu = menu;
         this.game = game;
 
-        this.scenes = [menu, game];
+        this.scenes = [menu, game, levelSelector];
         console.log(this.game);
     }  
     
@@ -30,11 +31,6 @@ class SceneManager {
         this.scenes[index].create();
         this.actualScene = index;
         this.scenes[pos].destroy();
-        
-        
-        
-        
-        
     }
 }
 

@@ -29,8 +29,6 @@ function create () {
     canvas.setAttribute("y", 100);
     canvas.setAttribute('style', "position: absolute;  left: 410px; top: 100px; border:2px");
     document.body.appendChild(canvas);
-
-    
 }
 
 function printWorld(myboard){
@@ -121,13 +119,13 @@ function mouseOver(event){
 
 function mouseRelease (event) {
 
-    if (sceneManager.scenes[1].activeWorld){
+    if (sceneManager.scenes[1].activeWorld && !sceneManager.scenes[1].activePause){
         let newX = event.clientX;
         let newY = event.clientY;
         movePlayer(newX, newY);
-    } else {
-        menuClick(newX, nexY);
-    }
+    }/* else {
+        menuClick(newX, newY);
+    }*/
     
 }
 
@@ -181,7 +179,7 @@ function release(e){
 }
 
 function movePlayerKeys(k){
-    if(!sceneManager.scenes[1].activePause){ //pausa del game (escena 1)
+    if(!sceneManager.scenes[1].activePause && sceneManager.scenes[1].activeWorld){ //pausa del game (escena 1)
         switch(k){
             case 1:
                 sceneManager.scenes[1].elements[0].move(1); //Player del game (escena1)
@@ -202,7 +200,7 @@ function movePlayerKeys(k){
 
 function movePlayer (newX, newY) {
 
-    if(!sceneManager.scenes[1].activePause){
+    if(!sceneManager.scenes[1].activePause && sceneManager.scenes[1].activeWorld){
         let diffX = mouseX-newX;
         let diffY = mouseY-newY;
 
@@ -235,4 +233,9 @@ function shuffleArray(array) {
 
 function menuClick (x, y) {
     //This function receives the position where user has clicked
+}
+
+function playSound(sound){
+    var s = new Audio("Assets/sounds/"+sound+".wav");
+    s.play();
 }

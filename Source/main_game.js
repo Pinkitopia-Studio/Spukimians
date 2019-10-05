@@ -5,7 +5,7 @@ MAIN GAME JAVASCRIPT. This file calls all functions and contains the MAIN GAME.
 class Game {
     
     constructor () {
-        this.activeWorld = true;
+        this.activeWorld = false;
         this.activePause = false;
         this.activeLevelSelector = false;
 
@@ -55,6 +55,8 @@ class Game {
 
         var myEnemy = new Enemy();
         this.addElement(myEnemy);
+
+        playSound("inGame");
         
     }
 
