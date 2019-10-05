@@ -6,19 +6,18 @@ class Game {
     
     constructor () {
         this.activeWorld = true;
-        this.menu = 0;
-        this.activeMenu = false;
         this.activePause = false;
         this.activeLevelSelector = false;
 
         this.elements = [];
+        this.pauseElements = [];
         //Attribute "elements" of Game:
         //Consists of an array with all the active elements in scene.
         //Used for rendering and other options.
     }
 
-    create (x, y) {
-
+    create () {
+        var x = 10, y = 10;
         
         this.activeWorld = true;
         /*
@@ -48,24 +47,42 @@ class Game {
         //Attribute "world" of Game:
         //Consists of an array with the information of all the board. 
 
-        
-
         this.tileSheet = new Image();
         this.tileSheet.src = "Assets/exampleTileset.png";
+
+        var myPlayer = new Player();
+        this.addElement(myPlayer);
+
+        var myEnemy = new Enemy();
+        this.addElement(myEnemy);
         
     }
 
-    addElement(element){
-        /*
-        FUNCTION addElement:
-        - Adds an element to the world
-        - While an element is in this array, it's rendered in scene.
-        */
-        this.elements.push(element);
+    addElement(element, arrayIndex){
+        if(arrayIndex === 1){
+            this.pauseElements.push(element);
+        }else{
+            this.elements.push(element);
+        }
+        
     }
 
-    eraseElements(){
-        this.elements = [];
+    removeElement(index, arrayIndex){
+        if(arrayIndex === 1){
+            this.pauseElements.splice(index, 1);
+        }else{
+            this.elements.splice(index, 1);
+        }
+        
+    }
+
+    eraseElements(arrayIndex){
+        if(arrayIndex === 1){
+            this.pauseElements = [];
+        }else{
+            this.elements = [];
+        }
+        
     }
 
     checkTile(x, y){
@@ -80,28 +97,69 @@ class Game {
         });
     }
 
+    destroy(interval){
+        this.elements = []
+        this.pauseElements = []
+        this.world = [];
+        this.activePause = false;
+        this.activeWorld = false;
+
+        //clearInterval(interval);
+    }
+
+
+    update() {
+        /*
+        FUNCTION UPDATE:
+        - Clears canvas context.
+        - Calls update of every active object in the game
+        - Prints new canvas with updated information of each object
+        It's called 20 times per second.
+        */
+        let context = document.getElementById("game").getContext("2d");
+        context.clearRect(0, 0, 640, 640);
+    
+        
+        
+        if (this.activeWorld){
+            //If the world is active (Signifies that a level is being played)
+            printWorld(this);
+        } 
+        
+        if(this.activePause){
+            printPause(this);
+        }else{
+            this.eraseElements(1); //borra todos los elementos del pause
+        }
+        
+    
+        this.elements.forEach(element => {
+            element.update(this);
+        });
+    
+        this.pauseElements.forEach(element => {
+            element.update(this);
+        })
+    
+        if(esc){ 
+            this.activePause = true;
+            
+        }else{
+            this.activePause = false;
+            
+        }
+    
+       
+    }
 
 }
 
-var unnamed = new Game();
-create();
-unnamed.create(10, 10);
-setInterval(function () {update(unnamed)}, 50);
-var myPlayer = new Player();
-unnamed.addElement(myPlayer);
-
-var canvas = getCanvas();
-window.onmousemove = mouseOver;
-window.onmousedown = mouseMovement;
-window.onmouseup = mouseRelease;
-window.onkeydown = press;
-window.onkeyup = release;
 
 
-var myEnemy = new Enemy();
-unnamed.addElement(myEnemy);
 
-var play = new Button("ui/PlayOFF", 0, 0, 292, 292, "ui/PlayON");
 
-play.create();
-unnamed.addElement(play);
+
+
+
+
+

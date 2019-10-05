@@ -31,16 +31,16 @@ class Player {
         let change = false;
         switch(direction){
             case 1:
-                change = unnamed.checkTile(this.tileX, this.tileY+1);
+                change = sceneManager.scenes[1].checkTile(this.tileX, this.tileY+1);
             break;
             case 2:
-                change = unnamed.checkTile(this.tileX+1, this.tileY);
+                change = sceneManager.scenes[1].checkTile(this.tileX+1, this.tileY);
             break;
             case 3:
-                change = unnamed.checkTile(this.tileX, this.tileY-1);
+                change = sceneManager.scenes[1].checkTile(this.tileX, this.tileY-1);
             break;
             case 4:
-                change = unnamed.checkTile(this.tileX-1, this.tileY);
+                change = sceneManager.scenes[1].checkTile(this.tileX-1, this.tileY);
             break;
         }
         if (change) this.nextMove = direction;
@@ -142,7 +142,7 @@ class Player {
                 this.moving = 0;
                 this.velocity = 0;
                 //The player stops moving, so send a signal to all ghosts in board to move
-                if (!(this instanceof Enemy)) unnamed.sendEnemySignal();
+                if (!(this instanceof Enemy)) sceneManager.scenes[1].sendEnemySignal();
                 
             }
             if (this.lastMoved == 0 && this.nextMove != 0){

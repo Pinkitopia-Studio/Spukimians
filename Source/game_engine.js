@@ -32,43 +32,6 @@ function create () {
 
     
 }
-//MAIN LOOP
-function update(myboard) {
-    /*
-    FUNCTION UPDATE:
-    - Clears canvas context.
-    - Calls update of every active object in the game
-    - Prints new canvas with updated information of each object
-    It's called 20 times per second.
-    */
-    let context = document.getElementById("game").getContext("2d");
-    context.clearRect(0, 0, 640, 640);
-
-    
-    
-    if (myboard.activeWorld){
-        //If the world is active (Signifies that a level is being played)
-        printWorld(myboard);
-    } 
-    else if (myboard.activeMenu) {
-        printMenu(myboard);
-    }
-    
-
-    myboard.elements.forEach(element => {
-        element.update(myboard);
-    });
-
-    if(esc){ 
-        myboard.activePause = true;
-        
-    }else{
-        myboard.activePause = false;
-        
-    }
-
-   
-}
 
 function printWorld(myboard){
     let x = myboard.world.length;
@@ -81,7 +44,9 @@ function printWorld(myboard){
     }
     if(myboard.activePause){
         printBackground("pause");
+
     }
+    
 }
 
 function printTile(image, type, position){
@@ -117,9 +82,15 @@ function printImage(src, pos, size){
     return img;
 }
 
-function printMenu () {
+function printMenu (myboard) {
     //This function prints the background and the buttons of the menu
     printBackground("menuBackground"); 
+}
+
+function printPause(myboard){
+    var play = new Button("ui/PlayOFF", 174, 174, 292, 292, "ui/PlayON");
+    myboard.addElement(play, 1);
+    
 }
 
 function printBackground(background){
@@ -150,7 +121,7 @@ function mouseOver(event){
 
 function mouseRelease (event) {
 
-    if (unnamed.activeWorld){
+    if (sceneManager.scenes[1].activeWorld){
         let newX = event.clientX;
         let newY = event.clientY;
         movePlayer(newX, newY);
@@ -210,47 +181,47 @@ function release(e){
 }
 
 function movePlayerKeys(k){
-    switch(k){
-        case 1:
-            myPlayer.move(1);
-            break;
-        case 2:
-            myPlayer.move(2);
-            break;
-        case 3:
-            myPlayer.move(3);
-            break;
-        case 4:
-            myPlayer.move(4);
-            break;
+    if(!sceneManager.scenes[1].activePause){ //pausa del game (escena 1)
+        switch(k){
+            case 1:
+                sceneManager.scenes[1].elements[0].move(1); //Player del game (escena1)
+                break;
+            case 2:
+                sceneManager.scenes[1].elements[0].move(2);
+                break;
+            case 3:
+                sceneManager.scenes[1].elements[0].move(3);
+                break;
+            case 4:
+                sceneManager.scenes[1].elements[0].move(4);
+                break;
+        }
     }
+    
 }
 
 function movePlayer (newX, newY) {
 
-    let diffX = mouseX-newX;
-    let diffY = mouseY-newY;
+    if(!sceneManager.scenes[1].activePause){
+        let diffX = mouseX-newX;
+        let diffY = mouseY-newY;
 
-    if (Math.abs(diffX) > Math.abs(diffY)) {
-        //If the swipe was larger on X axis, move Left or Right
-        if (diffX > 0){
-            myPlayer.move(4); //Move left
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+            //If the swipe was larger on X axis, move Left or Right
+            if (diffX > 0){
+                sceneManager.scenes[1].elements[0].move(4); //Move left
+            } else {
+                sceneManager.scenes[1].elements[0].move(2); //Move Right
+            }
         } else {
-            myPlayer.move(2); //Move Right
-        }
-    } else {
-        //Else, the swipe was larger on Y axis, so move Up or Down
-        if (diffY > 0){
-            myPlayer.move(3); //Move down
-        } else {
-            myPlayer.move(1); //Move up
+            //Else, the swipe was larger on Y axis, so move Up or Down
+            if (diffY > 0){
+                sceneManager.scenes[1].elements[0].move(3); //Move down
+            } else {
+                sceneManager.scenes[1].elements[0].move(1); //Move up
+            }
         }
     }
-
-    
-       
-    
-    
 }
 
 function shuffleArray(array) {

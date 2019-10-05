@@ -10,34 +10,59 @@ class Button{
         this.sizeY = sY;
         this.sprites = [img, imgHover];
 
-        this.hover = false;
-        this.active = true;
-        this.image = this.sprites[0];
-
-        
     }
     
     
     create(){
-        
-            
-        
+        this.hover = false;
+        this.active = true;
+        this.image = this.sprites[0];
+
+        this.x = this.posX;
+        this.y = this.posY;
+        this.width = this.sizeX;
+        this.height = this.sizeY;
     }
 
-    
+    assignFunction(fn){
+        this.fn = fn;
+    }
 
     update(){
-        
-        console.log(mousePosX - 410);
 
         if((mousePosX - 410 >= this.posX && mousePosX - 410 <= this.posX+this.sizeX) && (mousePosY - 100 >= this.posY && mousePosY - 100 <= this.posY + this.sizeY)){
-            console.log("he entrao");
-            this.image = this.sprites[1];
+            if(this.sprites[1] !== ""){
+                this.image = this.sprites[1];
+            }else{
+                
+                this.posX = this.x - (this.width/20);
+                this.posY = this.y - (this.height/20);
+                this.sizeX = this.width + (this.width/20*2);
+                this.sizeY = this.height + (this.height/20*2);
+            }
+            
         }
         else{
             this.image = this.sprites[0];
+
+            this.posX = this.x;
+            this.posY = this.y;
+            this.sizeX = this.width;
+            this.sizeY = this.height;
         }
 
+        if((mouseX- 410 >= this.posX && mouseX - 410 <= this.posX+this.sizeX) && (mouseY - 100 >= this.posY && mouseY - 100 <= this.posY + this.sizeY)){
+            
+            this.onClick(this.fn);
+        }
+        
         this.button = printImage(this.image, [this.posX, this.posY], [this.sizeX, this.sizeY]);
     }
+
+    onClick(callback){ //se debe meter una función.
+        callback();
+    }
+        
+    
+
 }
