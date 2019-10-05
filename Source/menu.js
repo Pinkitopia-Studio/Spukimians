@@ -11,9 +11,9 @@ class Menu {
     create(){
         this.active = true;
 
-        let play = new Button("ui/play", 320 - (365/2), 50, 365, 155, "");
-        let options = new Button("ui/back", 320 - (410/2), 250, 410, 155, "");
-        let exit = new Button("ui/salir", 320 - (365/2), 450, 365, 155, "");
+        let play = new Button("ui/play", 1240/2 - (365/2), 150, 365, 155, "");
+        let options = new Button("ui/back", 1240/2 - (410/2), 350, 410, 155, "");
+        let exit = new Button("ui/salir", 1240/2 - (365/2), 550, 365, 155, "");
 
         play.create();
         play.assignFunction(function(){
@@ -43,7 +43,8 @@ class Menu {
     update(){
         
         let context = document.getElementById("game").getContext("2d");
-        context.clearRect(0, 0, 640, 640);
+        context.clearRect(0, 0, 1240, 840);
+
 
         if(this.active)
             printBackground("menuBackground");

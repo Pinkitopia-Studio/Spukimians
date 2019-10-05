@@ -6,6 +6,9 @@ In this file, all game engine functions are located.
 
 var mouseX, mouseY;
 
+var cornerX = 1240/2 - 640/2; //ESQUINA IZQUIERDA
+var cornerY = 840/2 - 640/2;
+
 var mousePosX, mousePosY;
 //TECLAS DE TECLADO
 var up = false,
@@ -23,21 +26,23 @@ function create () {
     */
     let canvas = document.createElement("CANVAS");
     canvas.id = "game";
-    canvas.setAttribute("width",640);
-    canvas.setAttribute("height",640);
-    canvas.setAttribute("x", 410);
-    canvas.setAttribute("y", 100);
-    canvas.setAttribute('style', "position: absolute;  left: 410px; top: 100px; border:2px");
+    canvas.setAttribute("width",1240);
+    canvas.setAttribute("height",860);
+    canvas.setAttribute("x", 20);
+    canvas.setAttribute("y", 20);
+    canvas.setAttribute('style', "background-color: black; position: absolute;  left: 20px; top: 20px; border:2px");
     document.body.appendChild(canvas);
 }
 
 function printWorld(myboard){
+    
+    
     let x = myboard.world.length;
     let y = myboard.world[0].length;
     let image = myboard.tileSheet;
     for (var i = 0; i < x; i++){
         for (var j = 0; j < y; j++){
-            printTile(myboard.tileSheet, myboard.world[i][j], [i*64, j*64]);
+            printTile(myboard.tileSheet, myboard.world[i][j], [cornerX+(i*64), cornerY+(j*64)]);
         }
     }
     if(myboard.activePause){
@@ -69,7 +74,7 @@ function printTile(image, type, position){
 
 function printSprite(image, sprite, printPosition){
     let context = document.getElementById("game").getContext("2d");
-    context.drawImage(image, sprite[0], sprite[1], 64, 64, printPosition[0], printPosition[1] - 16, 64, 64);
+    context.drawImage(image, sprite[0], sprite[1], 64, 64, cornerX + printPosition[0], cornerY + printPosition[1] - 16, 64, 64);
 }
 
 function printImage(src, pos, size){
@@ -95,7 +100,7 @@ function printBackground(background){
     let context = document.getElementById("game").getContext("2d");
     let backgroundImage = new Image();
     backgroundImage.src = "Assets/"+background+".png";
-    context.drawImage(backgroundImage, 0, 0, 640, 640, 0, 0, 640, 640);
+    context.drawImage(backgroundImage, 0, 0, 640, 640, cornerX, cornerY, 640, 640);
 }
 
 function getCanvas(){

@@ -119,7 +119,8 @@ class Game {
         It's called 20 times per second.
         */
         let context = document.getElementById("game").getContext("2d");
-        context.clearRect(0, 0, 640, 640);
+        context.clearRect(0, 0, 1240, 840);
+
     
         
         

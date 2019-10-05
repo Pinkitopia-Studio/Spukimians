@@ -30,7 +30,7 @@ class Button{
 
     update(){
 
-        if((mousePosX - 410 >= this.posX && mousePosX - 410 <= this.posX+this.sizeX) && (mousePosY - 100 >= this.posY && mousePosY - 100 <= this.posY + this.sizeY)){
+        if((mousePosX - 20 >= this.posX && mousePosX - 20 <= this.posX+this.sizeX) && (mousePosY - 20 >= this.posY && mousePosY - 20 <= this.posY + this.sizeY)){
             if(this.sprites[1] !== ""){
                 this.image = this.sprites[1];
             }else{
@@ -51,7 +51,7 @@ class Button{
             this.sizeY = this.height;
         }
 
-        if((mouseX- 410 >= this.posX && mouseX - 410 <= this.posX+this.sizeX) && (mouseY - 100 >= this.posY && mouseY - 100 <= this.posY + this.sizeY)){
+        if((mouseX- 20 >= this.posX && mouseX - 20 <= this.posX+this.sizeX) && (mouseY - 20 >= this.posY && mouseY - 20 <= this.posY + this.sizeY)){
             
             this.onClick(this.fn);
         }
