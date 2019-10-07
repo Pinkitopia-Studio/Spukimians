@@ -22,6 +22,9 @@ class Button{
         this.y = this.posY;
         this.width = this.sizeX;
         this.height = this.sizeY;
+        
+        
+        
     }
 
     assignFunction(fn){
@@ -55,8 +58,10 @@ class Button{
             
             this.onClick(this.fn);
         }
-        
+
         this.button = printImage(this.image, [this.posX, this.posY], [this.sizeX, this.sizeY]);
+        
+        
     }
 
     onClick(callback){ //se debe meter una función.

@@ -47,7 +47,7 @@ class Game {
             //Attribute "world" of Game:
             //Consists of an array with the information of all the board. 
         } else {
-            parseTiledLevel("Levels/level"+level+".csv");
+            parseTiledLevel("Levels/level"+level+".txt");
         }
 
         

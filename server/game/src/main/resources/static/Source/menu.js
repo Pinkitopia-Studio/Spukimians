@@ -34,7 +34,10 @@ class Menu {
         this.addElement(options);
         this.addElement(exit);
 
+        
+
     }
+        
 
     addElement(element){
         this.elements.push(element);
@@ -45,9 +48,10 @@ class Menu {
         let context = document.getElementById("game").getContext("2d");
         context.clearRect(0, 0, 1240, 840);
 
-
+        
         if(this.active)
             printBackground("menuBackground");
+        
 
         this.elements.forEach(element => {
             element.update();
