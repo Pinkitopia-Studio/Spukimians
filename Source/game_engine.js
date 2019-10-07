@@ -69,7 +69,7 @@ function printTile(image, type, position){
             sprite = [558, 186];
         break;
     }
-    context.drawImage(image, sprite[0], sprite[1], 62, 62, position[0], position[1], 64, 64);
+    context.drawImage(image, sprite[0], sprite[1], 64, 64, position[0], position[1], 64, 64);
 }
 
 function printSprite(image, sprite, printPosition){

@@ -16,36 +16,46 @@ class Game {
         //Used for rendering and other options.
     }
 
-    create () {
-        var x = 10, y = 10;
-        
+    create (level) {
+
         this.activeWorld = true;
-        /*
-        FUNCTION create:
-        */
-        this.world = new Array(x);
-        for (var i = 0; i < x; i++){
-            this.world[i] = new Array(y);
-            for (var j = 0; j < y; j++){
-                this.world[i][j] = 0;
+        var x = 0, y = 0;
+        this.world = undefined;
+
+        if (level == 0){
+            this.world = new Array(x);
+            for (var i = 0; i < x; i++){
+                this.world[i] = new Array(y);
+                for (var j = 0; j < y; j++){
+                    this.world[i][j] = 0;
+                }
             }
-        }
-        for (var i = 0; i < x; i++){
-            //Wall creation in borders.
-            this.world[i][0] = 1;
-            this.world[0][i] = 1;
-            this.world[x-1][i] = 1;
-            this.world[i][y-1] = 1;
+            for (var i = 0; i < x; i++){
+                //Wall creation in borders.
+                this.world[i][0] = 1;
+                this.world[0][i] = 1;
+                this.world[x-1][i] = 1;
+                this.world[i][y-1] = 1;
+            }
+
+            this.world[4][4] = 2;
+            this.world[3][6] = 2;
+            this.world[5][4] = 2;
+            this.world[8][7] = 2;
+            this.world[3][5] = 2;
+            this.world[5][5] = 2;
+            //Attribute "world" of Game:
+            //Consists of an array with the information of all the board. 
+        } else {
+            let details = parseTiledLevel("Levels/level"+level);
+            this.x = details[0];
+            this.y = details[1];
+            this.world = details[2];
         }
 
-        this.world[4][4] = 2;
-        this.world[3][6] = 2;
-        this.world[5][4] = 2;
-        this.world[8][7] = 2;
-        this.world[3][5] = 2;
-        this.world[5][5] = 2;
-        //Attribute "world" of Game:
-        //Consists of an array with the information of all the board. 
+        
+
+        
 
         this.tileSheet = new Image();
         this.tileSheet.src = "Assets/exampleTileset.png";
@@ -88,7 +98,7 @@ class Game {
     }
 
     checkTile(x, y){
-        return (this.world[x][y] == 0);
+        return (this.world[x][y] == 10);
     }
 
     sendEnemySignal () {

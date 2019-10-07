@@ -25,12 +25,21 @@ class SceneManager {
         this.scenes[this.actualScene].update();
     }
 
-    changeScenes(index){
+    changeScenes(index, level){
         let pos = this.actualScene;
+
+        if (index == 1){
+            //If next scene is a level of the game
+            this.scenes[index].create(level);
+            this.actualScene = index;
+            this.scenes[pos].destroy();
+        } else {
+            this.scenes[index].create();
+            this.actualScene = index;
+            this.scenes[pos].destroy();
+        }
         
-        this.scenes[index].create();
-        this.actualScene = index;
-        this.scenes[pos].destroy();
+        
     }
 }
 
