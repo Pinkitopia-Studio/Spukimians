@@ -14,12 +14,12 @@ class LevelSelector {
 
         level1.create();
         level1.assignFunction(function(){
-            sceneManager.changeScenes(1);
+            sceneManager.changeScenes(1, 1);
         });
 
         level2.create();
         level2.assignFunction(function(){
-            //sceneManager.changeScenes(2);
+            sceneManager.changeScenes(1, 2);
         })
         
         volver.create();

@@ -1,5 +1,12 @@
 function readTextFile(file)
 {
+    $.ajax({
+        type: "GET",
+        url: file,
+        dataType: "text",
+        success: function(data) {processData(data);}
+        });
+    /*
     var rawFile = new XMLHttpRequest();
     rawFile.open("GET", file, false);
     rawFile.onreadystatechange = function ()
@@ -13,11 +20,14 @@ function readTextFile(file)
         }
     }
     rawFile.send(null);
-    return allText;
+    return allText;*/
 }
 
 function parseTiledLevel(file){
-    let text = readTextFile(file);
+    readTextFile(file);
+}
+
+function processData (text) {
     let splittedArray = text.split("\n");
     let x = splittedArray.length;
     let y = splittedArray[0].length;
@@ -35,5 +45,5 @@ function parseTiledLevel(file){
         }
     }
 
-    return [x, y, newWorld];
+    sceneManager.scenes[1].finishCreate([x, y, newWorld]);
 }

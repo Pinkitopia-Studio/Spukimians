@@ -18,7 +18,7 @@ class Game {
 
     create (level) {
 
-        this.activeWorld = true;
+        
         var x = 0, y = 0;
         this.world = undefined;
 
@@ -47,15 +47,19 @@ class Game {
             //Attribute "world" of Game:
             //Consists of an array with the information of all the board. 
         } else {
-            let details = parseTiledLevel("Levels/level"+level);
-            this.x = details[0];
-            this.y = details[1];
-            this.world = details[2];
+            parseTiledLevel("Levels/level"+level+".csv");
         }
 
         
 
         
+        
+    }
+
+    finishCreate (details) {
+        this.x = details[0];
+        this.y = details[1];
+        this.world = details[2];
 
         this.tileSheet = new Image();
         this.tileSheet.src = "Assets/exampleTileset.png";
@@ -67,7 +71,8 @@ class Game {
         this.addElement(myEnemy);
 
         playSound("inGame");
-        
+
+        this.activeWorld = true;
     }
 
     addElement(element, arrayIndex){
