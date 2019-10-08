@@ -16,6 +16,22 @@ class Enemy extends Player {
         }
 
         automaticMove () {
+            let myPlayer = sceneManager.scenes[1].elements[0];
+            if (detectPlayer (myPlayer.x, myPlayer.y)){
+                let nextMove = selectMove(this.x, this.y);
+            } else {
+                this.randomMove();
+            }
+            
+            
+        }
+
+        detectPlayer (px, py) {
+            //px = player x, py = player y
+            return (Math.abs(px-this.x) < 3 && Math.abs(py-this.y) < 3);
+        }
+
+        randomMove () {
             //Received a signal for an automatic move.
             let possibleMovements = [1, 2, 3, 4];
             shuffleArray(possibleMovements); //Randomizes the 4 possible directions
@@ -38,8 +54,6 @@ class Enemy extends Player {
                 this.previousMove = possibleMovements[i-1];
                 this.calculatePreviousMove();
             }
-            
-            
         }
 
         calculatePreviousMove () {
