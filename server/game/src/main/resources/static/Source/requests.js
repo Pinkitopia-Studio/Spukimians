@@ -2,13 +2,14 @@
 
 function readTextFile(file)
 {
-    /*$.ajax({
+    $.ajax({
         type: "GET",
         url: file,
         dataType: "text",
         success: function(data) {processData(data);}
         });
-    */
+    
+   /*
     var xmlhttp;
     if(window.XMLHttpRequest){
         xmlhttp = new XMLHttpRequest();
@@ -16,7 +17,7 @@ function readTextFile(file)
     else{
         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
     }
-    
+    var allText;
     xmlhttp.open("GET", file, false);
     xmlhttp.onreadystatechange = function ()
     {
@@ -24,12 +25,12 @@ function readTextFile(file)
         {
             if(xmlhttp.status === 200 || xmlhttp.status == 0)
             {
-                var allText = xmlhttp.responseText;
+                allText = xmlhttp.responseText;
             }
         }
     }
     xmlhttp.send();
-    return allText;
+    return allText;*/
 }
 
 

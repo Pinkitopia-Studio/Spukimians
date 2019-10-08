@@ -58,16 +58,20 @@ function printTile(image, type, position){
     switch(type){
         case 0:
             //Floor tile
-            sprite = [0, 186];
+            sprite = [0, 0];
         break;
         case 1:
             //Wall tile
-            sprite = [0, 0];
+            sprite = [64, 0];
         break;
-        case 2:
+        case 10:
             //Hole tile
-            sprite = [558, 186];
-        break;
+            sprite = [0, 64];
+            break;
+        case 18:
+            sprite = [512, 64];
+            break;
+        
     }
     context.drawImage(image, sprite[0], sprite[1], 64, 64, position[0], position[1], 64, 64);
 }
