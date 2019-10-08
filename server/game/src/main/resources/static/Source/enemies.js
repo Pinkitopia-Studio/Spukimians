@@ -13,22 +13,25 @@ class Enemy extends Player {
             this.tileX = 4;
             this.tileY = 6;
             this.previousMove = 0;
+            this.nextMove = 0;
+        }
+
+        detectPlayer (ptileX, ptileY) {
+            //CON SUPER ACCEDES AL JUGADOR IVAN PORQUE ESTAS HEREDANDO DE EL
+            
+            return (Math.abs(ptileX-this.tileX) < 3 && Math.abs(ptileY-this.tileY) < 3);
         }
 
         automaticMove () {
             let myPlayer = sceneManager.scenes[1].elements[0];
-            if (detectPlayer (myPlayer.x, myPlayer.y)){
-                let nextMove = selectMove(this.x, this.y);
+            if (this.detectPlayer (myPlayer.tileX, myPlayer.tileY)){
+                console.log("Te persigo joputa");
+                this.nextMove = this.selectMove();
             } else {
                 this.randomMove();
             }
             
             
-        }
-
-        detectPlayer (px, py) {
-            //px = player x, py = player y
-            return (Math.abs(px-this.x) < 3 && Math.abs(py-this.y) < 3);
         }
 
         randomMove () {
@@ -72,6 +75,12 @@ class Enemy extends Player {
                 break;
             }
         }
+
+        selectMove () {
+            return 1;
+
+        }
+        
 
 
 

@@ -70,7 +70,7 @@ class Game {
         var myEnemy = new Enemy();
         this.addElement(myEnemy);
 
-        playSound("inGame");
+        //playSound("inGame");
 
         this.activeWorld = true;
     }
