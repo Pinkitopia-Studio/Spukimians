@@ -24,16 +24,31 @@ class Character extends Player {
     //
 
     update (myboard) {
-        //CUADRITOS PARA LAS TRAMPAS
-        this.squarePositions = [[this.tileX*64, (this.tileY+1) * 64 + 16], [(this.tileX+1) * 64, this.tileY*64 + 16], [this.tileX*64, (this.tileY-1)*64 + 16], [(this.tileX-1)*64, this.tileY*64 + 16]];
 
-        this.squarePositions.forEach(element => {
-            printSprite(this.squareRed, [0, 0], [element[0], element[1]]);
-        });    
+        if(sceneManager.scenes[1].puttingTrap){
+            //CUADRITOS PARA LAS TRAMPAS (MIRA A VER SI NO ES UN TILE COLISIONABLE)
+            if(sceneManager.scenes[1].checkTile(this.tileX, this.tileY+1)){
+                this.squarePositions.push([this.tileX*64, (this.tileY+1)*64 + 16]);
+            }
+            if(sceneManager.scenes[1].checkTile(this.tileX+1, this.tileY)){
+                this.squarePositions.push([(this.tileX+1)*64, this.tileY*64 + 16]);
+            }
+            if(sceneManager.scenes[1].checkTile(this.tileX, this.tileY-1)){
+                this.squarePositions.push([this.tileX*64, (this.tileY-1)*64 + 16]);
+            }
+            if(sceneManager.scenes[1].checkTile(this.tileX-1, this.tileY)){
+                this.squarePositions.push([(this.tileX-1)*64, this.tileY*64 + 16]);
+            }
 
+            this.squarePositions.forEach(element => {
+                printSprite(this.squareRed, [0, 0], [element[0], element[1]]);
+            });    
+
+        }
+        
         super.update(myboard);
        
-               
+        this.squarePositions = [];       
         
         
     }

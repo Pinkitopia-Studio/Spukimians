@@ -112,7 +112,7 @@ function printMenu (myboard) {
 }
 
 function printPause(myboard){
-    var play = new Button("ui/PlayOFF", 174, 174, 292, 292, "ui/PlayON");
+    var play = new Button("ui/play", 174, 174, 292, 292, "");
     myboard.addElement(play, 1);
     
 }
@@ -136,6 +136,11 @@ function printLevelSelector(){
 function mouseMovement(event) {
     mouseX = event.clientX;
     mouseY = event.clientY;
+    if (sceneManager.scenes[1].activeWorld && !sceneManager.scenes[1].activePause){
+        if(sceneManager.scenes[1].trapButton.active)
+            sceneManager.scenes[1].trapButton.active = false; 
+    }
+        
 }
 
 function mouseOver(event){
@@ -144,10 +149,12 @@ function mouseOver(event){
 }
 
 function mouseRelease (event) {
-
+    
     if (sceneManager.scenes[1].activeWorld && !sceneManager.scenes[1].activePause){
         let newX = event.clientX;
         let newY = event.clientY;
+        
+        
         movePlayer(newX, newY);
     }/* else {
         menuClick(newX, newY);
@@ -205,7 +212,7 @@ function release(e){
 }
 
 function movePlayerKeys(k){
-    if(!sceneManager.scenes[1].activePause && sceneManager.scenes[1].activeWorld){ //pausa del game (escena 1)
+    if(!sceneManager.scenes[1].activePause && sceneManager.scenes[1].activeWorld && !sceneManager.scenes[1].puttingTrap){ //pausa del game (escena 1)
         switch(k){
             case 1:
                 sceneManager.scenes[1].elements[0].move(1); //Player del game (escena1)
@@ -226,7 +233,7 @@ function movePlayerKeys(k){
 
 function movePlayer (newX, newY) {
 
-    if(!sceneManager.scenes[1].activePause && sceneManager.scenes[1].activeWorld){
+    if(!sceneManager.scenes[1].activePause && sceneManager.scenes[1].activeWorld && !sceneManager.scenes[1].puttingTrap){
         let diffX = mouseX-newX;
         let diffY = mouseY-newY;
 

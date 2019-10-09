@@ -15,7 +15,8 @@ class Button{
     
     create(){
         this.hover = false;
-        this.active = true;
+        this.active = false;
+        
         this.image = this.sprites[0];
 
         this.x = this.posX;
@@ -54,9 +55,12 @@ class Button{
             this.sizeY = this.height;
         }
 
-        if((mouseX- 20 >= this.posX && mouseX - 20 <= this.posX+this.sizeX) && (mouseY - 20 >= this.posY && mouseY - 20 <= this.posY + this.sizeY)){
+        if((mouseX- 20 >= this.posX && mouseX - 20 <= this.posX+this.sizeX) && (mouseY - 20 >= this.posY && mouseY - 20 <= this.posY + this.sizeY) && !this.active){
+            if(!this.active){
+                this.onClick(this.fn);
+                this.active = true;
+            }
             
-            this.onClick(this.fn);
         }
 
         this.button = printImage(this.image, [this.posX, this.posY], [this.sizeX, this.sizeY]);
@@ -67,6 +71,8 @@ class Button{
     onClick(callback){ //se debe meter una función.
         callback();
     }
+
+    
         
     
 

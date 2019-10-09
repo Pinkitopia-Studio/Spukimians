@@ -6,7 +6,8 @@ class Game {
     
     constructor () {
         this.activeWorld = false;
-        this.activePause = false;
+        this.activePause = false; //INDICA SI SE ENCUENTRA EL JUEGO EN PAUSE O NO
+        this.puttingTrap = false; //INDICA SI SE ENCUENTRA EL JUEGO EN FASE DE PONER TRAMPA O NO
         this.activeLevelSelector = false;
 
         this.elements = [];
@@ -53,6 +54,8 @@ class Game {
         
 
         
+
+        
         
     }
 
@@ -69,6 +72,22 @@ class Game {
 
         var myEnemy = new Enemy();
         this.addElement(myEnemy);
+
+        this.trapButton = new Button("ui/trapButton", 1240-64 - (64/2), 150, 64, 64, "");
+        this.trapButton.create();
+        var that = this;
+        this.trapButton.assignFunction(function(){
+            if(!that.puttingTrap){
+                that.puttingTrap = true;
+            }else{
+                setTimeout(function(){
+                    that.puttingTrap = false;
+                }, 500);
+            }
+            
+            console.log("boton pulsado");
+           
+        })
 
         
 
@@ -153,14 +172,15 @@ class Game {
             this.eraseElements(1); //borra todos los elementos del pause
         }
         
-    
+        //ACTUALIZACION DE ELEMENTOS DE LA ESCENA
         this.elements.forEach(element => {
             element.update(this);
         });
     
         this.pauseElements.forEach(element => {
             element.update(this);
-        })
+        });
+        this.trapButton.update();
     
         if(esc){ 
             this.activePause = true;
