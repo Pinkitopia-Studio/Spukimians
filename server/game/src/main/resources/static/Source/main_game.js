@@ -106,6 +106,8 @@ class Game {
         var replay = new Button("reiniciar", 500, 510, 240, 192, "");
         replay.create();
         replay.assignFunction(function(){
+            esc = false;
+            that.activePause = false;
             sceneManager.changeScenes(1, that.level);
         });
         this.addElement(replay, 1);
