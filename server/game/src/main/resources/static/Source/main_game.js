@@ -64,11 +64,13 @@ class Game {
         this.tileSheet = new Image();
         this.tileSheet.src = "Assets/mazmorraTileset.png";
 
-        var myPlayer = new Player();
+        var myPlayer = new Character();
         this.addElement(myPlayer);
 
         var myEnemy = new Enemy();
         this.addElement(myEnemy);
+
+        
 
         //playSound("inGame");
 

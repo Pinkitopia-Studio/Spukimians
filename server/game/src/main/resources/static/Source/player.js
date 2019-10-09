@@ -1,29 +1,23 @@
 class Player {
 
     constructor () {
-        this.spriteSheet = new Image();
-        this.spriteSheet.src = "Assets/girlSpriteSheet64.png";
-        this.moving = 1;
-        /*
-        Attribute "moving": 0 = idle
-        1 - 4 = moving to a direction (1S, 2E, 3N, 4W)
-        */
+       this.spriteSheet = new Image();   
+       
        this.lastSprite = 0;
-       this.x = 128;
-       this.y = 128;
+       
        this.velocity = 2;
        this.lastMoved = 0;
        /*
        Attribute "lastMoved" indicates how many pixels has the player moved since it started moving.
        */
-       this.nextMove = 0;
-       this.tileX = 2;
-       this.tileY = 2;
+       
 
        this.nextIdle = 0; //Velocidad en que cambian los sprites de la animación de idle
        this.nextWalk = 0; //Velocidad en que cambian los sprites de la animación de andar
 
        this.lastDirection = 1; //1S, 2E, 3N, 4W
+
+       
     }
     
 
@@ -47,32 +41,34 @@ class Player {
         return change;
     }
 
+    //
+
     update (myboard) {
         if(!myboard.activePause){
             this.lastSprite = (this.lastSprite) % 4; //cambiado para los nuevos sprites
-            let spritePos = [0, 0];
+            this.spritePos = [0, 0];
             
             if(this.moving > 0){
                 
                 switch(this.moving) {
                     case 1:
                         this.y+=this.velocity;
-                        spritePos = [(this.lastSprite+4)*64, 0];
+                        this.spritePos = [(this.lastSprite+4)*64, 0];
                         this.lastDirection = 1;
                     break;
                     case 2:
                         this.x+=this.velocity;
-                        spritePos = [(this.lastSprite+4)*64, 64];
+                        this.spritePos = [(this.lastSprite+4)*64, 64];
                         this.lastDirection = 2;
                     break;
                     case 3:
                         this.y-=this.velocity;
-                        spritePos = [(this.lastSprite+4)*64, 128];
+                        this.spritePos = [(this.lastSprite+4)*64, 128];
                         this.lastDirection = 3;
                     break;
                     case 4:
                         this.x-=this.velocity;
-                        spritePos = [(this.lastSprite+4)*64, 192];
+                        this.spritePos = [(this.lastSprite+4)*64, 192];
                         this.lastDirection = 4;
                     break;
                     
@@ -82,16 +78,16 @@ class Player {
             }else{
                 switch(this.lastDirection){
                     case 1:
-                        spritePos = [this.lastSprite * 64, 0];
+                        this.spritePos = [this.lastSprite * 64, 0];
                         break;
                     case 2:
-                        spritePos = [this.lastSprite * 64, 64];
+                        this.spritePos = [this.lastSprite * 64, 64];
                         break;
                     case 3:
-                        spritePos = [this.lastSprite * 64, 128];
+                        this.spritePos = [this.lastSprite * 64, 128];
                         break;
                     case 4:
-                        spritePos = [this.lastSprite * 64, 192];
+                        this.spritePos = [this.lastSprite * 64, 192];
                         break;
                 }
                 
@@ -154,8 +150,11 @@ class Player {
                 this.velocity = 2;
             }
 
-        
-            printSprite(this.spriteSheet, spritePos, [this.x, this.y]);
+            //PINTADO DEL PERSONAJE
+            printSprite(this.spriteSheet, this.spritePos, [this.x, this.y]);    
+            
+
+            
             
         }
         
