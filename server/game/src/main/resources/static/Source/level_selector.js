@@ -43,7 +43,7 @@ class LevelSelector {
         context.clearRect(0, 0, 1240, 840);
 
         if(this.active)
-            printBackground("levelBackground");
+            printBackground("backgroundMenu");
 
         this.elements.forEach(element => {
             element.update();

@@ -129,10 +129,6 @@ class Character extends Player {
                     console.log("borrando trampa");
                     this.traps[i].destroy();
                     borrar = i;
-
-                    /*for(var j = i; j < this.traps.length; j++){
-                        this.traps[j] = this.traps[j+1];
-                    }*/
                     
                 }
                 else{

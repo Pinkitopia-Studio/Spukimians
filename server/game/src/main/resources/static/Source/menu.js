@@ -50,7 +50,7 @@ class Menu {
 
         
         if(this.active)
-            printBackground("menuBackground");
+            printBackground("backgroundMenu");
         
 
         this.elements.forEach(element => {

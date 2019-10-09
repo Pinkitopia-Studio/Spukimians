@@ -121,7 +121,7 @@ function printBackground(background){
     let context = document.getElementById("game").getContext("2d");
     let backgroundImage = new Image();
     backgroundImage.src = "Assets/"+background+".png";
-    context.drawImage(backgroundImage, 0, 0, 640, 640, cornerX, cornerY, 640, 640);
+    context.drawImage(backgroundImage, 0, 0, 1240, 860, 0, 0, 1240, 860);
 }
 
 function getCanvas(){
