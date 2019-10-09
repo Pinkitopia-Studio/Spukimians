@@ -62,8 +62,10 @@ class Button{
         if((mouseX- 20 >= this.posX && mouseX - 20 <= this.posX+this.sizeX) && (mouseY - 20 >= this.posY && mouseY - 20 <= this.posY + this.sizeY) && !this.active){
             if(!this.active){
                 console.log("he sido pulsado");
+                
                 this.onClick(this.fn);
                 this.active = true;
+                
             }
             
         }

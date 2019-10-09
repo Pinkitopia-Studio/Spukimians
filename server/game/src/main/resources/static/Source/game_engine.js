@@ -138,6 +138,13 @@ function mouseMovement(event) {
             element.active = false;
         })
     }
+    if(sceneManager.scenes[1].activeWorld && sceneManager.scenes[1].activePause){
+        if(sceneManager.scenes[1].pauseElements[0].active || sceneManager.scenes[1].pauseElements[1].active || sceneManager.scenes[1].pauseElements[2].active){
+            sceneManager.scenes[1].pauseElements.forEach(element =>{
+                element.active = false;
+            });
+        }
+    }
         
 }
 

@@ -100,6 +100,7 @@ class Game {
         play.assignFunction(function(){
             esc = false;
             that.activePause = false;
+            play.active = false;
         });
         this.addElement(play, 1);
         var replay = new Button("reiniciar", 500, 510, 240, 192, "");
