@@ -45,10 +45,7 @@ function printWorld(myboard){
             printTile(myboard.tileSheet, myboard.world[i][j], [cornerX+(i*64), cornerY+(j*64)]);
         }
     }
-    if(myboard.activePause){
-        printBackground("pause");
-
-    }
+    
     
 }
 
@@ -111,11 +108,7 @@ function printMenu (myboard) {
     printBackground("menuBackground"); 
 }
 
-function printPause(myboard){
-    var play = new Button("ui/play", 174, 174, 292, 292, "");
-    myboard.addElement(play, 1);
-    
-}
+
 
 function printBackground(background){
     let context = document.getElementById("game").getContext("2d");

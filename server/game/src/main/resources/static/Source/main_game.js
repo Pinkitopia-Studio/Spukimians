@@ -17,10 +17,11 @@ class Game {
         //Attribute "elements" of Game:
         //Consists of an array with all the active elements in scene.
         //Used for rendering and other options.
+        this.level = -1;
     }
 
     create (level) {
-
+        this.level = level;
         
         var x = 0, y = 0;
         this.world = undefined;
@@ -54,7 +55,6 @@ class Game {
         }
 
         
-
         
 
         
@@ -75,7 +75,7 @@ class Game {
         var myEnemy = new Enemy();
         this.addElement(myEnemy);
 
-        this.trapButton = new Button("ui/trapButton", 1240-64 - (64/2), 150, 64, 64, "");
+        this.trapButton = new Button("trap_botton", 20, 20, 240, 192, "");
         this.trapButton.create();
         var that = this;
         this.trapButton.assignFunction(function(){
@@ -92,6 +92,28 @@ class Game {
             console.log("boton pulsado");
            
         })
+        var that = this;
+
+        //CREACION DE MENU DE PAUSA INCORPORADO EN ESTA ESCENA
+        var play = new Button("reanudar", 190, 510, 240, 192, "");
+        play.create();
+        play.assignFunction(function(){
+            esc = false;
+            that.activePause = false;
+        });
+        this.addElement(play, 1);
+        var replay = new Button("reiniciar", 500, 510, 240, 192, "");
+        replay.create();
+        replay.assignFunction(function(){
+            sceneManager.changeScenes(1, that.level);
+        });
+        this.addElement(replay, 1);
+        var options = new Button("options", 810, 510, 240, 192, "");
+        options.create();
+        options.assignFunction(function(){
+
+        });
+        this.addElement(options, 1);
 
         
 
@@ -150,6 +172,10 @@ class Game {
         //clearInterval(interval);
     }
 
+    
+       
+        
+    
 
     update() {
         /*
@@ -169,22 +195,26 @@ class Game {
             printWorld(this);
         } 
         
-        if(this.activePause){
-            printPause(this);
-        }else{
-            this.eraseElements(1); //borra todos los elementos del pause
-        }
+        
         
         //ACTUALIZACION DE ELEMENTOS DE LA ESCENA
         this.elements.forEach(element => {
             element.update(this);
         });
-    
-        this.pauseElements.forEach(element => {
-            element.update(this);
-        });
 
-        this.trapButton.update();
+        if(this.activePause){
+            printBackground("shade50per");
+            this.pauseElements.forEach(element => {
+                element.update();
+            });
+        }else{
+            this.trapButton.update();
+            
+        }
+    
+        
+
+        
         
     
         if(esc){ 
@@ -194,6 +224,8 @@ class Game {
             this.activePause = false;
             
         }
+
+        
     
        
     }
