@@ -5,19 +5,20 @@ class SceneManager {
     }
 
     create(){
-        this.actualScene = 0;
+        this.actualScene = 3;
 
         //SCENES
         var menu = new Menu();
         var game = new Game();
         var levelSelector = new LevelSelector();
+        var scoreScene = new Score();
 
         menu.create();
 
         this.menu = menu;
         this.game = game;
 
-        this.scenes = [menu, game, levelSelector];
+        this.scenes = [menu, game, levelSelector, scoreScene];
         console.log(this.game);
     }  
     
@@ -25,12 +26,16 @@ class SceneManager {
         this.scenes[this.actualScene].update();
     }
 
-    changeScenes(index, level){
+    changeScenes(index, level, ghosts, movements){
         let pos = this.actualScene;
 
         if (index == 1){
-            //If next scene is a level of the game
+            //If next scene is a level of the game or score of the game
             this.scenes[index].create(level);
+            this.actualScene = index;
+            this.scenes[pos].destroy();
+        } else if (index == 3){
+            this.scenes[index].create(level, movements, ghosts);
             this.actualScene = index;
             this.scenes[pos].destroy();
         } else {
