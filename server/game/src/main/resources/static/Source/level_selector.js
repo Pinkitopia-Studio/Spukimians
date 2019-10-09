@@ -2,6 +2,7 @@ class LevelSelector {
     constructor(){
         this.elements = [];
         this.active = false;
+        this.ghosts = [];
     }
 
     create(){
@@ -31,26 +32,47 @@ class LevelSelector {
         this.addElement(level2);
         this.addElement(volver);
 
+        this.createGhost();
+
     }
 
     addElement(element){
         this.elements.push(element);
     }
 
+    createGhost(){
+        for(var i = 1; i <= 5; i++){
+            var yPos = 300*i % 860;
+            
+            var spuki = new Spuki(1250 + 10*i , yPos, i*3, i/2, yPos + 200, yPos - 200, "ghostMenu");
+            this.ghosts.push(spuki);
+        }
+        
+        
+        
+    }
+
     update(){
         
-        let context = document.getElementById("game").getContext("2d");
-        context.clearRect(0, 0, 1240, 840);
+        clearCanvas();
 
         if(this.active)
             printBackground("backgroundMenu");
+
+        this.ghosts.forEach(element => {
+            element.update();
+        });
 
         this.elements.forEach(element => {
             element.update();
         });
         
             
-        
+        for(var i = 0; i < this.ghosts.length; i++){
+            if(this.ghosts[i].x < -64){
+                this.ghosts[i].x = 1304;
+            }
+        }
         
 
     }
@@ -58,5 +80,6 @@ class LevelSelector {
     destroy(){
         this.elements = [];
         this.active = false;
+        this.ghosts = [];
     }
 }

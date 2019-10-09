@@ -159,8 +159,7 @@ class Game {
         - Prints new canvas with updated information of each object
         It's called 20 times per second.
         */
-        let context = document.getElementById("game").getContext("2d");
-        context.clearRect(0, 0, 1240, 840);
+        clearCanvas();
 
     
         

@@ -280,5 +280,5 @@ function playSound(sound){
 
 function clearCanvas () {
     let context = document.getElementById("game").getContext("2d");
-    context.clearRect(0, 0, 1240, 840); //Clears canvas for printing
+    context.clearRect(0, 0, 1240, 860); //Clears canvas for printing
 }
