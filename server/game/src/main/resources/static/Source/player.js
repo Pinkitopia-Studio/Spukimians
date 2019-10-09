@@ -48,7 +48,7 @@ class Player {
             this.lastSprite = (this.lastSprite) % 4; //cambiado para los nuevos sprites
             this.spritePos = [0, 0];
             
-            if(this.moving > 0 && !myboard.puttingTrap){
+            if(this.moving > 0){
                 
                 switch(this.moving) {
                     case 1:

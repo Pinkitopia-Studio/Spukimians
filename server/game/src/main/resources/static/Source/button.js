@@ -3,12 +3,16 @@
 
 class Button{
 
-    constructor(img, x, y, sX, sY, imgHover){
+    constructor(img, x, y, sX, sY, imgHover, ){
         this.posX = x;
         this.posY = y;
         this.sizeX = sX;
         this.sizeY = sY;
+        
         this.sprites = [img, imgHover];
+        
+        
+        
 
     }
     
@@ -57,13 +61,17 @@ class Button{
 
         if((mouseX- 20 >= this.posX && mouseX - 20 <= this.posX+this.sizeX) && (mouseY - 20 >= this.posY && mouseY - 20 <= this.posY + this.sizeY) && !this.active){
             if(!this.active){
+                console.log("he sido pulsado");
                 this.onClick(this.fn);
                 this.active = true;
             }
             
         }
-
+        
         this.button = printImage(this.image, [this.posX, this.posY], [this.sizeX, this.sizeY]);
+        
+
+        
         
         
     }

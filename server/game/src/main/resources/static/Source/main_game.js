@@ -12,6 +12,8 @@ class Game {
 
         this.elements = [];
         this.pauseElements = [];
+        
+        this.items = [];
         //Attribute "elements" of Game:
         //Consists of an array with all the active elements in scene.
         //Used for rendering and other options.
@@ -77,11 +79,13 @@ class Game {
         this.trapButton.create();
         var that = this;
         this.trapButton.assignFunction(function(){
-            if(!that.puttingTrap){
+            if(!that.puttingTrap && that.elements[0].moving === 0){
                 that.puttingTrap = true;
+                that.elements[0].createTrapButtons();
             }else{
                 setTimeout(function(){
                     that.puttingTrap = false;
+                    that.elements[0].eraseTrapButtons();
                 }, 500);
             }
             
@@ -180,7 +184,9 @@ class Game {
         this.pauseElements.forEach(element => {
             element.update(this);
         });
+
         this.trapButton.update();
+        
     
         if(esc){ 
             this.activePause = true;

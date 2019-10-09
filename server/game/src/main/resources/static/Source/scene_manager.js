@@ -5,7 +5,7 @@ class SceneManager {
     }
 
     create(){
-        this.actualScene = 3;
+        this.actualScene = 0;
 
         //SCENES
         var menu = new Menu();

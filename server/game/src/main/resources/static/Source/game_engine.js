@@ -139,6 +139,11 @@ function mouseMovement(event) {
     if (sceneManager.scenes[1].activeWorld && !sceneManager.scenes[1].activePause){
         if(sceneManager.scenes[1].trapButton.active)
             sceneManager.scenes[1].trapButton.active = false; 
+
+        
+        sceneManager.scenes[1].elements[0].trapButtons.forEach(element =>{
+            element.active = false;
+        })
     }
         
 }
