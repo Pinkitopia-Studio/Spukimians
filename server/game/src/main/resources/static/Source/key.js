@@ -1,4 +1,4 @@
-class Trap {
+class Key {
     constructor(x, y){
         this.x = x * 64;
         this.y = y * 64;
@@ -7,14 +7,14 @@ class Trap {
         this.sizeX = 64;
         this.sizeY = 64;
         this.sprite = new Image();
-        this.sprite.src = "Assets/trap.png";
+        this.sprite.src = "Assets/llave.png";
         this.active = true;
-        this.name = "trap";
+        this.name = "key";
     }
 
     update(){
         if(this.active){
-            printSprite(this.sprite, [0, 0], [this.x, this.y + 16]);
+            printSprite(this.sprite, [0, 0], [this.x, this.y+16]);
         }
         
     }

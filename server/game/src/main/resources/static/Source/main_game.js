@@ -14,6 +14,7 @@ class Game {
         this.pauseElements = [];
         
         this.items = [];
+        this.interactiveWorld = [];
         //Attribute "elements" of Game:
         //Consists of an array with all the active elements in scene.
         //Used for rendering and other options.
@@ -28,10 +29,13 @@ class Game {
 
         if (level == 0){
             this.world = new Array(x);
+            this.interactiveWorld = new Array(x);
             for (var i = 0; i < x; i++){
                 this.world[i] = new Array(y);
+                this.interactiveWorld[i] = new Array(y);
                 for (var j = 0; j < y; j++){
                     this.world[i][j] = 0;
+                    this.interactiveWorld[i][j] = 0;
                 }
             }
             for (var i = 0; i < x; i++){
@@ -49,9 +53,12 @@ class Game {
             this.world[3][5] = 2;
             this.world[5][5] = 2;
             //Attribute "world" of Game:
-            //Consists of an array with the information of all the board. 
+            //Consists of an array with the information of all the board.
+            var key = new Key(levelsData.data[this.level].keyX, levelsData.data[this.level].keyY);
+            this.addItem(key, key.tileX, key.tileY);
         } else {
             parseTiledLevel("Levels/level"+level+".txt");
+            
         }
 
         
@@ -119,6 +126,15 @@ class Game {
         this.addElement(options, 1);
 
         
+        this.interactiveWorld = new Array(this.world.length);
+            for (var i = 0; i < this.world.length; i++){
+                this.interactiveWorld[i] = new Array(this.world[0].length);
+                for (var j = 0; j < this.world[0].length; j++){
+                    this.interactiveWorld[i][j] = 0;
+                }
+            }
+        var key = new Key(levelsData.data[this.level].keyX, levelsData.data[this.level].keyY);
+        this.addItem(key, key.tileX, key.tileY);
 
         //playSound("inGame");
 
@@ -205,6 +221,10 @@ class Game {
             element.update(this);
         });
 
+        this.items.forEach(item => {
+            item.update();
+        });
+
         if(this.activePause){
             printBackground("shade50per");
             this.pauseElements.forEach(element => {
@@ -231,6 +251,49 @@ class Game {
         
     
        
+    }
+
+    addItem(item, tileX, tileY) {
+        this.items.push(item);
+        let position = this.items.length;
+        if(this.interactiveWorld[tileX][tileY] == 0){
+            this.interactiveWorld[tileX][tileY] = position;
+        }
+    }
+
+    deleteItem(tileX, tileY){
+        var position = -1;
+        for (var i = 0; i < this.items.length; i++){
+            if (this.items[i].tileX == tileX && this.items[i].tileY == tileY){
+                position = i;
+            }
+        }
+
+        if(position != -1){
+            this.items.splice(position, 1);
+        }
+
+        for (var i = 0; i < this.interactiveWorld.length; i++){
+            for (var j = 0; j < this.interactiveWorld[0].length; j++){
+                if(this.interactiveWorld[i][j] > position){
+                    this.interactiveWorld[i][j]--;
+                } else if (this.interactiveWorld[i][j] == position){
+                    this.interactiveWorld[i][j] = 0;
+                }
+            }
+        }
+    }
+
+    interact(tileX, tileY){
+        if(this.interactiveWorld[tileX][tileY] != 0){
+            let position = this.interactiveWorld[tileX][tileY]-1;
+            if (this.items[position].name == "key"){
+                this.deleteItem(tileX, tileY);
+                alert("OPEN THE GATE a little");
+                //Abrir puerta
+            }
+        }
+        
     }
 
 }
