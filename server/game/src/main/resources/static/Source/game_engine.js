@@ -64,13 +64,30 @@ function printTile(image, type, position){
             //Wall tile
             sprite = [64, 0];
         break;
-        case 10:
+        case 2:
+            //Wall tile
+            sprite = [128, 0];
+        break;
+        case 3:
+            //Wall tile
+            sprite = [192, 0];
+        break;
+        case 4:
             //Hole tile
             sprite = [0, 64];
             break;
-        case 18:
-            sprite = [512, 64];
+        case 5:
+            sprite = [64, 64];
             break;
+        case 6:
+            //Wall tile
+            sprite = [128, 64];
+            break;
+        case 7:
+            //Wall tile
+            sprite = [192, 64];
+            break;
+
         
     }
     context.drawImage(image, sprite[0], sprite[1], 64, 64, position[0], position[1], 64, 64);

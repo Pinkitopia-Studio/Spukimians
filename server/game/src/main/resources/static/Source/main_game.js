@@ -62,7 +62,7 @@ class Game {
         this.world = details[2];
 
         this.tileSheet = new Image();
-        this.tileSheet.src = "Assets/exampleTileset.png";
+        this.tileSheet.src = "Assets/mazmorraTileset.png";
 
         var myPlayer = new Player();
         this.addElement(myPlayer);
@@ -101,9 +101,10 @@ class Game {
         }
         
     }
-
+    
+    //COMPRUEBA SI EL SUELO ES TRASPASABLE (SUELO = 10)
     checkTile(x, y){
-        return (this.world[x][y] == 10);
+        return (this.world[x][y] == 4);
     }
 
     sendEnemySignal () {

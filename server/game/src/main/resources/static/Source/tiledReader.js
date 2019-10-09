@@ -7,7 +7,7 @@ function parseTiledLevel(file){
 function processData (text) {
     let splittedArray = text.split("\n");
     let x = splittedArray[0].length / 2; //COGE LAS COMAS POR LO TANDO DIVIDIMOS ENTRE 2
-    let y = splittedArray.length;
+    let y = splittedArray.length - 1;
     
     var newWorld = new Array(x);
         for (var i = 0; i < x; i++){
@@ -22,6 +22,8 @@ function processData (text) {
             newWorld[i][j] = parseInt(splitted[j]);
         }
     }
+    console.log(newWorld);
+
     var newMatrix = new Array(x);
     //Colocación correcta
     for (var i = 0; i < x; i++){
