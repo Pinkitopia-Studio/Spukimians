@@ -277,3 +277,8 @@ function playSound(sound){
     var s = new Audio("Assets/sounds/"+sound+".wav");
     s.play();
 }
+
+function clearCanvas () {
+    let context = document.getElementById("game").getContext("2d");
+    context.clearRect(0, 0, 1240, 840); //Clears canvas for printing
+}

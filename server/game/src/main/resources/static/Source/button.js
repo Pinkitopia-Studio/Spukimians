@@ -3,7 +3,7 @@
 
 class Button{
 
-    constructor(img, x, y, sX, sY, imgHover, ){
+    constructor(img, x, y, sX, sY, imgHover){
         this.posX = x;
         this.posY = y;
         this.sizeX = sX;

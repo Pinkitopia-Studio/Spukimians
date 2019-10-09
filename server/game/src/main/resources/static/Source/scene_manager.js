@@ -12,13 +12,14 @@ class SceneManager {
         var game = new Game();
         var levelSelector = new LevelSelector();
         var scoreScene = new Score();
+        var gameOverScene = new GameOver();
 
         menu.create();
 
         this.menu = menu;
         this.game = game;
 
-        this.scenes = [menu, game, levelSelector, scoreScene];
+        this.scenes = [menu, game, levelSelector, scoreScene, gameOverScene];
         console.log(this.game);
     }  
     

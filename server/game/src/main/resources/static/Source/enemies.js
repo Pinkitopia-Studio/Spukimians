@@ -111,7 +111,7 @@ class Enemy extends Player {
             }
 
             //Player CAUGHT, end level.
-            alert("JAJA MORISTE WE");
+            sceneManager.changeScenes(4);
 
         }
 
