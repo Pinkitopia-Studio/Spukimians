@@ -1,18 +1,13 @@
 function findPath(world, pathStart, pathEnd)
 {
-  // atajos de tecleo
+  	//atajo de tecleo
 	var	abs = Math.abs;
-	var	max = Math.max;
-	var	pow = Math.pow;
-	var	sqrt = Math.sqrt;
-
-	var maximocomomuro = 2;
 
 	var worldWidth = world[0].length;
 	var worldHeight = world.length;
 	var worldSize =	worldWidth * worldHeight;
 
-	var findNeighbours = function(){}; 
+	//var findNeighbours = function(){}; 
     
     function Distancia(Point, Goal)
 	{	
@@ -38,7 +33,7 @@ function findPath(world, pathStart, pathEnd)
 		result.push({x:x, y:S});
 		if(myW)
 		result.push({x:W, y:y});
-		findNeighbours(myN, myS, myE, myW, N, S, E, W, result);
+		//findNeighbours(myN, myS, myE, myW, N, S, E, W, result);
 		return result;
 	}
     
@@ -46,7 +41,7 @@ function findPath(world, pathStart, pathEnd)
 	function sepuedeandar(x, y)
 	{
         if (x > -1 && y > -1){
-            if (y < worldWidth && x < worldHeight) return ((world[x][y] != 2) && (world[x][y] <= maximocomomuro));
+            if (y < worldWidth && x < worldHeight) return ((world[x][y] == 4));
         }
 		return false;
 	};

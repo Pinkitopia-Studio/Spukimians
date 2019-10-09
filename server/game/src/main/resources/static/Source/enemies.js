@@ -27,6 +27,22 @@ class Enemy extends Player {
             if (this.detectPlayer (myPlayer.tileX, myPlayer.tileY)){
                 console.log("Te persigo joputa");
                 this.nextMove = this.selectMove();
+                let path = findPath(sceneManager.scenes[1].world, [this.tileX, this.tileY], [myPlayer.tileX, myPlayer.tileY]);
+                console.log(path);
+                let nextMoveInPath = path[1];
+                if (nextMoveInPath[0] < this.tileX){
+                    this.nextMove = 4;
+                    this.previousMove = 2;
+                } else if (nextMoveInPath[0] > this.tileX){
+                    this.nextMove = 2;
+                    this.previousMove = 4;
+                } else if (nextMoveInPath[1] < this.tileY){
+                    this.nextMove = 3;
+                    this.previousMove = 1;
+                } else {
+                    this.nextMove = 1;
+                    this.previousMove = 3;
+                }
             } else {
                 this.randomMove();
             }
