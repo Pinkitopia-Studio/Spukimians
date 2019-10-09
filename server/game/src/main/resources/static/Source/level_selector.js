@@ -3,6 +3,9 @@ class LevelSelector {
         this.elements = [];
         this.active = false;
         this.ghosts = [];
+
+        this.velFloor = 3;
+        this.xFloor = 0;
     }
 
     create(){
@@ -58,6 +61,15 @@ class LevelSelector {
 
         if(this.active)
             printBackground("backgroundMenu");
+
+
+        if(this.xFloor <= -1088){
+            this.xFloor = 0;
+        }else{
+            this.xFloor = this.xFloor - (1 * this.velFloor);
+        }
+        
+        printImage("floor", [this.xFloor, 0], [2432, 860]);
 
         this.ghosts.forEach(element => {
             element.update();
