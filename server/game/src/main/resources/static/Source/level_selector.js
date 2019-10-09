@@ -7,9 +7,9 @@ class LevelSelector {
     create(){
         this.active = true;
 
-        let level1 = new Button("ui/heart", 1240/3 - (65/2), 400, 65, 65, "");
-        let level2 = new Button("ui/heart", 1240/2 - (65/2), 400, 65, 65, "");
-        let volver = new Button("ui/back", 660 - (410/2), 550, 410, 155, "");
+        let level1 = new Button("nums/1", 1240/3 - (65/2), 400, 65, 65, "");
+        let level2 = new Button("nums/2", 1240/2 - (65/2), 400, 65, 65, "");
+        let volver = new Button("ui/volver", 660 - (420/2), 550, 420, 192, "");
         
 
         level1.create();
