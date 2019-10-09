@@ -13,3 +13,7 @@ var levelsData = {
             minMovements:15
         }]
 };
+
+//Levels data: In each array position there are two things:
+// - ghosts: number of ghosts in that level
+// - minMovements: minimum number of movements for getting the third star

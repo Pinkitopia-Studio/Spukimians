@@ -24,7 +24,9 @@ class Enemy extends Player {
 
         automaticMove () {
             let myPlayer = sceneManager.scenes[1].elements[0];
-            if (this.detectPlayer (myPlayer.tileX, myPlayer.tileY)){
+            if (Math.abs(this.tileX - myPlayer.tileX)+Math.abs(this.tileY - myPlayer.tileY) <= 1){
+                this.killPlayer(myPlayer);
+            } else if (this.detectPlayer (myPlayer.tileX, myPlayer.tileY)){
                 console.log("Te persigo joputa");
                 this.nextMove = this.selectMove();
                 let path = findPath(sceneManager.scenes[1].world, [this.tileX, this.tileY], [myPlayer.tileX, myPlayer.tileY]);
@@ -97,7 +99,21 @@ class Enemy extends Player {
 
         }
         
+        killPlayer (myPlayer) {
+            if (myPlayer.tileX < this.tileX){
+                this.nextMove = 4;
+            } else if (myPlayer.tileX > this.tileX) {
+                this.nextMove = 2;
+            } else if (myPlayer.tileY < this.tileY) {
+                this.nextMove = 3;
+            } else {
+                this.nextMove = 1;
+            }
 
+            //Player CAUGHT, end level.
+            alert("JAJA MORISTE WE");
+
+        }
 
 
 }
