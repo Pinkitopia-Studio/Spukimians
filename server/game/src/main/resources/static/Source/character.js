@@ -136,11 +136,11 @@ class Character extends Player {
                 }
             }
             if (cont === this.traps.length){
-                var trap = new Trap(x, y);
+                var trap = new Item(x, y, "Assets/trap.png", 1);
                 this.traps.push(trap);
             }
         }else{
-            var trap = new Trap(x, y);
+            var trap = new Item(x, y, "Assets/trap.png", 1);
             this.traps.push(trap);
         }
 

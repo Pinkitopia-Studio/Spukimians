@@ -19,6 +19,13 @@ class Game {
         //Consists of an array with all the active elements in scene.
         //Used for rendering and other options.
         this.level = -1;
+        
+        //ANIMACION DE ANTORCHAS
+        this.torches = [];
+        this.posSprite = 0;
+        this.nextSprite = 0;
+        this.spriteSheetTorches = new Image();
+        this.spriteSheetTorches.src = "Assets/animacionTilesAntorcha.png"
     }
 
     create (level) {
@@ -133,12 +140,21 @@ class Game {
                     this.interactiveWorld[i][j] = 0;
                 }
             }
-        var key = new Key(levelsData.data[this.level].keyX, levelsData.data[this.level].keyY);
+        var key = new Item(levelsData.data[this.level].keyX, levelsData.data[this.level].keyY, "Assets/llave.png", 2);
         this.addItem(key, key.tileX, key.tileY);
 
         //playSound("inGame");
 
         this.activeWorld = true;
+
+        //ANIMACION ANTORCHAS: DETECTAMOS LAS POSICIONES EN LAS QUE SE ENCUENTRAN LOS TILE DE ANTORCHA
+        for (var i = 0; i < this.world.length; i++){
+            for(var j = 0; j < this.world[i].length; j++){
+                if(this.world[i][j] === 3){ //CASILLA DE ANTORCHA
+                    this.torches.push([i, j]);
+                }
+            }
+        }
     }
 
     addElement(element, arrayIndex){
@@ -236,10 +252,6 @@ class Game {
         }
     
         
-
-        
-        
-    
         if(esc){ 
             this.activePause = true;
             
@@ -248,8 +260,20 @@ class Game {
             
         }
 
+        this.torches.forEach(element => {
+            printSprite(this.spriteSheetTorches, [this.posSprite * 64, 0], [element[0] * 64, (element[1] *64) + 16]);
+        });
+
+        //ANIMACION ANTORCHAS
+        if(this.nextSprite === 8){
+            
+            this.posSprite = (this.posSprite + 1) % 4
+            this.nextSprite = 0;
+        }
+
         
-    
+        this.nextSprite = this.nextSprite + 1;
+        
        
     }
 
@@ -287,7 +311,7 @@ class Game {
     interact(tileX, tileY){
         if(this.interactiveWorld[tileX][tileY] != 0){
             let position = this.interactiveWorld[tileX][tileY]-1;
-            if (this.items[position].name == "key"){
+            if (this.items[position].id === 2){
                 this.deleteItem(tileX, tileY);
                 alert("OPEN THE GATE a little");
                 //Abrir puerta
@@ -295,6 +319,8 @@ class Game {
         }
         
     }
+
+    
 
 }
 
