@@ -26,6 +26,8 @@ class Game {
         this.nextSprite = 0;
         this.spriteSheetTorches = new Image();
         this.spriteSheetTorches.src = "Assets/animacionTilesAntorcha.png"
+
+        this.door = [];
     }
 
     create (level) {
@@ -147,11 +149,15 @@ class Game {
 
         this.activeWorld = true;
 
-        //ANIMACION ANTORCHAS: DETECTAMOS LAS POSICIONES EN LAS QUE SE ENCUENTRAN LOS TILE DE ANTORCHA
+        //ANIMACION ANTORCHAS: DETECTAMOS LAS POSICIONES EN LAS QUE SE ENCUENTRAN LOS TILE DE ANTORCHA 
+        //LECTURA DE TILES ESPECIALES
         for (var i = 0; i < this.world.length; i++){
             for(var j = 0; j < this.world[i].length; j++){
                 if(this.world[i][j] === 3){ //CASILLA DE ANTORCHA
                     this.torches.push([i, j]);
+                }
+                if(this.world[i][j] === 6){
+                    this.door = [i, j];
                 }
             }
         }
@@ -187,7 +193,23 @@ class Game {
     //COMPRUEBA SI EL SUELO ES TRASPASABLE (SUELO = 10)
     checkTile(x, y){
         return (this.world[x][y] == 4);
+
+        
     }
+
+    checkActivable(x, y){
+        //COMPROBACIONES DE ACTIVABLES
+        let that = this;
+
+        if(this.world[x][y] == 6 && this.elements[0].items[1] >= 1){ // SI EL JUGADOR TIENE LA LLAVE
+            this.world[x][y] = 7;
+            setTimeout(function(){
+                sceneManager.changeScenes(3, that.level, that.elements[0].items[2], that.elements[0].movements);
+            }, 2000);
+        }
+    }
+
+    
 
     sendEnemySignal () {
         this.elements.forEach(element => {
@@ -221,8 +243,11 @@ class Game {
         It's called 20 times per second.
         */
         clearCanvas();
+        
+        updateCamera(this.elements[0].x, this.elements[0].y)
+       
 
-    
+        
         
         
         if (this.activeWorld){
@@ -230,7 +255,9 @@ class Game {
             printWorld(this);
         } 
         
-        
+        this.torches.forEach(element => {
+            printSprite(this.spriteSheetTorches, [this.posSprite * 64, 0], [element[0] * 64, (element[1] *64) + 16]);
+        });
         
         //ACTUALIZACION DE ELEMENTOS DE LA ESCENA
         this.elements.forEach(element => {
@@ -250,6 +277,8 @@ class Game {
             this.trapButton.update();
             
         }
+
+        
     
         
         if(esc){ 
@@ -260,9 +289,7 @@ class Game {
             
         }
 
-        this.torches.forEach(element => {
-            printSprite(this.spriteSheetTorches, [this.posSprite * 64, 0], [element[0] * 64, (element[1] *64) + 16]);
-        });
+        
 
         //ANIMACION ANTORCHAS
         if(this.nextSprite === 8){
@@ -273,6 +300,7 @@ class Game {
 
         
         this.nextSprite = this.nextSprite + 1;
+
         
        
     }
@@ -313,7 +341,7 @@ class Game {
             let position = this.interactiveWorld[tileX][tileY]-1;
             if (this.items[position].id === 2){
                 this.deleteItem(tileX, tileY);
-                alert("OPEN THE GATE a little");
+                this.elements[0].items[1] = 1;
                 //Abrir puerta
             }
         }

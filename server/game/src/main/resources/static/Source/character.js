@@ -22,6 +22,13 @@ class Character extends Player {
 
        this.trapButtons = [];
        this.traps = [];
+
+       //ITEMS: [3 = numero de trampas restantes, 0 = numero de llaves en el bolsillo, 0 = numero de fantasmas capturados]
+       this.items = [3, 0, 0];
+
+       //MOVIMIENTOS
+       this.movements = 0;
+
     }
     
     //

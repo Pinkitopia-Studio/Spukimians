@@ -26,15 +26,19 @@ class Player {
         switch(direction){
             case 1:
                 change = sceneManager.scenes[1].checkTile(this.tileX, this.tileY+1);
+                sceneManager.scenes[1].checkActivable(this.tileX, this.tileY+1);
             break;
             case 2:
                 change = sceneManager.scenes[1].checkTile(this.tileX+1, this.tileY);
+                sceneManager.scenes[1].checkActivable(this.tileX+1, this.tileY);
             break;
             case 3:
                 change = sceneManager.scenes[1].checkTile(this.tileX, this.tileY-1);
+                sceneManager.scenes[1].checkActivable(this.tileX, this.tileY-1);
             break;
             case 4:
                 change = sceneManager.scenes[1].checkTile(this.tileX-1, this.tileY);
+                sceneManager.scenes[1].checkActivable(this.tileX-1, this.tileY);
             break;
         }
         if (change) this.nextMove = direction;
@@ -141,6 +145,9 @@ class Player {
                 if (!(this instanceof Enemy)){
                     sceneManager.scenes[1].sendEnemySignal();
                     sceneManager.scenes[1].interact(this.tileX, this.tileY);
+
+                    sceneManager.scenes[1].elements[0].movements = sceneManager.scenes[1].elements[0].movements + 1;
+                    console.log(sceneManager.scenes[1].elements[0].movements);
                 }
                 
             }

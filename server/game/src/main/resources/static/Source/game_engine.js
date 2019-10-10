@@ -42,7 +42,8 @@ function printWorld(myboard){
     let image = myboard.tileSheet;
     for (var i = 0; i < x; i++){
         for (var j = 0; j < y; j++){
-            printTile(myboard.tileSheet, myboard.world[i][j], [cornerX+(i*64), cornerY+(j*64)]);
+            //printTile(myboard.tileSheet, myboard.world[i][j], [cornerX+(i*64),cornerY+(j*64)]); LINEA ANTIGUA
+            printTile(myboard.tileSheet, myboard.world[i][j], [(i*64),(j*64)]); //CON CAMARA
         }
     }
     
@@ -87,12 +88,14 @@ function printTile(image, type, position){
 
         
     }
-    context.drawImage(image, sprite[0], sprite[1], 64, 64, position[0], position[1], 64, 64);
+    //context.drawImage(image, sprite[0], sprite[1], 64, 64, position[0], position[1], 64, 64); LINEA ANTIGUA
+    context.drawImage(image, sprite[0], sprite[1], 64, 64, viewport.offset[0] + position[0], viewport.offset[1]+position[1], 64, 64); //CON CAMARA
 }
 
 function printSprite(image, sprite, printPosition){
     let context = document.getElementById("game").getContext("2d");
-    context.drawImage(image, sprite[0], sprite[1], 64, 64, cornerX + printPosition[0], cornerY + printPosition[1] - 16, 64, 64);
+    //context.drawImage(image, sprite[0], sprite[1], 64, 64, cornerX + printPosition[0], cornerY + printPosition[1] - 16, 64, 64); LINEA ANTIGUA
+    context.drawImage(image, sprite[0], sprite[1], 64, 64, viewport.offset[0] + printPosition[0], viewport.offset[1] + printPosition[1] - 16, 64, 64); //CON CAMARA
 }
 
 function printImage(src, pos, size){
@@ -281,4 +284,13 @@ function playSound(sound){
 function clearCanvas () {
     let context = document.getElementById("game").getContext("2d");
     context.clearRect(0, 0, 1240, 860); //Clears canvas for printing
+}
+
+function updateCamera(px, py){
+    viewport.update(px + (64/2), py + (64/2));
+
+    let context = document.getElementById("game").getContext("2d");
+    context.fillStyle = "#000000";
+    context.fillRect(0, 0, viewport.screen[0], viewport.screen[1]);
+        
 }
