@@ -6,19 +6,19 @@ function parseTiledLevel(file){
 
 function processData (text) {
     let splittedArray = text.split("\n");
-    let x = splittedArray[0].length / 2; //COGE LAS COMAS POR LO TANDO DIVIDIMOS ENTRE 2
+    let x = splittedArray[0].length / 2 - 1; //COGE LAS COMAS POR LO TANDO DIVIDIMOS ENTRE 2
     let y = splittedArray.length - 1;
     
-    var newWorld = new Array(x);
-        for (var i = 0; i < x; i++){
-            newWorld[i] = new Array(y);
-            for (var j = 0; j < y; j++){
+    var newWorld = new Array(y);
+        for (var i = 0; i < y; i++){
+            newWorld[i] = new Array(x);
+            for (var j = 0; j < x; j++){
                 newWorld[i][j] = 0;
             }
         }
-    for (var i = 0; i < x; i++){
+    for (var i = 0; i < y; i++){
         let splitted = splittedArray[i].split(",");
-        for (var j = 0; j < y; j++){
+        for (var j = 0; j < x; j++){
             newWorld[i][j] = parseInt(splitted[j]);
         }
     }

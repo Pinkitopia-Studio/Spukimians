@@ -1,12 +1,20 @@
 var levelsData = {
         data : [
         {
+            playerX: 2,
+            playerY: 16,
+            enemyX: 2,
+            enemyY: 10,
             ghosts:0,
             minMovements:0,
-            keyX: 0,
-            keyY: 0
+            keyX: 3,
+            keyY: 4
         },
         {
+            playerX: 2,
+            playerY: 2,
+            enemyX: 8,
+            enemyY: 8,
             ghosts:1,
             minMovements:20,
             keyX: 3,

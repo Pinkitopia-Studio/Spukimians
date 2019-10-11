@@ -5,22 +5,23 @@ class SceneManager {
     }
 
     create(){
-        this.actualScene = 0;
+        this.actualScene = -1;
 
         //SCENES
-        var menu = new Menu();
-        var game = new Game();
-        var levelSelector = new LevelSelector();
-        var scoreScene = new Score();
-        var gameOverScene = new GameOver();
-
+        var menu, game, levelSelector, scoreScene, gameOverScene;
+        menu = new Menu();
+        
+        
         menu.create();
 
-        this.menu = menu;
-        this.game = game;
-
         this.scenes = [menu, game, levelSelector, scoreScene, gameOverScene];
-        console.log(this.game);
+        
+
+        
+        this.actualScene = 0;
+
+        this.changeScenes(1, 0);
+    
     }  
     
     update(){
@@ -28,6 +29,25 @@ class SceneManager {
     }
 
     changeScenes(index, level, ghosts, movements){
+        
+        switch(index){
+            case 0:
+                this.scenes[0] = new Menu();
+                break;
+            case 1:
+                this.scenes[1] = new Game();
+                break;
+            case 2:
+                this.scenes[2] = new LevelSelector();
+                break;
+            case 3:
+                this.scenes[3] = new Score();
+                break;
+            case 4:
+                this.scenes[4] = new GameOver();
+                break;
+
+        }
         let pos = this.actualScene;
 
         if (index == 1){
@@ -66,6 +86,7 @@ var tileH = 64;
 var mapW = 1240;
 var mapH = 860;
 
+//CAMARA
 var viewport = {
     screen		: [0,0],
     startTile   : [0,0],

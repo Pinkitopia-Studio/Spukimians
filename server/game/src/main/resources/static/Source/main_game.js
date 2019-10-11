@@ -36,7 +36,7 @@ class Game {
         var x = 0, y = 0;
         this.world = undefined;
 
-        if (level == 0){
+        if (level == -1){
             this.world = new Array(x);
             this.interactiveWorld = new Array(x);
             for (var i = 0; i < x; i++){
@@ -85,10 +85,10 @@ class Game {
         this.tileSheet = new Image();
         this.tileSheet.src = "Assets/mazmorraTileset.png";
 
-        var myPlayer = new Character();
+        var myPlayer = new Character(levelsData.data[this.level].playerX, levelsData.data[this.level].playerY);
         this.addElement(myPlayer);
 
-        var myEnemy = new Enemy();
+        var myEnemy = new Enemy(levelsData.data[this.level].enemyX, levelsData.data[this.level].enemyY);
         this.addElement(myEnemy);
 
         this.trapButton = new Button("trap_botton", 20, 20, 240, 192, "");
@@ -193,8 +193,6 @@ class Game {
     //COMPRUEBA SI EL SUELO ES TRASPASABLE (SUELO = 10)
     checkTile(x, y){
         return (this.world[x][y] == 4);
-
-        
     }
 
     checkActivable(x, y){

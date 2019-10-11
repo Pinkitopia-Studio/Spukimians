@@ -1,16 +1,16 @@
 class Character extends Player {
 
-    constructor () {       
+    constructor (x, y) {       
        super();
         
        this.spriteSheet.src = "Assets/girlSpriteSheet64.png";
        this.moving = 1;
-       this.x = 128;
-       this.y = 128;
+       this.x = x*64;
+       this.y = y*64;
 
        this.nextMove = 0;
-       this.tileX = 2;
-       this.tileY = 2;
+       this.tileX = x;
+       this.tileY = y;
         /*
         Attribute "moving": 0 = idle
         1 - 4 = moving to a direction (1S, 2E, 3N, 4W)

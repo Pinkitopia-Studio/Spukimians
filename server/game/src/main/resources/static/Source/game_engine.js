@@ -54,6 +54,9 @@ function printTile(image, type, position){
     let context = document.getElementById("game").getContext("2d");
     let sprite = [0, 0];
     switch(type){
+        case -1:
+            sprite = [192, 128];
+            break;
         case 0:
             //Floor tile
             sprite = [0, 0];
@@ -137,22 +140,25 @@ function printLevelSelector(){
 function mouseMovement(event) {
     mouseX = event.clientX;
     mouseY = event.clientY;
-    if (sceneManager.scenes[1].activeWorld && !sceneManager.scenes[1].activePause){
-        if(sceneManager.scenes[1].trapButton.active)
-            sceneManager.scenes[1].trapButton.active = false; 
-
-        
-        sceneManager.scenes[1].elements[0].trapButtons.forEach(element =>{
-            element.active = false;
-        })
-    }
-    if(sceneManager.scenes[1].activeWorld && sceneManager.scenes[1].activePause){
-        if(sceneManager.scenes[1].pauseElements[0].active || sceneManager.scenes[1].pauseElements[1].active || sceneManager.scenes[1].pauseElements[2].active){
-            sceneManager.scenes[1].pauseElements.forEach(element =>{
+    if(sceneManager.actualScene == 1){
+        if (sceneManager.scenes[1].activeWorld && !sceneManager.scenes[1].activePause){
+            if(sceneManager.scenes[1].trapButton.active)
+                sceneManager.scenes[1].trapButton.active = false; 
+    
+            
+            sceneManager.scenes[1].elements[0].trapButtons.forEach(element =>{
                 element.active = false;
-            });
+            })
+        }
+        if(sceneManager.scenes[1].activeWorld && sceneManager.scenes[1].activePause){
+            if(sceneManager.scenes[1].pauseElements[0].active || sceneManager.scenes[1].pauseElements[1].active || sceneManager.scenes[1].pauseElements[2].active){
+                sceneManager.scenes[1].pauseElements.forEach(element =>{
+                    element.active = false;
+                });
+            }
         }
     }
+    
         
 }
 
@@ -162,14 +168,16 @@ function mouseOver(event){
 }
 
 function mouseRelease (event) {
-    
-    if (sceneManager.scenes[1].activeWorld && !sceneManager.scenes[1].activePause){
+    if(sceneManager.actualScene == 1){
         let newX = event.clientX;
         let newY = event.clientY;
         
         
         movePlayer(newX, newY);
-    }/* else {
+    }
+    
+       
+    /* else {
         menuClick(newX, newY);
     }*/
     
@@ -225,47 +233,52 @@ function release(e){
 }
 
 function movePlayerKeys(k){
-    if(!sceneManager.scenes[1].activePause && sceneManager.scenes[1].activeWorld && !sceneManager.scenes[1].puttingTrap){ //pausa del game (escena 1)
-        switch(k){
-            case 1:
-                sceneManager.scenes[1].elements[0].move(1); //Player del game (escena1)
-                break;
-            case 2:
-                sceneManager.scenes[1].elements[0].move(2);
-                break;
-            case 3:
-                sceneManager.scenes[1].elements[0].move(3);
-                break;
-            case 4:
-                sceneManager.scenes[1].elements[0].move(4);
-                break;
+    if(sceneManager.actualScene == 1){
+        if(!sceneManager.scenes[1].activePause && sceneManager.scenes[1].activeWorld && !sceneManager.scenes[1].puttingTrap){ //pausa del game (escena 1)
+            switch(k){
+                case 1:
+                    sceneManager.scenes[1].elements[0].move(1); //Player del game (escena1)
+                    break;
+                case 2:
+                    sceneManager.scenes[1].elements[0].move(2);
+                    break;
+                case 3:
+                    sceneManager.scenes[1].elements[0].move(3);
+                    break;
+                case 4:
+                    sceneManager.scenes[1].elements[0].move(4);
+                    break;
+            }
         }
     }
+    
     
 }
 
 function movePlayer (newX, newY) {
-
-    if(!sceneManager.scenes[1].activePause && sceneManager.scenes[1].activeWorld && !sceneManager.scenes[1].puttingTrap){
-        let diffX = mouseX-newX;
-        let diffY = mouseY-newY;
-
-        if (Math.abs(diffX) > Math.abs(diffY)) {
-            //If the swipe was larger on X axis, move Left or Right
-            if (diffX > 0){
-                sceneManager.scenes[1].elements[0].move(4); //Move left
+    if(sceneManager.actualScene == 1){
+        if(!sceneManager.scenes[1].activePause && sceneManager.scenes[1].activeWorld && !sceneManager.scenes[1].puttingTrap){
+            let diffX = mouseX-newX;
+            let diffY = mouseY-newY;
+    
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                //If the swipe was larger on X axis, move Left or Right
+                if (diffX > 0){
+                    sceneManager.scenes[1].elements[0].move(4); //Move left
+                } else {
+                    sceneManager.scenes[1].elements[0].move(2); //Move Right
+                }
             } else {
-                sceneManager.scenes[1].elements[0].move(2); //Move Right
-            }
-        } else {
-            //Else, the swipe was larger on Y axis, so move Up or Down
-            if (diffY > 0){
-                sceneManager.scenes[1].elements[0].move(3); //Move down
-            } else {
-                sceneManager.scenes[1].elements[0].move(1); //Move up
+                //Else, the swipe was larger on Y axis, so move Up or Down
+                if (diffY > 0){
+                    sceneManager.scenes[1].elements[0].move(3); //Move down
+                } else {
+                    sceneManager.scenes[1].elements[0].move(1); //Move up
+                }
             }
         }
     }
+    
 }
 
 function shuffleArray(array) {

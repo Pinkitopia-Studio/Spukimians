@@ -4,14 +4,14 @@ In this file all enemy-related code can be found.
 
 class Enemy extends Player {
 
-        constructor () {
+        constructor (x, y) {
             super();
             this.spriteSheet.src = "Assets/exampleSpriteSheet_Enemy.png";
-            this.x = 256;
-            this.y = 384;
+            this.x = x*64;
+            this.y = y*64;
             this.moving = 0;
-            this.tileX = 4;
-            this.tileY = 6;
+            this.tileX = x;
+            this.tileY = y;
             this.previousMove = 0;
             this.nextMove = 0;
         }
