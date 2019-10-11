@@ -5,7 +5,7 @@ var levelsData = {
             playerY: 16,
             enemyX: 2,
             enemyY: 10,
-            ghosts:0,
+            ghosts: 0,
             minMovements:0,
             keyX: 3,
             keyY: 4,
@@ -14,6 +14,9 @@ var levelsData = {
             ],
             levers: [
                 [3, 18, 0] //[posX, posY, idBarrier]
+            ],
+            boxes: [
+                [2, 13]
             ]
         },
         {
@@ -26,7 +29,10 @@ var levelsData = {
             keyX: 3,
             keyY: 4,
             barriers: [],
-            levers: []
+            levers: [],
+            boxes: [
+                [3, 3]
+            ]
         },
         {
             ghosts:2,

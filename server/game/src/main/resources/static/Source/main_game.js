@@ -13,8 +13,8 @@ class Game {
         this.elements = [];
         this.pauseElements = [];
         
-        this.items = [];
-        this.interactiveWorld = [];
+        this.items = []; //[llave, ]
+        this.interactiveWorld = []; //[1 = trampa, 2 = llave, 3 = palanca, 4 = caja]
         //Attribute "elements" of Game:
         //Consists of an array with all the active elements in scene.
         //Used for rendering and other options.
@@ -85,8 +85,11 @@ class Game {
         var myPlayer = new Character(levelsData.data[this.level].playerX, levelsData.data[this.level].playerY);
         this.addElement(myPlayer);
 
-        var myEnemy = new Enemy(levelsData.data[this.level].enemyX, levelsData.data[this.level].enemyY);
-        this.addElement(myEnemy);
+        for(var i = 0; i < levelsData.data[this.level].ghosts; i++){
+            var myEnemy = new Enemy(levelsData.data[this.level].enemyX, levelsData.data[this.level].enemyY);
+            this.addElement(myEnemy);
+        }
+        
 
         this.trapButton = new Button("trap_botton", 20, 20, 240, 192, "");
         this.trapButton.create();
@@ -183,7 +186,49 @@ class Game {
 
         }
         
-        
+        //CAJAS (4)
+        if(levelsData.data[this.level].boxes != []){
+            levelsData.data[this.level].boxes.forEach(element => {
+                var box = new Item(element[0], element[1], "Assets/trap.png", 4);
+                that.addItem(box, box.tileX, box.tileY, 4);
+
+                box.assignFunction(relativePosition => { 
+                    let dir = that.elements[0].facing; //1 SUR 2 ESTE 3 NORTE 4 OESTE
+                    switch(dir){
+                        case 1:
+                            //COMPROBAR SI HAY ESPACIO AL SUR
+                            if(that.checkTile(box.tileX, box.tileY + 1)){
+                                
+                                box.tileY++;
+                                //MOVER CAJA ABAJO
+                            }
+                            break;
+                        case 2:
+                        //COMPROBAR SI HAY ESPACIO AL ESTE
+                            if(that.checkTile(box.tileX + 1, box.tileY)){
+                                //MOVER CAJA DERECHA
+                                box.tileX++;
+                            }
+                            break;
+                        case 3:
+                            //COMPROBAR SI HAY ESPACIO AL NORTE
+                            if(that.checkTile(box.tileX, box.tileY - 1)){
+                                //MOVER CAJA ARRIBA
+                                box.tileY--;
+                            }
+                            break;
+                        case 4:
+                            //COMPROBAR SI HAY ESPACIO AL OESTE
+                            if(that.checkTile(box.tileX - 1, box.tileY)){
+                                //MOVER CAJA IZQUIERDA
+                                box.tileX--;
+                            }
+                            break;
+                    }
+
+                });
+            });
+        }
         
         
     }
@@ -212,7 +257,6 @@ class Game {
         }else{
             this.elements = [];
         }
-        
     }
     
     //COMPRUEBA SI EL SUELO ES TRASPASABLE (SUELO = 10)
@@ -374,12 +418,19 @@ class Game {
 
     interact(tileX, tileY){
         if(this.interactiveWorld[tileX][tileY] != 0){
-            let position = this.interactiveWorld[tileX][tileY] - 2;
-            if (this.items[position].id === 2){
-                this.deleteItem(tileX, tileY);
-                this.elements[0].items[1] = 1;
-                //Abrir puerta
+            if(this.interactiveWorld[tileX][tileY] == 2){ //CASO LLAVE
+                let position = 0;
+                if (this.items[position].id === 2){
+                    this.deleteItem(tileX, tileY);
+                    this.elements[0].items[1] = 1;
+                    //Abrir puerta
+                }
             }
+            /*if(this.interactiveWorld[tileX][tileY] == 4){ //CASO CAJA
+                let position = this.interactiveWorld[tileX][tileY];
+                if(this.items[position].id === )
+            }*/
+            
         }
         
     }

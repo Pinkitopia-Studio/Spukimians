@@ -10,7 +10,7 @@ class Item {
         this.sprite.src = src;
         this.posSprite = [0, 0]
         this.active = true;
-        this.id = id; //ID = 1 TRAMPA, 2 = LLAVE, 3 = PALANCA
+        this.id = id; //ID = 1 TRAMPA, 2 = LLAVE, 3 = PALANCA, 4 = CAJA
     }
 
     update(){

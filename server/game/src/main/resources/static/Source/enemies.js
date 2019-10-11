@@ -32,7 +32,7 @@ class Enemy extends Player {
                 let path = findPath(sceneManager.scenes[1].world, [this.tileX, this.tileY], [myPlayer.tileX, myPlayer.tileY]);
                 console.log(path);
                 let nextMoveInPath = path[1];
-                if (nextMoveInPath[0] < this.tileX){
+                 if (nextMoveInPath[0] < this.tileX){
                     this.nextMove = 4;
                     this.previousMove = 2;
                 } else if (nextMoveInPath[0] > this.tileX){

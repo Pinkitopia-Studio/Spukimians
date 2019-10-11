@@ -144,11 +144,13 @@ class Player {
                 this.velocity = 0;
                 //The player stops moving, so send a signal to all ghosts in board to move
                 if (!(this instanceof Enemy)){
+                    sceneManager.scenes[1].elements[0].movements = sceneManager.scenes[1].elements[0].movements + 1;
+                    console.log(sceneManager.scenes[1].elements[0].movements);
+
                     sceneManager.scenes[1].sendEnemySignal();
                     sceneManager.scenes[1].interact(this.tileX, this.tileY);
 
-                    sceneManager.scenes[1].elements[0].movements = sceneManager.scenes[1].elements[0].movements + 1;
-                    console.log(sceneManager.scenes[1].elements[0].movements);
+                    
                 }
                 
             }
