@@ -88,6 +88,15 @@ function printTile(image, type, position){
             //Wall tile
             sprite = [192, 64];
             break;
+        case 8:
+            sprite = [0, 128];
+            break;
+        case 9:
+            sprite = [64, 128];
+            break;
+        case 10:
+            sprite = [128, 128];
+            break;
 
         
     }

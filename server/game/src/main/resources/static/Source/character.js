@@ -4,7 +4,8 @@ class Character extends Player {
        super();
         
        this.spriteSheet.src = "Assets/girlSpriteSheet64.png";
-       this.moving = 1;
+       this.moving = 0;
+       this.facing = 1;
        this.x = x*64;
        this.y = y*64;
 

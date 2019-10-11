@@ -20,7 +20,7 @@ class SceneManager {
         
         this.actualScene = 0;
 
-        this.changeScenes(1, 0);
+        //this.changeScenes(1, 0);
     
     }  
     

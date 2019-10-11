@@ -42,6 +42,7 @@ class Player {
             break;
         }
         if (change) this.nextMove = direction;
+        this.facing = direction;
         return change;
     }
 
@@ -80,7 +81,7 @@ class Player {
 
                 this.nextWalk++;
             }else{
-                switch(this.lastDirection){
+                switch(this.facing){
                     case 1:
                         this.spritePos = [this.lastSprite * 64, 0];
                         break;

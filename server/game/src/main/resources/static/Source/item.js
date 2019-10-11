@@ -8,13 +8,14 @@ class Item {
         this.sizeY = 64;
         this.sprite = new Image();
         this.sprite.src = src;
+        this.posSprite = [0, 0]
         this.active = true;
-        this.id = id; //ID = 1 TRAMPA, 2 = LLAVE
+        this.id = id; //ID = 1 TRAMPA, 2 = LLAVE, 3 = PALANCA
     }
 
     update(){
         if(this.active){
-            printSprite(this.sprite, [0, 0], [this.x, this.y + 16]);
+            printSprite(this.sprite, this.posSprite, [this.x, this.y + 16]);
         }
         
     }

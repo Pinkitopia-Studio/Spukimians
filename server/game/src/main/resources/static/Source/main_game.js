@@ -28,6 +28,9 @@ class Game {
         this.spriteSheetTorches.src = "Assets/animacionTilesAntorcha.png"
 
         this.door = [];
+
+        //Barreras
+        this.barriers = [];
     }
 
     create (level) {
@@ -143,7 +146,7 @@ class Game {
                 }
             }
         var key = new Item(levelsData.data[this.level].keyX, levelsData.data[this.level].keyY, "Assets/llave.png", 2);
-        this.addItem(key, key.tileX, key.tileY);
+        this.addItem(key, key.tileX, key.tileY, 2);
 
         //playSound("inGame");
 
@@ -161,6 +164,34 @@ class Game {
                 }
             }
         }
+
+        //BARRERAS
+        if(levelsData.data[this.level].barriers != []){
+            levelsData.data[this.level].barriers.forEach(element => {
+                var barr = new Barrier(element[0], element[1]);
+                that.barriers.push(barr);
+                that.world[element[0]][element[1]] = 10; //SE VUELVE CASILLA NO TRANSITABLE
+            });
+        }
+
+        //PALANCAS
+        if(levelsData.data[this.level].levers != []){
+            levelsData.data[this.level].levers.forEach(element => {
+                var lever = new Item(element[0], element[1], "Assets/lever.png", 3);
+                lever.assignFunction(id => { //METERLE UN 0 al llamarla
+                    id = element[2]; //Aqui se asigna el id
+                    lever.posSprite = [64, 0];
+                    that.barriers[id].unlock();
+                });
+                that.addItem(lever, lever.tileX, lever.tileY, 3)
+                that.world[element[0]][element[1]] = 10;
+            });
+
+        }
+        
+        
+        
+        
     }
 
     addElement(element, arrayIndex){
@@ -204,6 +235,14 @@ class Game {
             setTimeout(function(){
                 sceneManager.changeScenes(3, that.level, that.elements[0].items[2], that.elements[0].movements);
             }, 2000);
+        }
+
+        if(this.interactiveWorld[x][y] == 3){
+            this.items.forEach(element => {
+                if(x == element.tileX && y == element.tileY){
+                    element.execute();
+                }
+            });
         }
     }
 
@@ -258,6 +297,10 @@ class Game {
         });
         
         //ACTUALIZACION DE ELEMENTOS DE LA ESCENA
+        this.barriers.forEach(element => {
+            element.update();
+        });
+
         this.elements.forEach(element => {
             element.update(this);
         });
@@ -303,9 +346,9 @@ class Game {
        
     }
 
-    addItem(item, tileX, tileY) {
+    addItem(item, tileX, tileY, position) {
         this.items.push(item);
-        let position = this.items.length;
+        
         if(this.interactiveWorld[tileX][tileY] == 0){
             this.interactiveWorld[tileX][tileY] = position;
         }
@@ -344,6 +387,10 @@ class Game {
             }
         }
         
+    }
+
+    openBarrier(x, y){
+        this.world[x][y] = 4;
     }
 
     
