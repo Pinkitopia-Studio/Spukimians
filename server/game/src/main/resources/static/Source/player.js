@@ -99,12 +99,12 @@ class Player {
                 this.nextIdle++;
             }
             
-            if(this.nextWalk == 2){ //determinación de la velocidad de la animación de andar
+            if(this.nextWalk == 4){ //determinación de la velocidad de la animación de andar
                 this.lastSprite = this.lastSprite + 1;
                 this.nextWalk = 0;
             }
 
-            if(this.nextIdle == 4){
+            if(this.nextIdle == 8){
                 this.lastSprite = this.lastSprite + 1;
                 this.nextIdle = 0;
             }
