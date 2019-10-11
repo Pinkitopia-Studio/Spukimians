@@ -82,7 +82,7 @@ class Character extends Player {
             //CUADRITOS PARA LAS TRAMPAS (MIRA A VER SI NO ES UN TILE COLISIONABLE)
             if(sceneManager.scenes[1].checkTile(this.tileX, this.tileY+1)){
                 
-                var button = new Button("square", cornerX + this.tileX*64, cornerY + (this.tileY+1)*64, 64, 64, "");
+                var button = new Button("square", this.tileX*64, (this.tileY+1)*64 + 16, 64, 64, "");
                 button.create();
                 var that = this;
                 button.assignFunction(function(){
@@ -91,7 +91,7 @@ class Character extends Player {
                 this.trapButtons.push(button);
             }
             if(sceneManager.scenes[1].checkTile(this.tileX+1, this.tileY)){
-                var button = new Button("square", cornerX + (this.tileX+1)*64, cornerY +  this.tileY*64, 64, 64, "");
+                var button = new Button("square", (this.tileX+1)*64, this.tileY*64 + 16, 64, 64, "");
                 button.create();
                 var that = this;
                 button.assignFunction(function(){
@@ -100,7 +100,7 @@ class Character extends Player {
                 this.trapButtons.push(button);
             }
             if(sceneManager.scenes[1].checkTile(this.tileX, this.tileY-1)){
-                var button = new Button("square", cornerX +this.tileX*64, cornerY + (this.tileY-1)*64, 64, 64, "");
+                var button = new Button("square", this.tileX*64, (this.tileY-1)*64 + 16, 64, 64, "");
                 button.create();
                 var that = this;
                 button.assignFunction(function(){
@@ -109,7 +109,7 @@ class Character extends Player {
                 this.trapButtons.push(button);
             }
             if(sceneManager.scenes[1].checkTile(this.tileX-1, this.tileY)){
-                var button = new Button("square", cornerX + (this.tileX-1)*64, cornerY + this.tileY*64, 64, 64, "");
+                var button = new Button("square", (this.tileX-1)*64, this.tileY*64 + 16, 64, 64, "");
                 button.create();
                 var that = this;
                 button.assignFunction(function(){

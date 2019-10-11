@@ -92,10 +92,15 @@ function printTile(image, type, position){
     context.drawImage(image, sprite[0], sprite[1], 64, 64, viewport.offset[0] + position[0], viewport.offset[1]+position[1], 64, 64); //CON CAMARA
 }
 
-function printSprite(image, sprite, printPosition){
+function printSprite(image, sprite, printPosition, isButton, size){
     let context = document.getElementById("game").getContext("2d");
     //context.drawImage(image, sprite[0], sprite[1], 64, 64, cornerX + printPosition[0], cornerY + printPosition[1] - 16, 64, 64); LINEA ANTIGUA
-    context.drawImage(image, sprite[0], sprite[1], 64, 64, viewport.offset[0] + printPosition[0], viewport.offset[1] + printPosition[1] - 16, 64, 64); //CON CAMARA
+    if(isButton){
+        context.drawImage(image, viewport.offset[0] + printPosition[0], viewport.offset[1] + printPosition[1] - 16, size[0], size[1]);
+    }else{
+        context.drawImage(image, sprite[0], sprite[1], 64, 64, viewport.offset[0] + printPosition[0], viewport.offset[1] + printPosition[1] - 16, 64, 64); //CON CAMARA
+    }
+    
 }
 
 function printImage(src, pos, size){
