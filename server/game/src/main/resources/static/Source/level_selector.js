@@ -69,11 +69,14 @@ class LevelSelector {
             this.xFloor = this.xFloor - (1 * this.velFloor);
         }
         
+        
         printImage("floor", [this.xFloor, 0], [2432, 860]);
 
         this.ghosts.forEach(element => {
             element.update();
         });
+
+        printImage("selec_niv", [1240/2 - (908/2), 100], [908, 128]);
 
         this.elements.forEach(element => {
             element.update();

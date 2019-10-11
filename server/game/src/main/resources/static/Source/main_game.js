@@ -72,12 +72,6 @@ class Game {
             parseTiledLevel("Levels/level"+level+".txt");
             
         }
-
-        
-        
-
-        
-        
     }
 
     finishCreate (details) {
@@ -311,6 +305,7 @@ class Game {
 
         if(this.activePause){
             printBackground("shade50per");
+            printImage("pausa", [1240/2 - (294/2), 100], [294, 128]);
             this.pauseElements.forEach(element => {
                 element.update();
             });
