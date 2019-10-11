@@ -11,19 +11,19 @@ class LevelSelector {
     create(){
         this.active = true;
 
-        let level1 = new Button("nums/1", 1240/3 - (65/2), 400, 65, 65, "");
-        let level2 = new Button("nums/2", 1240/2 - (65/2), 400, 65, 65, "");
+        let level1 = new Button("nums/1_xl", 1240/4 - (300/2), 300, 300, 240, "");
+        let level2 = new Button("nums/2_xl", 1240/2 - (300/2), 300, 300, 240, "");
         let volver = new Button("ui/volver", 660 - (420/2), 550, 420, 192, "");
         
 
         level1.create();
         level1.assignFunction(function(){
-            sceneManager.changeScenes(1, 0);
+            sceneManager.changeScenes(1, 1);
         });
 
         level2.create();
         level2.assignFunction(function(){
-            sceneManager.changeScenes(1, 2);
+            sceneManager.changeScenes(1, 0);
         })
         
         volver.create();

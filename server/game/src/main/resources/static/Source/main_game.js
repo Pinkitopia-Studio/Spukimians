@@ -379,7 +379,7 @@ class Game {
 
     interact(tileX, tileY){
         if(this.interactiveWorld[tileX][tileY] != 0){
-            let position = this.interactiveWorld[tileX][tileY]-1;
+            let position = this.interactiveWorld[tileX][tileY] - 2;
             if (this.items[position].id === 2){
                 this.deleteItem(tileX, tileY);
                 this.elements[0].items[1] = 1;

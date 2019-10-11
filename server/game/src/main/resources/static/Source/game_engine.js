@@ -54,6 +54,7 @@ function printTile(image, type, position){
     let context = document.getElementById("game").getContext("2d");
     let sprite = [0, 0];
     switch(type){
+        
         case -1:
             sprite = [192, 128];
             break;

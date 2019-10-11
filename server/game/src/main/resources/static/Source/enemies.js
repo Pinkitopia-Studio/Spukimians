@@ -6,7 +6,7 @@ class Enemy extends Player {
 
         constructor (x, y) {
             super();
-            this.spriteSheet.src = "Assets/exampleSpriteSheet_Enemy.png";
+            this.spriteSheet.src = "Assets/ghostSpriteSheet.png";
             this.x = x*64;
             this.y = y*64;
             this.moving = 0;
