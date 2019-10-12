@@ -146,6 +146,7 @@ class Character extends Player {
             if (cont === this.traps.length){
                 var trap = new Item(x, y, "Assets/trap.png", 1);
                 this.traps.push(trap);
+                //playSound("");
             }
         }else{
             var trap = new Item(x, y, "Assets/trap.png", 1);

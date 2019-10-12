@@ -98,11 +98,14 @@ class Game {
             if(!that.puttingTrap && that.elements[0].moving === 0){
                 that.puttingTrap = true;
                 that.elements[0].createTrapButtons();
+                playSound("abrirBolsa");
             }else{
                 setTimeout(function(){
                     that.puttingTrap = false;
                     that.elements[0].eraseTrapButtons();
+                    
                 }, 500);
+                playSound("cerrarBolsa");
             }
             
             console.log("boton pulsado");
@@ -176,6 +179,7 @@ class Game {
             levelsData.data[this.level].levers.forEach(element => {
                 var lever = new Item(element[0], element[1], "Assets/lever.png", 3);
                 lever.assignFunction(id => { //METERLE UN 0 al llamarla
+                    playSound("palanca");
                     id = element[2]; //Aqui se asigna el id
                     lever.posSprite = [64, 0];
                     that.barriers[id].unlock();
@@ -268,11 +272,16 @@ class Game {
         //COMPROBACIONES DE ACTIVABLES
         let that = this;
 
-        if(this.world[x][y] == 6 && this.elements[0].items[1] >= 1){ // SI EL JUGADOR TIENE LA LLAVE
-            this.world[x][y] = 7;
-            setTimeout(function(){
-                sceneManager.changeScenes(3, that.level, that.elements[0].items[2], that.elements[0].movements);
-            }, 2000);
+        if(this.world[x][y] == 6){ // SI EL JUGADOR TIENE LA LLAVE
+            if(this.elements[0].items[1] >= 1){
+                playSound("abrirPuerta");
+                this.world[x][y] = 7;
+                setTimeout(function(){
+                    sceneManager.changeScenes(3, that.level, that.elements[0].items[2], that.elements[0].movements);
+                }, 2000);
+            }
+            else
+                playSound("puertaCerrada");
         }
 
         if(this.interactiveWorld[x][y] == 3){
@@ -287,9 +296,16 @@ class Game {
     
 
     sendEnemySignal () {
+        let that = this;
         this.elements.forEach(element => {
             if (element instanceof Enemy){
                 element.automaticMove();
+                /*console.log("Lo que tengo encima es " + this [element.tileX][element.tileY]);
+                if(that.interactiveWorld[element.tileX][element.tileY] === 1)
+                
+                    element = null;
+                    //element.killFantasma();
+                    */
             }
         });
     }
@@ -421,16 +437,21 @@ class Game {
             if(this.interactiveWorld[tileX][tileY] == 2){ //CASO LLAVE
                 let position = 0;
                 if (this.items[position].id === 2){
+                    
                     this.deleteItem(tileX, tileY);
                     this.elements[0].items[1] = 1;
                     //Abrir puerta
                 }
+                playSound("cogerLlave");
             }
-            /*if(this.interactiveWorld[tileX][tileY] == 4){ //CASO CAJA
+            /*
+            if(this.interactiveWorld[tileX][tileY] == 4){ //CASO CAJA
                 let position = this.interactiveWorld[tileX][tileY];
-                if(this.items[position].id === )
-            }*/
-            
+                if(this.items[position].id === 4){
+                    this
+                }
+            }
+            */
         }
         
     }
