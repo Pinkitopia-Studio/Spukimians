@@ -3,7 +3,15 @@ class Character extends Player {
     constructor (x, y) {       
        super();
         
-       this.spriteSheet.src = "Assets/girlSpriteSheet64.png";
+       switch(character){ //Se crea el personaje segun el que se haya escogido
+            case 0:
+                this.spriteSheet.src = "Assets/girlSpriteSheet64.png";
+                break;
+            case 1:
+                this.spriteSheet.src = "Assets/robot_spritesheet.png";
+                break;
+       }
+       
        this.moving = 0;
        this.facing = 1;
        this.x = x*64;

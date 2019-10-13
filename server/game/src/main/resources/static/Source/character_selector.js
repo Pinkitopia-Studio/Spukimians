@@ -6,10 +6,47 @@ class CharacterSelector {
 
         this.velFloor = 3;
         this.xFloor = 0;
+
+        //NEW
+        this.select = 0; //0 = chica, 1 = robot, 2 = serpiente, 3 = gato
     }
 
     create(){
         this.active = true;
+        
+        //NEW
+        this.spriteGirl = new Image();
+        this.spriteGirl.src = "Assets/girlSpriteSheet64.png";
+        this.spriteRobot = new Image();
+        this.spriteRobot.src = "Assets/robot_spritesheet.png";
+
+        this.buttonGirl = new Button("girlIcon128", 200, 350, 128, 128, "", true, "girlIconSelected");
+        this.buttonRobot = new Button("robotIcon128", 400, 350, 128, 128, "", true, "robotIconSelected");
+
+        let that = this;
+
+        this.buttonGirl.create();
+        this.buttonGirl.assignFunction(function(){
+            that.buttonRobot.pushed = false;
+            character = 0;
+        });
+
+        this.buttonGirl.pushed = true;
+
+        this.buttonRobot.create();
+        this.buttonRobot.assignFunction(function(){
+            that.buttonGirl.pushed = false;
+            character = 1;
+        });
+
+        this.posSprite = [0, 0];
+        this.nextSprite = 0;
+
+        this.goButton = new Button("reanudar", 800, 600, 240, 192, "");
+        this.goButton.create();
+        this.goButton.assignFunction(function(){
+            sceneManager.changeScenes(2);
+        });
 
         this.createGhost();
 
@@ -52,7 +89,7 @@ class CharacterSelector {
             element.update();
         });
 
-        //printImage("selec_niv", [1240/2 - (908/2), 100], [908, 128]);
+        printImage("selec_pers", [1240/2 - (908/2), 100], [908, 128]);
 
         this.elements.forEach(element => {
             element.update();
@@ -64,6 +101,25 @@ class CharacterSelector {
                 this.ghosts[i].x = 1304;
             }
         }
+
+        //NEW
+        printImage("selectPlayer", [(mapW / 2) - (1024 / 2), (mapH / 2) - (512 / 4)], [1024, 512]);
+
+        this.buttonGirl.update();
+        this.buttonRobot.update();
+        this.goButton.update();
+        
+        printSprite(this.spriteGirl, this.posSprite, [232, 500 + 16]);
+        printSprite(this.spriteRobot, this.posSprite, [432, 500 + 16]);
+
+        if(this.nextSprite == 8){
+            this.posSprite = [0, (this.posSprite[1] + 64) % 256];
+            this.nextSprite = 0;
+        }
+
+        this.nextSprite++;
+
+        
     }
 
     destroy(){

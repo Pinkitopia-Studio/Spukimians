@@ -8,13 +8,13 @@ class SceneManager {
         this.actualScene = -1;
 
         //SCENES
-        var menu, game, levelSelector, scoreScene, gameOverScene;
+        var menu, game, levelSelector, scoreScene, gameOverScene, characterSelector;
         menu = new Menu();
         
         
         menu.create();
 
-        this.scenes = [menu, game, levelSelector, scoreScene, gameOverScene];
+        this.scenes = [menu, game, levelSelector, scoreScene, gameOverScene, characterSelector];
         
 
         
@@ -45,6 +45,9 @@ class SceneManager {
                 break;
             case 4:
                 this.scenes[4] = new GameOver();
+                break;
+            case 5:
+                this.scenes[5] = new CharacterSelector();
                 break;
 
         }
@@ -79,6 +82,9 @@ window.onmousedown = mouseMovement;
 window.onmouseup = mouseRelease;
 window.onkeydown = press;
 window.onkeyup = release;
+
+//CHARACTER
+var character = 0; //0 = chica, 1 = robot, 2 = serpiente, 3 = gato
 
 //MAP PARAMETERS
 var tileW = 64;

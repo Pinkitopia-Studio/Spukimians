@@ -22,7 +22,7 @@ class Menu {
 
         play.create();
         play.assignFunction(function(){
-            sceneManager.changeScenes(2);
+            sceneManager.changeScenes(5);
         });
 
         options.create();
