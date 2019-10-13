@@ -30,6 +30,9 @@ class Character extends Player {
        //MOVIMIENTOS
        this.movements = 0;
 
+       //SPritesheet llave
+       
+
     }
     
     //
@@ -72,7 +75,11 @@ class Character extends Player {
        
         this.squarePositions = [];  
         
-        
+        //que salga la llave en una esquinita
+        if(this.items[1] == 1){
+            printImage("llaveIcon", [mapW-64, 0], [64, 64]);
+
+        }
         
         
         

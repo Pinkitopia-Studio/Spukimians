@@ -11,12 +11,22 @@ class Item {
         this.posSprite = [0, 0]
         this.active = true;
         this.id = id; //ID = 1 TRAMPA, 2 = LLAVE, 3 = PALANCA, 4 = CAJA
+        this.velocitySprite = 0;
     }
 
     update(){
         if(this.active){
             printSprite(this.sprite, this.posSprite, [this.x, this.y + 16]);
         }
+
+        if(this.id == 2){ //ANIMACION LLAVE
+            if(this.velocitySprite == 8){
+                this.posSprite = [(this.posSprite[0] + 64) % 256, 0];
+                this.velocitySprite = 0;
+            }
+            this.velocitySprite = this.velocitySprite + 1;
+        }
+        
         
     }
 

@@ -304,6 +304,8 @@ class Game {
                 //Si el fantasma no termina encima de una trampa, se puede mover
                 if(this.interactiveWorld[element.tileX][element.tileY] != 1)
                     element.automaticMove();
+                else
+                    element.dead = true;
             }
         });
     }
@@ -335,10 +337,6 @@ class Game {
         
         updateCamera(this.elements[0].x, this.elements[0].y)
        
-
-        
-        
-        
         if (this.activeWorld){
             //If the world is active (Signifies that a level is being played)
             printWorld(this);
@@ -353,12 +351,12 @@ class Game {
             element.update();
         });
 
-        this.elements.forEach(element => {
-            element.update(this);   
-        });
-
         this.items.forEach(item => {
             item.update();
+        });
+
+        this.elements.forEach(element => {
+            element.update(this);   
         });
 
         if(this.activePause){

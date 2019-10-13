@@ -17,6 +17,10 @@ class Player {
 
        this.lastDirection = 1; //1S, 2E, 3N, 4W
 
+       this.dead = false;
+       this.nextDead = 0;
+       this.posSpriteDead = 0;
+
        
     }
     
@@ -53,52 +57,68 @@ class Player {
             this.lastSprite = (this.lastSprite) % 4; //cambiado para los nuevos sprites
             this.spritePos = [0, 0];
             
-            if(this.moving > 0){
+            if(!this.dead){ //SI NO ESTA MUERTO HACE ANIMACIONES HABITUALES
+                if(this.moving > 0){
                 
-                switch(this.moving) {
-                    case 1:
-                        this.y+=this.velocity;
-                        this.spritePos = [(this.lastSprite+4)*64, 0];
-                        this.lastDirection = 1;
-                    break;
-                    case 2:
-                        this.x+=this.velocity;
-                        this.spritePos = [(this.lastSprite+4)*64, 64];
-                        this.lastDirection = 2;
-                    break;
-                    case 3:
-                        this.y-=this.velocity;
-                        this.spritePos = [(this.lastSprite+4)*64, 128];
-                        this.lastDirection = 3;
-                    break;
-                    case 4:
-                        this.x-=this.velocity;
-                        this.spritePos = [(this.lastSprite+4)*64, 192];
-                        this.lastDirection = 4;
-                    break;
+                    switch(this.moving) {
+                        case 1:
+                            this.y+=this.velocity;
+                            this.spritePos = [(this.lastSprite+4)*64, 0];
+                            this.lastDirection = 1;
+                        break;
+                        case 2:
+                            this.x+=this.velocity;
+                            this.spritePos = [(this.lastSprite+4)*64, 64];
+                            this.lastDirection = 2;
+                        break;
+                        case 3:
+                            this.y-=this.velocity;
+                            this.spritePos = [(this.lastSprite+4)*64, 128];
+                            this.lastDirection = 3;
+                        break;
+                        case 4:
+                            this.x-=this.velocity;
+                            this.spritePos = [(this.lastSprite+4)*64, 192];
+                            this.lastDirection = 4;
+                        break;
+                        
+                    }
+    
+                    this.nextWalk++;
+                }else{
+                    switch(this.facing){
+                        case 1:
+                            this.spritePos = [this.lastSprite * 64, 0];
+                            break;
+                        case 2:
+                            this.spritePos = [this.lastSprite * 64, 64];
+                            break;
+                        case 3:
+                            this.spritePos = [this.lastSprite * 64, 128];
+                            break;
+                        case 4:
+                            this.spritePos = [this.lastSprite * 64, 192];
+                            break;
+                    }
                     
+    
+                    this.nextIdle++;
                 }
-
-                this.nextWalk++;
-            }else{
-                switch(this.facing){
-                    case 1:
-                        this.spritePos = [this.lastSprite * 64, 0];
-                        break;
-                    case 2:
-                        this.spritePos = [this.lastSprite * 64, 64];
-                        break;
-                    case 3:
-                        this.spritePos = [this.lastSprite * 64, 128];
-                        break;
-                    case 4:
-                        this.spritePos = [this.lastSprite * 64, 192];
-                        break;
+            }else{ //ANIMACION DE MUERTE
+                if(this.posSpriteDead < 4){
+                    this.spritePos = [this.posSpriteDead * 64, 256];
+                    this.nextDead++;
+                }else{
+                    this.spritePos = [4 * 64, 320]; //Sprite vacio de la hoja
                 }
                 
-
-                this.nextIdle++;
             }
+
+            if(this.nextDead == 8){
+                this.posSpriteDead = this.posSpriteDead + 1;
+                this.nextDead = 0;
+            }
+            
             
             if(this.nextWalk == 3){ //determinación de la velocidad de la animación de andar
                 this.lastSprite = this.lastSprite + 1;

@@ -109,9 +109,14 @@ class Enemy extends Player {
             } else {
                 this.nextMove = 1;
             }
+            myPlayer.dead = true; //Matamos al player
+            myPlayer.lastSprite = 0; //ponemos la pos del sprite a 0 para hacer la animacion de muerte
 
             //Player CAUGHT, end level.
-            sceneManager.changeScenes(4);
+            setTimeout(function(){
+                sceneManager.changeScenes(4);
+            }, 2000);
+            
 
         }
 

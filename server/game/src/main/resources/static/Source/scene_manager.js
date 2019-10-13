@@ -52,17 +52,17 @@ class SceneManager {
 
         if (index == 1){
             //If next scene is a level of the game or score of the game
+            this.scenes[pos].destroy();
+            this.actualScene = index;
             this.scenes[index].create(level);
-            this.actualScene = index;
-            this.scenes[pos].destroy();
         } else if (index == 3){
+            this.scenes[pos].destroy();
+            this.actualScene = index;
             this.scenes[index].create(level, movements, ghosts);
-            this.actualScene = index;
-            this.scenes[pos].destroy();
         } else {
-            this.scenes[index].create();
-            this.actualScene = index;
             this.scenes[pos].destroy();
+            this.actualScene = index;
+            this.scenes[index].create();
         }
         
         
