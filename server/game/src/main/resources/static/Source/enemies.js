@@ -26,7 +26,7 @@ class Enemy extends Player {
             let myPlayer = sceneManager.scenes[1].elements[0];
             if (Math.abs(this.tileX - myPlayer.tileX)+Math.abs(this.tileY - myPlayer.tileY) <= 1){
                 this.killPlayer(myPlayer);
-            } else if (this.detectPlayer (myPlayer.tileX, myPlayer.tileY)){
+            }else if(this.detectPlayer (myPlayer.tileX, myPlayer.tileY)){
                 console.log("Te persigo joputa");
                 this.nextMove = this.selectMove();
                 let path = findPath(sceneManager.scenes[1].world, [this.tileX, this.tileY], [myPlayer.tileX, myPlayer.tileY]);
@@ -113,6 +113,10 @@ class Enemy extends Player {
             //Player CAUGHT, end level.
             sceneManager.changeScenes(4);
 
+        }
+
+        killFantasma(){
+            
         }
 
 

@@ -1,5 +1,5 @@
 
-//CLASE BOTON INTERACTUABLE
+//CLASE BOTON UI
 
 class Button{
 
@@ -8,40 +8,30 @@ class Button{
         this.posY = y;
         this.sizeX = sX;
         this.sizeY = sY;
-        
         this.sprites = [img, imgHover];
-        
         this.isSprite = (sX == 64) && (sY == 64);
-        
-
     }
-    
-    
+
     create(){
         this.hover = false;
         this.active = false;
-        
         this.image = this.sprites[0];
-
         this.x = this.posX;
         this.y = this.posY;
         this.width = this.sizeX;
         this.height = this.sizeY;
         
-        //SOLO SE USA SI EL BOTON ES UN SPRITE
+        //SI EL BOTON CONTIENE UNA IMAGEN SE CREA UNA IMAGEN
         this.sprite = new Image();
         this.sprite.src = "Assets/"+this.image+".png";
         
     }
-
     assignFunction(fn){
         this.fn = fn;
     }
-
     update(){
         
-        
-        if(this.isSprite){ //SPRITE AÑADIDO PARA CAMARA
+        if(this.isSprite){ //SPRITE ANADIDO PARA CAMARA
             if((mousePosX - 20 >= viewport.offset[0]+this.posX && mousePosX - 20 <= viewport.offset[0]+this.posX+this.sizeX) && (mousePosY - 20 >= viewport.offset[1]+this.posY - 16 && mousePosY - 20 <= viewport.offset[1]+this.posY + this.sizeY - 16)){
                 if(this.sprites[1] !== ""){
                     this.image = this.sprites[1];

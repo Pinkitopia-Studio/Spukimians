@@ -1,3 +1,4 @@
+//NO SE LO QUE ES ESTO
 class Barrier {
     constructor(x, y){
         this.tileX = x;

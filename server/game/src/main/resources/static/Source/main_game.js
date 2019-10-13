@@ -299,13 +299,11 @@ class Game {
         let that = this;
         this.elements.forEach(element => {
             if (element instanceof Enemy){
-                element.automaticMove();
-                /*console.log("Lo que tengo encima es " + this [element.tileX][element.tileY]);
-                if(that.interactiveWorld[element.tileX][element.tileY] === 1)
-                
-                    element = null;
-                    //element.killFantasma();
-                    */
+                console.log("Estoy encima de: " + this.interactiveWorld[element.tileX][element.tileY]);
+                //element.interact(element.tileX, element.tileY);
+                //Si el fantasma no termina encima de una trampa, se puede mover
+                if(this.interactiveWorld[element.tileX][element.tileY] != 1)
+                    element.automaticMove();
             }
         });
     }
@@ -356,7 +354,7 @@ class Game {
         });
 
         this.elements.forEach(element => {
-            element.update(this);
+            element.update(this);   
         });
 
         this.items.forEach(item => {

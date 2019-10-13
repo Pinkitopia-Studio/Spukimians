@@ -1,3 +1,6 @@
+/*
+Utilizado para los fantasmitos
+*/
 function findPath(world, pathStart, pathEnd)
 {
   	//atajo de tecleo

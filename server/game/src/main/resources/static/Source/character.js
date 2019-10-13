@@ -137,7 +137,8 @@ class Character extends Player {
                     console.log("borrando trampa");
                     this.traps[i].destroy();
                     borrar = i;
-                    
+                    //borrar trampa
+                    sceneManager.scenes[1].interactiveWorld[x][y] = 0;
                 }
                 else{
                     cont = cont + 1;
@@ -147,10 +148,14 @@ class Character extends Player {
                 var trap = new Item(x, y, "Assets/trap.png", 1);
                 this.traps.push(trap);
                 //playSound("");
+                playSound("palanca");
+                //dibujar trampa
+                sceneManager.scenes[1].interactiveWorld[x][y] = 1;
             }
         }else{
             var trap = new Item(x, y, "Assets/trap.png", 1);
             this.traps.push(trap);
+            
         }
 
         if(borrar !== -1){
