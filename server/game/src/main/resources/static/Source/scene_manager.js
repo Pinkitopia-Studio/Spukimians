@@ -26,6 +26,7 @@ class SceneManager {
     
     update(){
         this.scenes[this.actualScene].update();
+        
     }
 
     changeScenes(index, level, ghosts, movements){
@@ -72,6 +73,16 @@ class SceneManager {
     }
 }
 
+//CHARACTER
+var character = 0; //0 = chica, 1 = robot, 2 = serpiente, 3 = gato
+
+//MAP PARAMETERS
+var tileW = 64;
+var tileH = 64;
+
+var mapW = 1240;
+var mapH = 860;
+
 var sceneManager = new SceneManager();
 create();
 sceneManager.create();
@@ -83,14 +94,7 @@ window.onmouseup = mouseRelease;
 window.onkeydown = press;
 window.onkeyup = release;
 
-//CHARACTER
-var character = 0; //0 = chica, 1 = robot, 2 = serpiente, 3 = gato
 
-//MAP PARAMETERS
-var tileW = 64;
-var tileH = 64;
-var mapW = 1240;
-var mapH = 860;
 
 //CAMARA
 var viewport = {

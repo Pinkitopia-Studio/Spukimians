@@ -29,6 +29,7 @@ class CharacterSelector {
         this.buttonGirl.assignFunction(function(){
             that.buttonRobot.pushed = false;
             character = 0;
+            playSound("yourcute");
         });
 
         this.buttonGirl.pushed = true;
@@ -37,6 +38,7 @@ class CharacterSelector {
         this.buttonRobot.assignFunction(function(){
             that.buttonGirl.pushed = false;
             character = 1;
+            playSound("yourcute");
         });
 
         this.posSprite = [0, 0];
@@ -126,5 +128,7 @@ class CharacterSelector {
         this.elements = [];
         this.active = false;
         this.ghosts = [];
+
+        
     }
 }

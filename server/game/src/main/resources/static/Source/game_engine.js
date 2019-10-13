@@ -4,6 +4,7 @@ In this file, all game engine functions are located.
 
 */
 
+
 var mouseX, mouseY;
 
 var cornerX = 1240/2 - 640/2; //ESQUINA IZQUIERDA
@@ -26,17 +27,15 @@ function create () {
     */
     let canvas = document.createElement("CANVAS");
     canvas.id = "game";
-    canvas.setAttribute("width",1240);
-    canvas.setAttribute("height",860);
+    canvas.setAttribute("width",mapW);
+    canvas.setAttribute("height",mapH);
     canvas.setAttribute("x", 20);
     canvas.setAttribute("y", 20);
     canvas.setAttribute('style', "background-color: black; position: absolute;  left: 20px; top: 20px; border:2px");
-    document.body.appendChild(canvas);
+    document.getElementById("gameArea").appendChild(canvas);
 }
 
 function printWorld(myboard){
-    
-    
     let x = myboard.world.length;
     let y = myboard.world[0].length;
     let image = myboard.tileSheet;
@@ -101,8 +100,10 @@ function printTile(image, type, position){
 
         
     }
+    
     //context.drawImage(image, sprite[0], sprite[1], 64, 64, position[0], position[1], 64, 64); LINEA ANTIGUA
     context.drawImage(image, sprite[0], sprite[1], 64, 64, viewport.offset[0] + position[0], viewport.offset[1]+position[1], 64, 64); //CON CAMARA
+    
 }
 
 function printSprite(image, sprite, printPosition, isButton, size){
@@ -117,6 +118,8 @@ function printSprite(image, sprite, printPosition, isButton, size){
 }
 
 function printImage(src, pos, size){
+    
+
     let image = new Image();
     image.src = "Assets/"+src+".png";
     let context = document.getElementById("game").getContext("2d");
