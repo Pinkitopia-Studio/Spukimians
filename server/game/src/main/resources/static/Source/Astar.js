@@ -24,8 +24,8 @@ function findPath(world, pathStart, pathEnd)
 		E = x + 1,
 		W = x - 1,
 		myN = N > -1 && sepuedeandar(x, N),
-		myS = S < worldHeight && sepuedeandar(x, S),
-		myE = E < worldWidth && sepuedeandar(E, y),
+		myS = S < worldWidth && sepuedeandar(x, S),
+		myE = E < worldHeight && sepuedeandar(E, y),
 		myW = W > -1 && sepuedeandar(W, y),
 		result = [];
 		if(myN)

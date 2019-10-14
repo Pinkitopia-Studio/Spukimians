@@ -151,8 +151,8 @@ function printLevelSelector(){
 }
 
 function mouseMovement(event) {
-    mouseX = event.clientX;
-    mouseY = event.clientY;
+    /*mouseX = event.clientX;
+    mouseY = event.clientY;*/
     if(sceneManager.actualScene == 1){
         if (sceneManager.scenes[1].activeWorld && !sceneManager.scenes[1].activePause){
             if(sceneManager.scenes[1].trapButton.active)
@@ -189,6 +189,8 @@ function mouseRelease (event) {
         movePlayer(newX, newY);
     }
     
+    mouseX = event.clientX;
+    mouseY = event.clientY;
        
     /* else {
         menuClick(newX, newY);

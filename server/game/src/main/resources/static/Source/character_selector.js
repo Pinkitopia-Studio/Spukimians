@@ -52,6 +52,10 @@ class CharacterSelector {
 
         this.createGhost();
 
+        //Resets viewport offset camera, for printing correctly the sprites as the function that prints
+        //them uses the viewport offset.
+        viewport.offset[0] = 0;
+        viewport.offset[1] = 0;
     }
 
     addElement(element){
