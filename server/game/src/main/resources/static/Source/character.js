@@ -156,7 +156,7 @@ class Character extends Player {
                     sceneManager.scenes[1].interactiveWorld[x][y] = 0;
                 }
                 else{
-                    cont = cont + 1;
+                    cont++;
                 }
             }
             if (cont === this.traps.length){
@@ -170,7 +170,7 @@ class Character extends Player {
         }else{
             var trap = new Item(x, y, "Assets/trap.png", 1);
             this.traps.push(trap);
-            
+            sceneManager.scenes[1].interactiveWorld[x][y] = 1;
         }
 
         if(borrar !== -1){

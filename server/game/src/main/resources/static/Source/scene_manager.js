@@ -25,8 +25,15 @@ class SceneManager {
     }  
     
     update(){
+
+        
+        
+
         this.scenes[this.actualScene].update();
         
+        
+        
+
     }
 
     changeScenes(index, level, ghosts, movements){
@@ -83,9 +90,13 @@ var tileH = 64;
 var mapW = 1240;
 var mapH = 860;
 
+var mobileScaleFactor = 0.5;
+
 var sceneManager = new SceneManager();
 create();
 sceneManager.create();
+
+
 var sceneInterval = setInterval(function () {sceneManager.update()}, 30);
 
 window.onmousemove = mouseOver;
@@ -94,7 +105,7 @@ window.onmouseup = mouseRelease;
 window.onkeydown = press;
 window.onkeyup = release;
 
-
+var inicial = false;
 
 //CAMARA
 var viewport = {
@@ -134,6 +145,8 @@ window.onload = function(){
         document.getElementById("game").height
     ]
 }
+
+
 
 /*var game = new Game();
 create();

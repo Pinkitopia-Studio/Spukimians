@@ -439,6 +439,8 @@ class Game {
                     //Abrir puerta
                 }
                 playSound("cogerLlave");
+            } else if (this.interactiveWorld[tileX][tileY] == 1){
+                return 0;
             }
             /*
             if(this.interactiveWorld[tileX][tileY] == 4){ //CASO CAJA

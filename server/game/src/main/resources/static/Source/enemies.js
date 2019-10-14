@@ -121,7 +121,8 @@ class Enemy extends Player {
         }
 
         killFantasma(){
-            
+            alert("Fantasma muere jeje");
+            this.dead = true;
         }
 
 

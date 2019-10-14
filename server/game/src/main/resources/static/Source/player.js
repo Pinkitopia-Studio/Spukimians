@@ -171,6 +171,10 @@ class Player {
                     sceneManager.scenes[1].interact(this.tileX, this.tileY);
 
                     
+                } else {
+                    if (sceneManager.scenes[1].interact(this.tileX, this.tileY) == 0){
+                        this.killFantasma();
+                    }
                 }
                 
             }

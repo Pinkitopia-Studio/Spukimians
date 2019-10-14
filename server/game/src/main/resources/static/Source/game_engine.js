@@ -327,3 +327,32 @@ function updateCamera(px, py){
     context.fillRect(0, 0, viewport.screen[0], viewport.screen[1]);
         
 }
+
+function resize(scaleFactor) {
+
+    let canvas = document.getElementById("game");
+
+    let ctx = document.getElementById("game").getContext("2d");
+
+    // save the canvas content as imageURL
+    var data = canvas.toDataURL();
+
+    canvas.width*=scaleFactor;
+    canvas.height*=scaleFactor;
+
+
+    // scale and redraw the canvas content
+    var img = new Image();
+    img.onload = function () {
+        ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
+    }
+    img.src = data;
+
+}
+
+function unsize (scaleFactor){
+    let canvas = document.getElementById("game");
+
+    canvas.width*=2;
+    canvas.height*=2;
+}
