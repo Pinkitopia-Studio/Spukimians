@@ -23,7 +23,7 @@ class Button{
         this.width = this.sizeX;
         this.height = this.sizeY;
         
-        //SI EL BOTON CONTIENE UNA IMAGEN SE CREA UNA IMAGEN
+        //SI EL BOTON CONTIENE UN SPRITE IMAGEN SE CREA UNA IMAGEN
         this.sprite = new Image();
         this.sprite.src = "Assets/"+this.image+".png";
         
@@ -32,10 +32,13 @@ class Button{
         this.fn = fn;
     }
     update(){
+        var ratioX = GAME.currentWidth / mapW;
+        var ratioY = Game.currentHeight / mapH;
+        
         
         if(this.isSprite){ //SPRITE ANADIDO PARA CAMARA
             
-                if((mousePosX - 20 >= viewport.offset[0]+this.posX && mousePosX - 20 <= viewport.offset[0]+this.posX+this.sizeX) && (mousePosY - 20 >= viewport.offset[1]+this.posY - 16 && mousePosY - 20 <= viewport.offset[1]+this.posY + this.sizeY - 16)){
+                if((mousePosX >= viewport.offset[0]+this.posX && mousePosX <= viewport.offset[0]+this.posX+this.sizeX) && (mousePosY >= viewport.offset[1]+this.posY - 16 && mousePosY - 20 <= viewport.offset[1]+this.posY + this.sizeY - 16)){
                     if(this.sprites[1] !== ""){
                         this.image = this.sprites[1];
                     }else{
@@ -59,7 +62,7 @@ class Button{
             
             
 
-                if((mouseX- 20 >= viewport.offset[0]+this.posX && mouseX - 20 <= viewport.offset[0]+this.posX+this.sizeX) && (mouseY - 20 >= viewport.offset[1]+this.posY && mouseY - 20 <= viewport.offset[1]+this.posY + this.sizeY) && !this.active){
+                if((mouseX >= viewport.offset[0]+this.posX && mouseX <= viewport.offset[0]+this.posX+this.sizeX) && (mouseY >= viewport.offset[1]+this.posY && mouseY <= viewport.offset[1]+this.posY + this.sizeY) && !this.active){
                     if(!this.active){
                         console.log("he sido pulsado");
                         
@@ -74,7 +77,7 @@ class Button{
             
         }else{
             if(!this.pushed){
-                if((mousePosX - 20 >= this.posX && mousePosX - 20 <= this.posX+this.sizeX) && (mousePosY - 20 >= this.posY && mousePosY - 20 <= this.posY + this.sizeY)){
+                if((mousePosX >= this.posX && mousePosX <= this.posX+this.sizeX) && (mousePosY >= this.posY && mousePosY <= this.posY + this.sizeY)){
                     if(this.sprites[1] !== ""){
                         this.image = this.sprites[1];
                     }else{
@@ -95,7 +98,7 @@ class Button{
                     this.sizeY = this.height;
                 }
 
-                if((mouseX- 20 >= this.posX && mouseX - 20 <= this.posX+this.sizeX) && (mouseY - 20 >= this.posY && mouseY - 20 <= this.posY + this.sizeY) && !this.active){
+                if((mouseX >= this.posX && mouseX <= this.posX+this.sizeX) && (mouseY  >= this.posY && mouseY  <= this.posY + this.sizeY) && !this.active){
                     if(!this.active){
                         console.log("he sido pulsado");
                         
@@ -129,6 +132,7 @@ class Button{
             }
             this.button = printImage(this.image, [this.posX, this.posY], [this.sizeX, this.sizeY]);
         }
+        
         
         
         

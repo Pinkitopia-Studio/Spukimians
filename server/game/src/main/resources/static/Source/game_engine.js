@@ -178,21 +178,30 @@ function mouseMovement(event) {
 }
 
 function mouseOver(event){
-    mousePosX = event.clientX;
-    mousePosY = event.clientY;
+    var offset = $('#game').offset();
+
+    console.log(mousePosX);
+    console.log(mousePosY);
+    console.log(GAME.currentWidth);
+    mousePosX = event.clientX - offset.left + $(window).scrollLeft();
+    mousePosY = event.clientY - offset.top + $(window).scrollTop();
+
+    
 }
 
 function mouseRelease (event) {
+    var offset = $('#game').offset();
+    
     if(sceneManager.actualScene == 1){
-        let newX = event.clientX;
-        let newY = event.clientY;
+        let newX = event.clientX - offset.left + $(window).scrollLeft();
+        let newY = event.clientY - offset.top + $(window).scrollTop();
         
         
         movePlayer(newX, newY);
     }
     
-    mouseX = event.clientX;
-    mouseY = event.clientY;
+    mouseX = event.clientX - offset.left + $(window).scrollLeft();
+    mouseY = event.clientY - offset.top + $(window).scrollTop();
        
     /* else {
         menuClick(newX, newY);
