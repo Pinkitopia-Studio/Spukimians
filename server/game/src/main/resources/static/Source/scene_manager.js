@@ -8,13 +8,13 @@ class SceneManager {
         this.actualScene = -1;
 
         //SCENES
-        var menu, game, levelSelector, scoreScene, gameOverScene, characterSelector;
+        var menu, game, levelSelector, scoreScene, gameOverScene, characterSelector, credits;
         menu = new Menu();
         
         
         menu.create();
 
-        this.scenes = [menu, game, levelSelector, scoreScene, gameOverScene, characterSelector];
+        this.scenes = [menu, game, levelSelector, scoreScene, gameOverScene, characterSelector, credits];
         
 
         
@@ -25,15 +25,7 @@ class SceneManager {
     }  
     
     update(){
-
-        
-        
-
         this.scenes[this.actualScene].update();
-        
-        
-        
-
     }
 
     changeScenes(index, level, ghosts, movements){
@@ -56,6 +48,9 @@ class SceneManager {
                 break;
             case 5:
                 this.scenes[5] = new CharacterSelector();
+                break;
+            case 6:
+                this.scenes[6] = new Credits();
                 break;
 
         }
