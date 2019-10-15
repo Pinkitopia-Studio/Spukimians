@@ -37,7 +37,7 @@ class Button{
     }
     update(){
         var ratioX = GAME.currentWidth / mapW;
-        var ratioY = Game.currentHeight / mapH;
+        var ratioY = GAME.currentHeight / mapH;
         
         
         if(this.isSprite){ //SPRITE ANADIDO PARA CAMARA
@@ -72,9 +72,6 @@ class Button{
                         
                         this.onClick(this.fn);
                         this.active = true;
-                        
-                        
-                        
                     }
                     
                 }
@@ -85,12 +82,10 @@ class Button{
                     if(this.sprites[1] !== ""){
                         this.image = this.sprites[1];
                     }else{
-                    
-
-                        this.posX = this.x - (this.width/20);
-                        this.posY = this.y - (this.height/20);
-                        this.sizeX = this.width + (this.width/20*2);
-                        this.sizeY = this.height + (this.height/20*2);
+                        this.posX = (this.x - (this.width/20));
+                        this.posY = (this.y - (this.height/20));
+                        this.sizeX = (this.width + (this.width/20*2));
+                        this.sizeY = (this.height + (this.height/20*2));
                     }
                     
                 }

@@ -19,7 +19,7 @@ class Menu {
         this.title = printImage("big_spukii", [1240/2 - (1024/2), 0], [1024, 512]);
         let play = new Button("ui/play", 1240/2 - (390/2), 500, 390, 192, "");
         let options = new Button("options", (1240 * 0.9) - (240/2), 600, 240, 192, "");
-        let exit = new Button("ui/salir", 1240*0.15 - (390/2), 600, 390, 192, "");
+        let exit = new Button("creditos", 1240*0.1 - (240/2), 600, 240, 192, "");
 
         play.create();
         play.assignFunction(function(){

@@ -181,14 +181,12 @@ var GAME = {
         // page, allowing us to scroll past
         // the address bar, thus hiding it.
         if (GAME.android || GAME.ios) {
-            //document.body.style.height = (window.innerHeight + 50) + 'px';
+            document.body.style.height = (window.innerHeight + 50) + 'px';
         }
         
         GAME.canvas.style.width = GAME.currentWidth + 'px';
         GAME.canvas.style.height = GAME.currentHeight + 'px';
         
-        
-
         // we use a timeout here because some mobile
         // browsers don't fire if there is not
         // a short delay
