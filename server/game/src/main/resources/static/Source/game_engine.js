@@ -29,10 +29,12 @@ function create () {
     canvas.id = "game";
     canvas.setAttribute("width",mapW);
     canvas.setAttribute("height",mapH);
-    canvas.setAttribute("x", 20);
-    canvas.setAttribute("y", 20);
-    canvas.setAttribute('style', "background-color: black; position: absolute;  left: 20px; top: 20px; border:2px");
-    document.getElementById("gameArea").appendChild(canvas);
+    canvas.setAttribute("x", 0);
+    canvas.setAttribute("y", 0);
+    canvas.setAttribute('style', "background-color: black; left: 0px; top: 0px; position: relative");
+    document.body.appendChild(canvas);
+    $("body > canvas").css("width", window.screen.availWidth);
+    $("body > canvas").css("height", window.screen.availHeight);
 }
 
 function printWorld(myboard){

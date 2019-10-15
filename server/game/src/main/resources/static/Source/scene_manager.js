@@ -80,6 +80,8 @@ class SceneManager {
     }
 }
 
+//screen.orientation = "landscape";
+
 //CHARACTER
 var character = 0; //0 = chica, 1 = robot, 2 = serpiente, 3 = gato
 
@@ -96,8 +98,105 @@ var sceneManager = new SceneManager();
 create();
 sceneManager.create();
 
-
 var sceneInterval = setInterval(function () {sceneManager.update()}, 30);
+
+//LOCK ORIENTATION OF SCREEN
+
+/* Get the documentElement (<html>) to display the page in fullscreen */
+var elem = document.documentElement;
+
+/* View in fullscreen */
+/*
+function openFullscreen() {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.mozRequestFullScreen) { /* Firefox */
+    /*elem.mozRequestFullScreen();
+  } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+    /*elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE/Edge */
+    /*elem.msRequestFullscreen();
+  }
+}
+
+$(document).ready(function () {
+    openFullscreen();
+});*/ //NO FUNCIONA
+
+
+var GAME = {
+    WIDTH: 1240,
+    HEIGHT: 860,
+
+    RATIO: null,
+    currentWidth:  null,
+    currentHeight:  null,
+    canvas: null,
+    ctx:  null,
+
+    init: function() {
+        GAME.RATIO = GAME.WIDTH / GAME.HEIGHT;
+
+        GAME.currentWidth = GAME.WIDTH;
+        GAME.currentHeight = GAME.HEIGHT;
+
+        GAME.canvas = document.getElementById("game");
+
+        GAME.canvas.width = GAME.WIDTH;
+        GAME.canvas.height = GAME.HEIGHT;
+
+        GAME.ctx = GAME.canvas.getContext('2d');
+
+        // we need to sniff out Android and iOS
+        // so that we can hide the address bar in
+        // our resize function
+        GAME.ua = navigator.userAgent.toLowerCase();
+        GAME.android = GAME.ua.indexOf('android') > -1 ? true : false;
+        GAME.ios = ( GAME.ua.indexOf('iphone') > -1 || GAME.ua.indexOf('ipad') > -1  ) ? 
+            true : false;
+
+        GAME.resize();
+    },
+
+    resize: function(){
+        GAME.currentHeight = window.innerHeight;
+        // resize the width in proportion
+        // to the new height
+        GAME.currentWidth = GAME.currentHeight * GAME.RATIO;
+
+        // this will create some extra space on the
+        // page, allowing us to scroll past
+        // the address bar, thus hiding it.
+        if (GAME.android || GAME.ios) {
+            document.body.style.height = (window.innerHeight + 50) + 'px';
+        }
+
+        // set the new canvas style width and height
+        // note: our canvas is still 320 x 480, but
+        // we're essentially scaling it with CSS
+        var landscape = (window.orientation % 180 != 0);
+
+        GAME.canvas.style.width = GAME.currentWidth + 'px';
+        GAME.canvas.style.height = GAME.currentHeight + 'px';
+        
+        
+
+        // we use a timeout here because some mobile
+        // browsers don't fire if there is not
+        // a short delay
+        window.setTimeout(function() {
+                window.scrollTo(0,1);
+        }, 1);
+    }
+
+};
+
+window.addEventListener('load', GAME.init, false);
+window.addEventListener('resize', GAME.resize, false);
+
+
+
+
 
 window.onmousemove = mouseOver;
 window.onmousedown = mouseMovement;
