@@ -466,6 +466,8 @@ class Game {
         if(position != -1){
             this.items.splice(position, 1);
         }
+
+        this.elements[0].items[2]++;
     }
 
     interact(tileX, tileY){
