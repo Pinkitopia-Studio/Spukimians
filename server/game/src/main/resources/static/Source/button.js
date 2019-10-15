@@ -27,6 +27,10 @@ class Button{
         this.sprite = new Image();
         this.sprite.src = "Assets/"+this.image+".png";
         
+        //PARA LOS NUEVOS BOTONES CON RESIZE
+        this.relativeX = this.x;
+        this.relativeY = this.y;
+        
     }
     assignFunction(fn){
         this.fn = fn;
@@ -53,7 +57,7 @@ class Button{
                 }
                 else{
                     this.image = this.sprites[0];
-        
+                    
                     this.posX = this.x;
                     this.posY = this.y;
                     this.sizeX = this.width;
@@ -81,7 +85,8 @@ class Button{
                     if(this.sprites[1] !== ""){
                         this.image = this.sprites[1];
                     }else{
-                        
+                    
+
                         this.posX = this.x - (this.width/20);
                         this.posY = this.y - (this.height/20);
                         this.sizeX = this.width + (this.width/20*2);
@@ -91,7 +96,7 @@ class Button{
                 }
                 else{
                     this.image = this.sprites[0];
-        
+
                     this.posX = this.x;
                     this.posY = this.y;
                     this.sizeX = this.width;

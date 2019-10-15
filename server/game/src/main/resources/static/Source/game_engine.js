@@ -180,11 +180,11 @@ function mouseMovement(event) {
 function mouseOver(event){
     var offset = $('#game').offset();
 
-    console.log(mousePosX);
-    console.log(mousePosY);
-    console.log(GAME.currentWidth);
-    mousePosX = event.clientX - offset.left + $(window).scrollLeft();
-    mousePosY = event.clientY - offset.top + $(window).scrollTop();
+    //console.log(mousePosX);
+    //console.log(mousePosY);
+    //console.log(GAME.currentWidth);
+    mousePosX = event.pageX - offset.left + $(window).scrollLeft();
+    mousePosY = event.pageY - offset.top + $(window).scrollTop();
 
     
 }
