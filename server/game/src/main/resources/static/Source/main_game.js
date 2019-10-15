@@ -15,6 +15,7 @@ class Game {
         
         this.items = []; //[llave, ]
         this.interactiveWorld = []; //[1 = trampa, 2 = llave, 3 = palanca, 4 = caja]
+        this.soulWorld = [];
         //Attribute "elements" of Game:
         //Consists of an array with all the active elements in scene.
         //Used for rendering and other options.
@@ -31,9 +32,12 @@ class Game {
 
         //Barreras
         this.barriers = [];
+
+        this.souls = 0;
     }
 
     create (level) {
+        this.souls = 0;
         this.level = level;
         
         var x = 0, y = 0;
@@ -42,12 +46,15 @@ class Game {
         if (level == -1){
             this.world = new Array(x);
             this.interactiveWorld = new Array(x);
+            this.soulWorld = new Array(x);
             for (var i = 0; i < x; i++){
                 this.world[i] = new Array(y);
                 this.interactiveWorld[i] = new Array(y);
+                this.soulWorld[i] = new Array(y);
                 for (var j = 0; j < y; j++){
                     this.world[i][j] = 0;
                     this.interactiveWorld[i][j] = 0;
+                    this.soulWorld[i][j] = 0;
                 }
             }
             for (var i = 0; i < x; i++){
@@ -139,10 +146,13 @@ class Game {
 
         
         this.interactiveWorld = new Array(this.world.length);
+        this.soulWorld = new Array(this.world.length);
             for (var i = 0; i < this.world.length; i++){
                 this.interactiveWorld[i] = new Array(this.world[0].length);
+                this.soulWorld[i] = new Array(this.world[0].length);
                 for (var j = 0; j < this.world[0].length; j++){
                     this.interactiveWorld[i][j] = 0;
+                    this.soulWorld[i][j] = 0;
                 }
             }
         var key = new Item(levelsData.data[this.level].keyX, levelsData.data[this.level].keyY, "Assets/llave.png", 2);
@@ -244,6 +254,16 @@ class Game {
             this.elements.push(element);
         }
         
+    }
+
+    searchRemoveElement(element){
+        let actual = undefined;
+        let i = 0;
+        while (actual != element){
+            i++;
+            actual = this.elements[i];
+        }
+        this.removeElement(i, 0);
     }
 
     removeElement(index, arrayIndex){
@@ -351,12 +371,14 @@ class Game {
             element.update();
         });
 
-        this.items.forEach(item => {
-            item.update();
-        });
+        
 
         this.elements.forEach(element => {
             element.update(this);   
+        });
+
+        this.items.forEach(item => {
+            item.update();
         });
 
         if(this.activePause){
@@ -399,6 +421,10 @@ class Game {
 
     addItem(item, tileX, tileY, position) {
         this.items.push(item);
+
+        if (position == 5){
+            this.soulWorld[tileX][tileY] = 5;
+        }
         
         if(this.interactiveWorld[tileX][tileY] == 0){
             this.interactiveWorld[tileX][tileY] = position;
@@ -428,7 +454,26 @@ class Game {
         }
     }
 
+    deleteSoul(tileX, tileY){
+        this.soulWorld[tileX][tileY] = 0;
+        var position = -1;
+        for (var i = 0; i < this.items.length; i++){
+            if (this.items[i].id == 5){
+                position = i;
+            }
+        }
+
+        if(position != -1){
+            this.items.splice(position, 1);
+        }
+    }
+
     interact(tileX, tileY){
+        if (this.soulWorld[tileX][tileY] == 5){
+            //CASO ALMA
+            this.souls++;
+            this.deleteSoul(tileX, tileY);
+        }
         if(this.interactiveWorld[tileX][tileY] != 0){
             if(this.interactiveWorld[tileX][tileY] == 2){ //CASO LLAVE
                 let position = 0;
@@ -451,6 +496,7 @@ class Game {
             }
             */
         }
+        
         
     }
 

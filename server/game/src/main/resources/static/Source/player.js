@@ -109,6 +109,7 @@ class Player {
                     this.spritePos = [this.posSpriteDead * 64, 256];
                     this.nextDead++;
                 }else{
+                    
                     this.spritePos = [4 * 64, 320]; //Sprite vacio de la hoja
                 }
                 

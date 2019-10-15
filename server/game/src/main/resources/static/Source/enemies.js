@@ -27,10 +27,8 @@ class Enemy extends Player {
             if (Math.abs(this.tileX - myPlayer.tileX)+Math.abs(this.tileY - myPlayer.tileY) <= 1){
                 this.killPlayer(myPlayer);
             }else if(this.detectPlayer (myPlayer.tileX, myPlayer.tileY)){
-                console.log("Te persigo joputa");
                 this.nextMove = this.selectMove();
                 let path = findPath(sceneManager.scenes[1].world, [this.tileX, this.tileY], [myPlayer.tileX, myPlayer.tileY]);
-                console.log(path);
                 let nextMoveInPath = path[1];
                  if (nextMoveInPath[0] < this.tileX){
                     this.nextMove = 4;
@@ -123,6 +121,19 @@ class Enemy extends Player {
         killFantasma(){
             alert("Fantasma muere jeje");
             this.dead = true;
+            this.createSoul(this.tileX, this.tileY);
+        }
+
+        createSoul(tileX, tileY) {
+            let soul = new Item(tileX, tileY, "Assets/alma.png", 5);
+            sceneManager.scenes[1].addItem(soul, tileX, tileY, 5);
+        }
+
+        update (myboard){
+            super.update(myboard);
+            if (this.posSpriteDead >= 4){
+                sceneManager.scenes[1].searchRemoveElement(this);
+            }
         }
 
 

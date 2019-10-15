@@ -10,7 +10,7 @@ class Item {
         this.sprite.src = src;
         this.posSprite = [0, 0]
         this.active = true;
-        this.id = id; //ID = 1 TRAMPA, 2 = LLAVE, 3 = PALANCA, 4 = CAJA
+        this.id = id; //ID = 1 TRAMPA, 2 = LLAVE, 3 = PALANCA, 4 = CAJA, 5 = ALMA
         this.velocitySprite = 0;
     }
 
@@ -19,7 +19,7 @@ class Item {
             printSprite(this.sprite, this.posSprite, [this.x, this.y + 16]);
         }
 
-        if(this.id == 2){ //ANIMACION LLAVE
+        if(this.id == 2 || this.id == 5){ //ANIMACION LLAVE O ALMA
             if(this.velocitySprite == 8){
                 this.posSprite = [(this.posSprite[0] + 64) % 256, 0];
                 this.velocitySprite = 0;
