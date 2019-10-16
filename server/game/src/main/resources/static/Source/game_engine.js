@@ -155,6 +155,8 @@ function printLevelSelector(){
 function mouseMovement(event) {
     /*mouseX = event.clientX;
     mouseY = event.clientY;*/
+        
+    
     if(sceneManager.actualScene == 1){
         if (sceneManager.scenes[1].activeWorld && !sceneManager.scenes[1].activePause){
             if(sceneManager.scenes[1].trapButton.active)
@@ -181,25 +183,31 @@ function mouseOver(event){
     var offset = $('#game').offset();
 
     
-    mousePosX = event.pageX - offset.left + $(window).scrollLeft();
-    mousePosY = event.pageY - offset.top + $(window).scrollTop();
+    /*mousePosX = event.pageX - offset.left + $(window).scrollLeft();
+    mousePosY = event.pageY - offset.top + $(window).scrollTop();*/
+    //RATON ANTES DEL BUG
 
+    let canvas = document.getElementById("game");
+    mousePosX = event.offsetX * canvas.width / canvas.clientWidth | 0;
+    mousePosY = event.offsetY * canvas.height / canvas.clientHeight | 0;
     
 }
 
 function mouseRelease (event) {
     var offset = $('#game').offset();
+
+    let canvas = getCanvas();
     
     if(sceneManager.actualScene == 1){
-        let newX = event.clientX - offset.left + $(window).scrollLeft();
-        let newY = event.clientY - offset.top + $(window).scrollTop();
+        let newX = event.offsetX * canvas.width / canvas.clientWidth | 0;
+        let newY = event.offsetY * canvas.height / canvas.clientHeight | 0;
         
         
         movePlayer(newX, newY);
     }
     
-    mouseX = event.clientX - offset.left + $(window).scrollLeft();
-    mouseY = event.clientY - offset.top + $(window).scrollTop();
+    mouseX = event.offsetX * canvas.width / canvas.clientWidth | 0;
+    mouseY = event.offsetY * canvas.height / canvas.clientHeight | 0;
        
     /* else {
         menuClick(newX, newY);
