@@ -9,7 +9,7 @@ function processData (text) {
     let auxArray = splittedArray[0].split(",");
     let x = auxArray.length; //COGE LAS COMAS POR LO TANDO DIVIDIMOS ENTRE 2
     let y = splittedArray.length - 1;
-    console.log(splittedArray[0].length);
+    
     
     var newWorld = new Array(y);
         for (var i = 0; i < y; i++){
@@ -24,7 +24,7 @@ function processData (text) {
             newWorld[i][j] = parseInt(splitted[j]);
         }
     }
-    console.log(newWorld);
+    
 
     var newMatrix = new Array(x);
     //Colocación correcta
@@ -35,7 +35,7 @@ function processData (text) {
         }
     }
 
-    console.log(newMatrix);
+  
 
     sceneManager.scenes[1].finishCreate([x, y, newMatrix]);
 }

@@ -255,11 +255,6 @@ var GAME = {
 window.addEventListener('load', GAME.init, false);
 window.addEventListener('resize', GAME.resize, false);
 
-
-
-
-
-
 window.onmousemove = mouseOver;
 window.onmousedown = mouseMovement;
 window.onmouseup = mouseRelease;

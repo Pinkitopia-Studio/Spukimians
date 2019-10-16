@@ -161,15 +161,18 @@ function mouseMovement(event) {
         if (sceneManager.scenes[1].activeWorld && !sceneManager.scenes[1].activePause){
             if(sceneManager.scenes[1].trapButton.active)
                 sceneManager.scenes[1].trapButton.active = false; 
-    
+            
+        
             
             sceneManager.scenes[1].elements[0].trapButtons.forEach(element =>{
                 element.active = false;
             })
         }
-        if(sceneManager.scenes[1].activeWorld && sceneManager.scenes[1].activePause){
+        
+        if(sceneManager.scenes[1].activeWorld && sceneManager.scenes[1].activePause || sceneManager.scenes[1].reloading){
             if(sceneManager.scenes[1].pauseElements[0].active || sceneManager.scenes[1].pauseElements[1].active || sceneManager.scenes[1].pauseElements[2].active){
                 sceneManager.scenes[1].pauseElements.forEach(element =>{
+                    console.log("hola");
                     element.active = false;
                 });
             }
@@ -198,7 +201,7 @@ function mouseRelease (event) {
 
     let canvas = getCanvas();
     
-    if(sceneManager.actualScene == 1){
+    if(sceneManager.actualScene == 1){ //ARREGLAR ESTO 
         let newX = event.offsetX * canvas.width / canvas.clientWidth | 0;
         let newY = event.offsetY * canvas.height / canvas.clientHeight | 0;
         

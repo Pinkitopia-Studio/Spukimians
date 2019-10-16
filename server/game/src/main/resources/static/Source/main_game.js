@@ -29,7 +29,7 @@ class Game {
         this.spriteSheetTorches.src = "Assets/animacionTilesAntorcha.png"
 
         this.door = [];
-
+        
         //Barreras
         this.barriers = [];
 
@@ -39,6 +39,7 @@ class Game {
     create (level) {
         this.souls = 0;
         this.level = level;
+        this.reloading = false;
         
         var x = 0, y = 0;
         this.world = undefined;
@@ -133,8 +134,7 @@ class Game {
         replay.create();
         replay.assignFunction(function(){
             esc = false;
-            that.activePause = false;
-            sceneManager.changeScenes(1, that.level);
+            that.reload();
         });
         this.addElement(replay, 1);
         var options = new Button("options", 810, 510, 240, 192, "");
@@ -246,6 +246,15 @@ class Game {
         
         
     }
+    reload(){
+        var lv = this.level;
+        this.destroy();
+        this.reloading = true;
+        
+        this.create(lv);
+        
+        
+    }
 
     addElement(element, arrayIndex){
         if(arrayIndex === 1){
@@ -330,14 +339,39 @@ class Game {
         });
     }
 
-    destroy(interval){
-        this.elements = []
-        this.pauseElements = []
-        this.world = [];
-        this.activePause = false;
-        this.activeWorld = false;
+    destroy(){
+        mouseX = -1; //PARA QUE FUNCIONE BIEN EL PAUSE SE CAMBIA LA POSICION DEL RATON AUTOMATICAMENTE
+        mouseY = -1; 
 
-        //clearInterval(interval);
+        this.activeWorld = false;
+        //this.activePause = false; //INDICA SI SE ENCUENTRA EL JUEGO EN PAUSE O NO
+        this.puttingTrap = false; //INDICA SI SE ENCUENTRA EL JUEGO EN FASE DE PONER TRAMPA O NO
+        this.activeLevelSelector = false;
+
+        this.elements = [];
+        this.pauseElements = [];
+        
+        this.items = []; //[llave, ]
+        this.interactiveWorld = []; //[1 = trampa, 2 = llave, 3 = palanca, 4 = caja]
+        this.soulWorld = [];
+        //Attribute "elements" of Game:
+        //Consists of an array with all the active elements in scene.
+        //Used for rendering and other options.
+        this.level = -1;
+        
+        //ANIMACION DE ANTORCHAS
+        this.torches = [];
+        this.posSprite = 0;
+        this.nextSprite = 0;
+        this.spriteSheetTorches = new Image();
+        this.spriteSheetTorches.src = "Assets/animacionTilesAntorcha.png"
+
+        this.door = [];
+
+        //Barreras
+        this.barriers = [];
+
+        this.souls = 0;
     }
 
     

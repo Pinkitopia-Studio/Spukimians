@@ -127,6 +127,9 @@ class Score {
     }
 
     destroy(){
+        mouseX = -1; //PARA QUE NO SE REPULSEN BOTONES EN LA SIGUIENTE PANTALLA
+        mouseY = -1; 
+
         this.elements = [];
         this.active = false;
         this.ghosts = [];
