@@ -11,11 +11,25 @@ class LevelSelector {
     create(){
         this.active = true;
 
+        this.source = "";
+        switch(language){
+            case 0:
+                this.source = "selec_niv";
+                break;
+            case 1:
+                this.source = "english/selec_niv_eng"
+                break;
+        }
+
         let level1 = new Button("nums/1_xl", 1240/4 - (300/2), 300, 300, 240, "");
         let level2 = new Button("nums/2_xl", 1240/2 - (300/2), 300, 300, 240, "");
-        let volver = new Button("ui/volver", 660 - (420/2), 550, 420, 192, "");
+        let back = new Button("volver_boton", (mapW * 0.25) - (204/2), mapH * 0.65, 204, 192, "");
         
-
+        back.create();
+        back.assignFunction(function(){
+            sceneManager.changeScenes(5);
+        });
+        
         level1.create();
         level1.assignFunction(function(){
             sceneManager.changeScenes(1, 1);
@@ -26,14 +40,10 @@ class LevelSelector {
             sceneManager.changeScenes(1, 0);
         })
         
-        volver.create();
-        volver.assignFunction(function(){
-            sceneManager.changeScenes(0);
-        })
-
+        
         this.addElement(level1);
         this.addElement(level2);
-        this.addElement(volver);
+        this.addElement(back);
 
         this.createGhost();
 
@@ -76,7 +86,7 @@ class LevelSelector {
             element.update();
         });
 
-        printImage("selec_niv", [1240/2 - (908/2), 100], [908, 128]);
+        printImage(this.source, [1240/2 - (908/2), 100], [908, 128]);
 
         this.elements.forEach(element => {
             element.update();

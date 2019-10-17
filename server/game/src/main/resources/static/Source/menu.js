@@ -16,11 +16,21 @@ class Menu {
     create(){
         this.active = true;
 
-        this.title = printImage("big_spukii", [1240/2 - (1024/2), 0], [1024, 512]);
-        let play = new Button("ui/play", 1240/2 - (390/2), 500, 390, 192, "");
-        let options = new Button("options", (1240 * 0.9) - (240/2), 600, 240, 192, "");
-        let credits = new Button("creditos", 1240*0.1 - (240/2), 600, 240, 192, "");
+        this.source = "";
+        switch(language){
+            case 0:
+                this.source = "ui/play";
+                break;
+            case 1:
+                this.source = "english/jugar_eng"
+                break;
+        }
 
+        this.title = printImage("big_spukii", [1240/2 - (1024/2), 0], [1024, 512]);
+        let play = new Button(this.source, 1240/2 - (390/2), 500, 390, 192, "");
+        let options = new Button("options", (1240 * 0.9) - (204/2), 600, 204, 192, "");
+        let credits = new Button("creditos", 1240*0.1 - (204/2), 600, 204, 192, "");
+        
         play.create();
         play.assignFunction(function(){
             sceneManager.changeScenes(5);
@@ -28,7 +38,7 @@ class Menu {
 
         options.create();
         options.assignFunction(function(){
-            //sceneManager.changeScenes(3);
+            sceneManager.changeScenes(7);
         })
         
         credits.create();

@@ -7,7 +7,7 @@ class Credits {
 
     create(){
         this.active = true;
-        let back = new Button("creditos", (mapW * 0.9) - (240/2), 600, 240, 192, "");
+        let back = new Button("volver_boton", (mapW * 0.9) - (204/2), 600, 204, 192, "");
         back.create();
         back.assignFunction(function(){
             sceneManager.changeScenes(0);

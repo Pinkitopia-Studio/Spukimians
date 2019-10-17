@@ -8,13 +8,13 @@ class SceneManager {
         this.actualScene = -1;
 
         //SCENES
-        var menu, game, levelSelector, scoreScene, gameOverScene, characterSelector, credits;
+        var menu, game, levelSelector, scoreScene, gameOverScene, characterSelector, credits, config;
         menu = new Menu();
         
         
         menu.create();
 
-        this.scenes = [menu, game, levelSelector, scoreScene, gameOverScene, characterSelector, credits];
+        this.scenes = [menu, game, levelSelector, scoreScene, gameOverScene, characterSelector, credits, config];
         
 
         
@@ -52,6 +52,9 @@ class SceneManager {
             case 6:
                 this.scenes[6] = new Credits();
                 break;
+            case 7:
+                this.scenes[7] = new Config();
+                break;
 
         }
         let pos = this.actualScene;
@@ -80,6 +83,7 @@ class SceneManager {
 
 //CHARACTER
 var character = 0; //0 = chica, 1 = robot, 2 = serpiente, 3 = gato
+var language = 0; //0 = spanish, 1 = english
 
 //MAP PARAMETERS
 var tileW = 64;

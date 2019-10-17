@@ -13,6 +13,16 @@ class CharacterSelector {
 
     create(){
         this.active = true;
+
+        this.source = "";
+        switch(language){
+            case 0:
+                this.source = "selec_pers";
+                break;
+            case 1:
+                this.source = "english/selec_pers_eng"
+                break;
+        }
         
         //NEW
         this.spriteGirl = new Image();
@@ -32,7 +42,7 @@ class CharacterSelector {
             playSound("yourcute");
         });
 
-        this.buttonGirl.pushed = true;
+        
 
         this.buttonRobot.create();
         this.buttonRobot.assignFunction(function(){
@@ -41,14 +51,33 @@ class CharacterSelector {
             playSound("yourcute");
         });
 
+        switch(character){
+            case 0:
+                this.buttonGirl.pushed = true;
+                break;
+            case 1:
+                this.buttonRobot.pushed = true;
+                break;
+            //case 2 gato
+            //case 3 snake
+        }
+
         this.posSprite = [0, 0];
         this.nextSprite = 0;
 
-        this.goButton = new Button("reanudar", 800, 600, 240, 192, "");
+        this.goButton = new Button("reanudar", 800, mapH * 0.7, 204, 192, "");
         this.goButton.create();
         this.goButton.assignFunction(function(){
             sceneManager.changeScenes(2);
         });
+
+        this.back = new Button("volver_boton", (mapW * 0.25) - (204/2), mapH * 0.7, 204, 192, "");
+        this.back.create();
+        this.back.assignFunction(function(){
+            sceneManager.changeScenes(0);
+        });
+
+        
 
         this.createGhost();
 
@@ -95,7 +124,7 @@ class CharacterSelector {
             element.update();
         });
 
-        printImage("selec_pers", [1240/2 - (908/2), 100], [908, 128]);
+        printImage(this.source, [1240/2 - (908/2), 100], [908, 128]);
 
         this.elements.forEach(element => {
             element.update();
@@ -109,11 +138,12 @@ class CharacterSelector {
         }
 
         //NEW
-        printImage("selectPlayer", [(mapW / 2) - (1024 / 2), (mapH / 2) - (512 / 4)], [1024, 512]);
+        printImage("selectPlayer", [(mapW / 2) - (1024 / 2), (mapH * 0.45) - (256 / 4)], [1024, 256]);
 
         this.buttonGirl.update();
         this.buttonRobot.update();
         this.goButton.update();
+        this.back.update();
         
         printSprite(this.spriteGirl, this.posSprite, [232, 500 + 16]);
         printSprite(this.spriteRobot, this.posSprite, [432, 500 + 16]);

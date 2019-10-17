@@ -37,9 +37,20 @@ class Game {
     }
 
     create (level) {
+
+        this.source = "";
+        switch(language){
+            case 0:
+                this.source = "pausa";
+                break;
+            case 1:
+                this.source = "english/pausa_eng"
+                break;
+        }
+
         this.souls = 0;
         this.level = level;
-        this.reloading = false;
+      
         
         var x = 0, y = 0;
         this.world = undefined;
@@ -122,7 +133,7 @@ class Game {
         var that = this;
 
         //CREACION DE MENU DE PAUSA INCORPORADO EN ESTA ESCENA
-        var play = new Button("reanudar", 190, 510, 240, 192, "");
+        var play = new Button("reanudar", (mapW * 0.2) - (204 / 2), 510, 204, 192, "");
         play.create();
         play.assignFunction(function(){
             esc = false;
@@ -130,19 +141,28 @@ class Game {
             play.active = false;
         });
         this.addElement(play, 1);
-        var replay = new Button("reiniciar", 500, 510, 240, 192, "");
+        var replay = new Button("reiniciar", (mapW * 0.4) - (204 / 2), 510, 204, 192, "");
         replay.create();
         replay.assignFunction(function(){
             esc = false;
+            that.activePause = false;
             that.reload();
         });
         this.addElement(replay, 1);
-        var options = new Button("options", 810, 510, 240, 192, "");
+        var options = new Button("options", (mapW * 0.6) - (204 / 2), 510, 204, 192, "");
         options.create();
         options.assignFunction(function(){
 
         });
         this.addElement(options, 1);
+        var exit = new Button("home", (mapW * 0.8) - (204 / 2), 510, 204, 192, "");
+        exit.create();
+        exit.assignFunction(function(){
+            esc = false;
+            that.activePause = false;
+            sceneManager.changeScenes(0);
+        });
+        this.addElement(exit, 1);
 
         
         this.interactiveWorld = new Array(this.world.length);
@@ -249,7 +269,7 @@ class Game {
     reload(){
         var lv = this.level;
         this.destroy();
-        this.reloading = true;
+        
         
         this.create(lv);
         
@@ -417,7 +437,7 @@ class Game {
 
         if(this.activePause){
             printBackground("shade50per");
-            printImage("pausa", [1240/2 - (294/2), 100], [294, 128]);
+            printImage(this.source, [1240/2 - (294/2), 100], [294, 128]);
             this.pauseElements.forEach(element => {
                 element.update();
             });
