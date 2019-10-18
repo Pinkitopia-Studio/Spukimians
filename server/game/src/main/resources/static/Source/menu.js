@@ -7,10 +7,14 @@ class Menu {
         this.active = false;
         this.ghosts = [];
         
-        
-        
         this.velFloor = 3;
         this.xFloor = 0;
+
+        this.posTitle = [0, 0];
+
+        this.titleImg = new Image();
+        this.titleImg.src = "Assets/big_spukii_anim.png";
+        this.velSprite = 0;
     }
 
     create(){
@@ -26,7 +30,7 @@ class Menu {
                 break;
         }
 
-        this.title = printImage("big_spukii", [1240/2 - (1024/2), 0], [1024, 512]);
+        //this.title = printImage("big_spukii", [1240/2 - (1024/2), 0], [1024, 512]);
         let play = new Button(this.source, 1240/2 - (390/2), 500, 390, 192, "");
         let options = new Button("options", (1240 * 0.9) - (204/2), 600, 204, 192, "");
         let credits = new Button("creditos", 1240*0.1 - (204/2), 600, 204, 192, "");
@@ -104,9 +108,16 @@ class Menu {
             }
         }
 
-        this.title = printImage("big_spukii", [1240/2 - (1024/2), 0], [1024, 512]);
+        //ACTUALIZACION DEL TITLE
+        if(this.velSprite == 8){
+            this.posTitle = [0, (this.posTitle[1] + 512) % 2048];
+            this.velSprite = 0;
+        }
         
 
+        this.title = printSpriteImg(this.titleImg, this.posTitle, [1240/2 - (1024/2), 0], [1024, 512]);
+        
+        this.velSprite = this.velSprite + 1;
     }
 
     destroy(){

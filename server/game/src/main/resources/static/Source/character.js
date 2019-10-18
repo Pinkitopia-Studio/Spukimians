@@ -82,11 +82,6 @@ class Character extends Player {
         super.update(myboard);
        
         this.squarePositions = [];  
-        
-        
-        
-        
-        
     }
 
     createTrapButtons(){
