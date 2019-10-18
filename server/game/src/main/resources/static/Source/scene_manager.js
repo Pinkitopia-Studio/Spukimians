@@ -12,17 +12,15 @@ class SceneManager {
         var carga = new Loading();
         
         
-        //carga.create();
-        menu = new Menu();
-        menu.create();
+        carga.create();
+        
+        
 
         this.scenes = [menu, game, levelSelector, scoreScene, gameOverScene, characterSelector, credits, config, carga];
         
 
         
-        this.actualScene = 0;
-
-        //this.changeScenes(1, 0);
+        this.actualScene = 8;
     
     }  
     
