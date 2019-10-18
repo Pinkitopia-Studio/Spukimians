@@ -122,7 +122,7 @@ function printSprite(image, sprite, printPosition, isButton, size){
 function printSpriteImg(image, sprite, printPosition, size){
     let context = document.getElementById("game").getContext("2d");
     
-    context.drawImage(image, sprite[0], sprite[1], size[0], size[1], viewport.offset[0] + printPosition[0], viewport.offset[1] + printPosition[1] - 16, size[0], size[1]); //CON CAMARA
+    context.drawImage(image, sprite[0], sprite[1], size[0], size[1], printPosition[0], printPosition[1] - 16, size[0], size[1]); //CON CAMARA
 }
 
 function printImage(src, pos, size){
