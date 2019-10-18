@@ -14,9 +14,9 @@ class Config {
         this.active = true;
 
         //buttons
-        let volumeMax = new Button("volumenMax", (mapW * 0.25) - (204 / 2), mapH * 0.15, 204, 192, "", true, "volumenMaxSelected");
-        let volumeLow = new Button("volumenMin", (mapW * 0.5) - (204 / 2), mapH * 0.15, 204, 192, "", true, "volumenMinSelected");
-        let volumeNO = new Button("volumenNO", (mapW * 0.75) - (204 / 2), mapH * 0.15, 204, 192, "", true, "volumenNOSelected");
+        let volumeMax = new Button("volumenMax", (mapW * 0.25) - (204 / 2), mapH * 0.3, 204, 192, "", true, "volumenMaxSelected");
+        let volumeLow = new Button("volumenMin", (mapW * 0.5) - (204 / 2), mapH * 0.3, 204, 192, "", true, "volumenMinSelected");
+        let volumeNO = new Button("volumenNO", (mapW * 0.75) - (204 / 2), mapH * 0.3, 204, 192, "", true, "volumenNOSelected");
 
         volumeMax.create();
         volumeMax.assignFunction(function(){
@@ -40,8 +40,8 @@ class Config {
         this.addElement(volumeLow);
         this.addElement(volumeNO);
 
-        let spanish = new Button("esp", (mapW * 0.37) - (204 / 2), mapH * 0.4, 204, 192, "", true, "espSelected");
-        let english = new Button("eng", (mapW * 0.62) - (204 / 2), mapH * 0.4, 204, 192, "", true, "engSelected");
+        let spanish = new Button("esp", (mapW * 0.37) - (204 / 2), mapH * 0.55, 204, 192, "", true, "espSelected");
+        let english = new Button("eng", (mapW * 0.62) - (204 / 2), mapH * 0.55, 204, 192, "", true, "engSelected");
 
         spanish.create();
         spanish.assignFunction(function(){
@@ -67,7 +67,7 @@ class Config {
         this.addElement(spanish);
         this.addElement(english);
 
-        let back = new Button("volver_boton", (mapW * 0.25) - (204/2), mapH * 0.65, 204, 192, "");
+        let back = new Button("volver_boton", (1240 * 0.9) - (204/2), 600, 204, 192, "");
         back.create();
         back.assignFunction(function(){
             sceneManager.changeScenes(0);
@@ -126,6 +126,8 @@ class Config {
                 this.ghosts[i].x = 1304;
             }
         }
+
+        printImage("letras_config", [mapW / 2 - (1104 / 2), mapH * 0.15 - (192 / 2)], [1104, 192]);
     }
 
     destroy(){

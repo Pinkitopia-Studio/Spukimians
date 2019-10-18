@@ -237,7 +237,6 @@ function touchRelease (event) {
     let touchY = event.changedTouches[0].clientY;
     
     if(sceneManager.actualScene == 1 && !sceneManager.scenes[1].activePause){ //ARREGLAR ESTO 
-        
         movePlayer(touchX, touchY);
     }
     

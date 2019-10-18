@@ -12,13 +12,15 @@ class SceneManager {
         var carga = new Loading();
         
         
-        carga.create();
+        //carga.create();
+        menu = new Menu();
+        menu.create();
 
         this.scenes = [menu, game, levelSelector, scoreScene, gameOverScene, characterSelector, credits, config, carga];
         
 
         
-        this.actualScene = 8;
+        this.actualScene = 0;
 
         //this.changeScenes(1, 0);
     
@@ -180,7 +182,7 @@ var GAME = {
         // page, allowing us to scroll past
         // the address bar, thus hiding it.
         if (GAME.android || GAME.ios) {
-            document.body.style.height = (window.innerHeight + 50) + 'px';
+            document.body.style.height = window.innerHeight + 'px';
         }
         
         GAME.canvas.style.width = GAME.currentWidth + 'px';
@@ -194,61 +196,7 @@ var GAME = {
         }, 1);
     }
 
-    /*
-    resize: function(){
-        
-
-        // set the new canvas style width and height
-        // note: our canvas is still 320 x 480, but
-        // we're essentially scaling it with CSS
-        
-
-        console.log(screen.orientation);
-
-        if(screen.orientation.type == "portrait" || screen.orientation.type == "portrait-primary"){
-            GAME.currentHeight = window.innerWidth;
-            // resize the width in proportion
-            // to the new height
-            GAME.currentWidth = GAME.currentHeight * GAME.RATIO;
-
-            // this will create some extra space on the
-            // page, allowing us to scroll past
-            // the address bar, thus hiding it.
-            if (GAME.android || GAME.ios) {
-                document.body.style.height = (window.innerWidth + 50) + 'px';
-            }
-
-            $("body").css("-webkit-transform", "rotate(90deg)");
-            
-        }else if(screen.orientation.type == "landscape" || screen.orientation.type == "landscape-primary"){
-            GAME.currentHeight = window.innerHeight;
-            // resize the width in proportion
-            // to the new height
-            GAME.currentWidth = GAME.currentHeight * GAME.RATIO;
-
-            // this will create some extra space on the
-            // page, allowing us to scroll past
-            // the address bar, thus hiding it.
-            if (GAME.android || GAME.ios) {
-                document.body.style.height = (window.innerHeight + 50) + 'px';
-            }
-            
-            $("body").css("-webkit-transform", "");
-        }
-
-        GAME.canvas.style.width = GAME.currentWidth + 'px';
-        GAME.canvas.style.height = GAME.currentHeight + 'px';
-        
-        
-
-        // we use a timeout here because some mobile
-        // browsers don't fire if there is not
-        // a short delay
-        window.setTimeout(function() {
-                window.scrollTo(0,1);
-        }, 1);
-    }
-    */
+    
 
 };
 

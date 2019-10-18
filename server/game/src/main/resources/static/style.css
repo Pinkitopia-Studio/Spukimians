@@ -3,7 +3,7 @@ body > canvas {
   
 }
 
-body { margin: 0; padding: 0; background: #000;}
+body { margin: 0; padding: 0; background: #000; overflow-x: hidden; overflow-y: hidden;}
 canvas { display: block; margin: 0 auto; background: #fff; }
 
 body:fullscreen {
