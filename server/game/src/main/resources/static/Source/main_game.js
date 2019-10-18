@@ -376,8 +376,11 @@ class Game {
                 console.log("Estoy encima de: " + this.interactiveWorld[element.tileX][element.tileY]);
                 //element.interact(element.tileX, element.tileY);
                 //Si el fantasma no termina encima de una trampa, se puede mover
-                if(this.interactiveWorld[element.tileX][element.tileY] != 1)
+                if(this.interactiveWorld[element.tileX][element.tileY] != 1){
                     element.automaticMove();
+                    element.canMove = true;
+                }
+                    
                 else
                     element.dead = true;
             }

@@ -20,7 +20,7 @@ class Player {
        this.dead = false;
        this.nextDead = 0;
        this.posSpriteDead = 0;
-
+        this.canMove = true;
        
     }
     
@@ -174,15 +174,17 @@ class Player {
 
                     
                 } else { //Enemy
+                    sceneManager.scenes[1].elements[0].canMove = true;
                     if (sceneManager.scenes[1].interactEnemy(this.tileX, this.tileY) == 0){
                         this.killFantasma();
                     }
                 }
                 
             }
-            if (this.lastMoved == 0 && this.nextMove != 0){
+            if (this.lastMoved == 0 && this.nextMove != 0 && this.canMove){
                 //If the player is stopped and has a next move available, start moving in
                 //That direction.
+                this.canMove = false;
                 this.moving = this.nextMove;
                 this.nextMove = 0;
                 this.lastSprite = 0;

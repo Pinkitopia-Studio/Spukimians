@@ -212,7 +212,7 @@ function mouseRelease (event) {
         let newY = event.offsetY * canvas.height / canvas.clientHeight | 0;
         console.log("Miau: " + mouseX + " " + mouseY);
         
-        movePlayer(newX, newY);
+        if(mouseX != -1) movePlayer(newX, newY);
     }
     
     mouseX = event.offsetX * canvas.width / canvas.clientWidth | 0;
