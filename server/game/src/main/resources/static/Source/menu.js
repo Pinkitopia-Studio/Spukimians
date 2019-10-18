@@ -127,5 +127,6 @@ class Menu {
         this.elements = [];
         this.active = false;
         this.ghosts = [];
+        this.posTitle = 0;
     }
 }
