@@ -1,5 +1,5 @@
 var levelsData = {
-        data : [
+        data : [ //LEVEL 0
         {
             playerX: 2,
             playerY: 16,
@@ -19,11 +19,11 @@ var levelsData = {
                 [2, 13]
             ]
         },
-        {
-            playerX: 2,
-            playerY: 2,
-            enemyX: 8,
-            enemyY: 8,
+        { //LEVEL 1
+            playerX: 4,
+            playerY: 7,
+            enemyX: 7,
+            enemyY: 3,
             ghosts:1,
             minMovements:20,
             keyX: 3,
@@ -34,7 +34,7 @@ var levelsData = {
                 [3, 3]
             ]
         },
-        {
+        { //LEVEL 2
             ghosts:2,
             minMovements:15,
             keyX: 5,

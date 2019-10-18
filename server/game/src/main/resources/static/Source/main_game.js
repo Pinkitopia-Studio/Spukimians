@@ -110,7 +110,7 @@ class Game {
         }
         
 
-        this.trapButton = new Button("trap_botton", 20, 20, 240, 192, "");
+        this.trapButton = new Button("trap_botton_peque", mapW-176, mapH - (144*2), 160, 128, "");
         this.trapButton.create();
         var that = this;
         this.trapButton.assignFunction(function(){
@@ -126,11 +126,19 @@ class Game {
                 }, 500);
                 playSound("cerrarBolsa");
             }
-            
-            console.log("boton pulsado");
            
-        })
-        var that = this;
+        });
+
+        //BOTON PAUSA
+        this.pauseButton = new Button("pause", mapW-176, mapH - 144, 160, 128, "");
+        this.pauseButton.create();
+        
+        this.pauseButton.assignFunction(function(){
+            esc = true;
+            that.activePause = true;
+            
+        });
+        
 
         //CREACION DE MENU DE PAUSA INCORPORADO EN ESTA ESCENA
         var play = new Button("reanudar", (mapW * 0.2) - (204 / 2), 510, 204, 192, "");
@@ -139,6 +147,9 @@ class Game {
             esc = false;
             that.activePause = false;
             play.active = false;
+            that.pauseButton.active = false;
+            mouseX = -1;
+            mouseY = -1;
         });
         this.addElement(play, 1);
         var replay = new Button("reiniciar", (mapW * 0.4) - (204 / 2), 510, 204, 192, "");
@@ -146,7 +157,10 @@ class Game {
         replay.assignFunction(function(){
             esc = false;
             that.activePause = false;
+            that.pauseButton.active = false;
             that.reload();
+            mouseX = -1;
+            mouseY = -1;
         });
         this.addElement(replay, 1);
         var options = new Button("options", (mapW * 0.6) - (204 / 2), 510, 204, 192, "");
@@ -223,7 +237,7 @@ class Game {
         //CAJAS (4)
         if(levelsData.data[this.level].boxes != []){
             levelsData.data[this.level].boxes.forEach(element => {
-                var box = new Item(element[0], element[1], "Assets/trap.png", 4);
+                var box = new Item(element[0], element[1], "Assets/caja.png", 4);
                 that.addItem(box, box.tileX, box.tileY, 4);
 
                 box.assignFunction(relativePosition => { 
@@ -263,6 +277,9 @@ class Game {
                 });
             });
         }
+
+        //INTERFAZ
+        this.interface = new Interface(this.elements[0]);
         
         
     }
@@ -426,28 +443,15 @@ class Game {
         });
 
         
+        this.items.forEach(item => {
+            item.update();
+        });
+
 
         this.elements.forEach(element => {
             element.update(this);   
         });
 
-        this.items.forEach(item => {
-            item.update();
-        });
-
-        if(this.activePause){
-            printBackground("shade50per");
-            printImage(this.source, [1240/2 - (294/2), 100], [294, 128]);
-            this.pauseElements.forEach(element => {
-                element.update();
-            });
-        }else{
-            this.trapButton.update();
-            
-        }
-
-        
-    
         
         if(esc){ 
             this.activePause = true;
@@ -456,8 +460,6 @@ class Game {
             this.activePause = false;
             
         }
-
-        
 
         //ANIMACION ANTORCHAS
         if(this.nextSprite === 8){
@@ -469,7 +471,20 @@ class Game {
         
         this.nextSprite = this.nextSprite + 1;
 
-        
+        //ACTUALIZACION DE INTERFAZ QUE ESTA POR ENCIMA DE TODO
+        this.interface.update(this.elements[0]);
+
+        //ACTUALIZACION DE PAUSE POR ENCIMA DE TODO
+        if(this.activePause){
+            printBackground("shade50per");
+            printImage(this.source, [1240/2 - (294/2), 100], [294, 128]);
+            this.pauseElements.forEach(element => {
+                element.update();
+            });
+        }else{
+            this.trapButton.update();
+            this.pauseButton.update();
+        }
        
     }
 
