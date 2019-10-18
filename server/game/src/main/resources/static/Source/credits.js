@@ -63,6 +63,8 @@ class Credits {
 
         printImage("credits", [mapW/2 - (576/2), this.posImage], [576, 1920]);
 
+        printImage("contact", [175, 250], [144, 15]);
+
         printImage("creditsShade", [0, 0], [mapW, mapH]);
 
         this.elements.forEach(element => {
