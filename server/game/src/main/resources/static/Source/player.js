@@ -181,7 +181,8 @@ class Player {
                 }
                 
             }
-            if (this.lastMoved == 0 && this.nextMove != 0 && this.canMove){
+            if ((this.lastMoved == 0 && this.nextMove != 0 && this.canMove) ||
+                (this.lastMoved == 0 && this.nextMove != 0 && sceneManager.scenes[1].elements.length == 1)){
                 //If the player is stopped and has a next move available, start moving in
                 //That direction.
                 this.canMove = false;

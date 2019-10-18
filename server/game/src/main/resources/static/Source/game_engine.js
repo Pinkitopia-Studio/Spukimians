@@ -6,6 +6,7 @@ In this file, all game engine functions are located.
 
 
 var mouseX, mouseY;
+var prevX, prevY;
 
 var cornerX = 1240/2 - 640/2; //ESQUINA IZQUIERDA
 var cornerY = 840/2 - 640/2;
@@ -158,8 +159,8 @@ function printLevelSelector(){
 
 function mouseMovement(event) {
     let canvas = getCanvas();
-    mouseX = event.offsetX * canvas.width / canvas.clientWidth | 0;
-    mouseY = event.offsetY * canvas.height / canvas.clientHeight | 0;
+    prevX = event.offsetX * canvas.width / canvas.clientWidth | 0;
+    prevY = event.offsetY * canvas.height / canvas.clientHeight | 0;
         
     
     if(sceneManager.actualScene == 1){
@@ -228,8 +229,8 @@ function touchStart (event) {
     let touchX = event.changedTouches[0].clientX;
     let touchY = event.changedTouches[0].clientY;
 
-    mouseX = touchX;
-    mouseY = touchY;
+    prevX = touchX;
+    prevY = touchY;
 }
 
 function touchRelease (event) {
@@ -319,8 +320,8 @@ function movePlayerKeys(k){
 function movePlayer (newX, newY) {
     if(sceneManager.actualScene == 1){
         if(!sceneManager.scenes[1].activePause && sceneManager.scenes[1].activeWorld && !sceneManager.scenes[1].puttingTrap){
-            let diffX = mouseX-newX;
-            let diffY = mouseY-newY;
+            let diffX = prevX-newX;
+            let diffY = prevY-newY;
     
             if (Math.abs(diffX) > Math.abs(diffY)) {
                 //If the swipe was larger on X axis, move Left or Right
