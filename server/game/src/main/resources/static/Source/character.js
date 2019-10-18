@@ -98,7 +98,13 @@ class Character extends Player {
                 button.create();
                 var that = this;
                 button.assignFunction(function(){
-                    that.createTrap(that.tileX, (that.tileY+1));
+                    if(that.items[0] > 0){
+                        that.createTrap(that.tileX, (that.tileY+1));
+                        
+                    }else{
+                        alert("No te quedan trampas");
+                    }
+                    
                 });
                 this.trapButtons.push(button);
             }
@@ -107,7 +113,13 @@ class Character extends Player {
                 button.create();
                 var that = this;
                 button.assignFunction(function(){
-                    that.createTrap((that.tileX+1), that.tileY);
+                    if(that.items[0] > 0){
+                        that.createTrap((that.tileX+1), that.tileY);
+                        
+                    }else{
+                        alert("No te quedan trampas");
+                    }
+                    
                 });
                 this.trapButtons.push(button);
             }
@@ -116,7 +128,13 @@ class Character extends Player {
                 button.create();
                 var that = this;
                 button.assignFunction(function(){
-                    that.createTrap(that.tileX, (that.tileY-1));
+                    if(that.items[0] > 0){
+                        that.createTrap(that.tileX, (that.tileY-1));
+                        
+                    }else{
+                        alert("No te quedan trampas");
+                    }
+                    
                 });
                 this.trapButtons.push(button);
             }
@@ -125,7 +143,13 @@ class Character extends Player {
                 button.create();
                 var that = this;
                 button.assignFunction(function(){
-                    that.createTrap((that.tileX-1), that.tileY);
+                    if(that.items[0] > 0){
+                        that.createTrap((that.tileX-1), that.tileY);
+                        
+                    }else{
+                        alert("No te quedan trampas");
+                    }
+                    
                 });
                 this.trapButtons.push(button);
             }
@@ -150,6 +174,7 @@ class Character extends Player {
                     borrar = i;
                     //borrar trampa
                     sceneManager.scenes[1].interactiveWorld[x][y] = 0;
+                    this.items[0]++;
                 }
                 else{
                     cont++;
@@ -162,11 +187,13 @@ class Character extends Player {
                 playSound("palanca");
                 //dibujar trampa
                 sceneManager.scenes[1].interactiveWorld[x][y] = 1;
+                this.items[0]--;
             }
         }else{
             var trap = new Item(x, y, "Assets/trap.png", 1);
             this.traps.push(trap);
             sceneManager.scenes[1].interactiveWorld[x][y] = 1;
+            this.items[0]--;
         }
 
         if(borrar !== -1){

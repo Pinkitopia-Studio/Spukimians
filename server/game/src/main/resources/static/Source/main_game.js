@@ -33,6 +33,9 @@ class Game {
         //Barreras
         this.barriers = [];
 
+        //cajas
+        this.boxes = [];
+
         this.souls = 0;
     }
 
@@ -114,18 +117,23 @@ class Game {
         this.trapButton.create();
         var that = this;
         this.trapButton.assignFunction(function(){
-            if(!that.puttingTrap && that.elements[0].moving === 0){
-                that.puttingTrap = true;
-                that.elements[0].createTrapButtons();
-                playSound("abrirBolsa");
+            if(that.elements[0].items[0] > 0 || that.puttingTrap){
+                if(!that.puttingTrap && that.elements[0].moving === 0){
+                    that.puttingTrap = true;
+                    that.elements[0].createTrapButtons();
+                    playSound("abrirBolsa");
+                }else{
+                    setTimeout(function(){
+                        that.puttingTrap = false;
+                        that.elements[0].eraseTrapButtons();
+                        
+                    }, 500);
+                    playSound("cerrarBolsa");
+                }
             }else{
-                setTimeout(function(){
-                    that.puttingTrap = false;
-                    that.elements[0].eraseTrapButtons();
-                    
-                }, 500);
-                playSound("cerrarBolsa");
+                alert("No te quedan trampas")
             }
+            
            
         });
 
@@ -238,7 +246,7 @@ class Game {
         if(levelsData.data[this.level].boxes != []){
             levelsData.data[this.level].boxes.forEach(element => {
                 var box = new Item(element[0], element[1], "Assets/caja.png", 4);
-                that.addItem(box, box.tileX, box.tileY, 4);
+                that.addBox(box, box.tileX, box.tileY, 4);
 
                 box.assignFunction(relativePosition => { 
                     let dir = that.elements[0].facing; //1 SUR 2 ESTE 3 NORTE 4 OESTE
@@ -388,7 +396,7 @@ class Game {
         this.elements = [];
         this.pauseElements = [];
         
-        this.items = []; //[llave, ]
+        this.items = []; //[llave, caja]
         this.interactiveWorld = []; //[1 = trampa, 2 = llave, 3 = palanca, 4 = caja]
         this.soulWorld = [];
         //Attribute "elements" of Game:
@@ -442,16 +450,19 @@ class Game {
             element.update();
         });
 
-        
-        this.items.forEach(item => {
-            item.update();
-        });
-
+        this.boxes.forEach(element => {
+            element.update();
+        })
 
         this.elements.forEach(element => {
             element.update(this);   
         });
 
+        this.items.forEach(item => {
+            item.update();
+        });
+
+        
         
         if(esc){ 
             this.activePause = true;
@@ -490,6 +501,18 @@ class Game {
 
     addItem(item, tileX, tileY, position) {
         this.items.push(item);
+
+        if (position == 5){
+            this.soulWorld[tileX][tileY] = 5;
+        }
+        
+        if(this.interactiveWorld[tileX][tileY] == 0){
+            this.interactiveWorld[tileX][tileY] = position;
+        }
+    }
+
+    addBox(item, tileX, tileY, position){
+        this.boxes.push(item);
 
         if (position == 5){
             this.soulWorld[tileX][tileY] = 5;
@@ -540,6 +563,7 @@ class Game {
     }
 
     interact(tileX, tileY){
+        console.log("Personaje encima de "+this.interactiveWorld[tileX][tileY]);
         if (this.soulWorld[tileX][tileY] == 5){
             //CASO ALMA
             this.souls++;
@@ -555,18 +579,29 @@ class Game {
                     //Abrir puerta
                 }
                 playSound("cogerLlave");
-            } else if (this.interactiveWorld[tileX][tileY] == 1){
-                return 0;
-            }
-            /*
-            if(this.interactiveWorld[tileX][tileY] == 4){ //CASO CAJA
-                let position = this.interactiveWorld[tileX][tileY];
-                if(this.items[position].id === 4){
-                    this
+            } else if (this.interactiveWorld[tileX][tileY] == 1){ //CASO TRAMPA
+                console.log("HOLA CABRONES");
+                //COMPROBAR LA TRAMPA QUE HAY QUE QUITAR
+                var trampillas = this.elements[0].traps;
+                var borrar = -1;
+                for(var i = 0; i < trampillas.length; i++){
+                    if(trampillas[i].tileX == tileX && trampillas[i].tileY == tileY){
+                        console.log("Borrando trampa del mapa");
+                        borrar = i;
+                        this.elements[0].traps[i].destroy();
+                    }
                 }
+                if(borrar > -1){
+                    this.elements[0].traps.splice(borrar, 1);
+                }
+                this.elements[0].items[0]++;
+                this.interactiveWorld[tileX][tileY] = 0;
             }
-            */
+            
+            
         }
+        
+        
         
         
     }

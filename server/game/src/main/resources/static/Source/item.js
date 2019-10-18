@@ -17,17 +17,15 @@ class Item {
     update(){
         if(this.active){
             printSprite(this.sprite, this.posSprite, [this.x, this.y + 16]);
-        }
 
-        if(this.id == 2 || this.id == 5){ //ANIMACION LLAVE O ALMA
-            if(this.velocitySprite == 8){
-                this.posSprite = [(this.posSprite[0] + 64) % 256, 0];
-                this.velocitySprite = 0;
+            if(this.id == 2 || this.id == 5){ //ANIMACION LLAVE O ALMA
+                if(this.velocitySprite == 8){
+                    this.posSprite = [(this.posSprite[0] + 64) % 256, 0];
+                    this.velocitySprite = 0;
+                }
+                this.velocitySprite = this.velocitySprite + 1;
             }
-            this.velocitySprite = this.velocitySprite + 1;
         }
-        
-        
     }
 
     destroy(){
