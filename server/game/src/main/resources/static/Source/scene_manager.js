@@ -262,9 +262,8 @@ window.addEventListener('resize', GAME.resize, false);
 window.onmousemove = mouseOver;
 window.onmousedown = mouseMovement;
 window.onmouseup = mouseRelease;
-window.ontouchmove = mouseOver;
-window.ontouchstart = mouseMovement;
-window.ontouchend = mouseRelease;
+window.ontouchstart = touchStart;
+window.ontouchend = touchRelease;
 window.onkeydown = press;
 window.onkeyup = release;
 

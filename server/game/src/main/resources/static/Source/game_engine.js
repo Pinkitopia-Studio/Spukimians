@@ -122,7 +122,7 @@ function printSprite(image, sprite, printPosition, isButton, size){
 function printSpriteImg(image, sprite, printPosition, size){
     let context = document.getElementById("game").getContext("2d");
     
-    context.drawImage(image, sprite[0], sprite[1], size[0], size[1], viewport.offset[0] + printPosition[0], viewport.offset[1] + printPosition[1] - 16, size[0], size[1]); //CON CAMARA
+    context.drawImage(image, sprite[0], sprite[1], size[0], size[1], printPosition[0], printPosition[1] - 16, size[0], size[1]); //CON CAMARA
 }
 
 function printImage(src, pos, size){
@@ -157,8 +157,9 @@ function printLevelSelector(){
 }
 
 function mouseMovement(event) {
-    /*mouseX = event.clientX;
-    mouseY = event.clientY;*/
+    let canvas = getCanvas();
+    mouseX = event.offsetX * canvas.width / canvas.clientWidth | 0;
+    mouseY = event.offsetY * canvas.height / canvas.clientHeight | 0;
         
     
     if(sceneManager.actualScene == 1){
@@ -197,6 +198,7 @@ function mouseOver(event){
     let canvas = document.getElementById("game");
     mousePosX = event.offsetX * canvas.width / canvas.clientWidth | 0;
     mousePosY = event.offsetY * canvas.height / canvas.clientHeight | 0;
+
     
 }
 
@@ -208,9 +210,9 @@ function mouseRelease (event) {
     if(sceneManager.actualScene == 1 && !sceneManager.scenes[1].activePause){ //ARREGLAR ESTO 
         let newX = event.offsetX * canvas.width / canvas.clientWidth | 0;
         let newY = event.offsetY * canvas.height / canvas.clientHeight | 0;
+        console.log("Miau: " + mouseX + " " + mouseY);
         
-        
-        //movePlayer(newX, newY);
+        movePlayer(newX, newY);
     }
     
     mouseX = event.offsetX * canvas.width / canvas.clientWidth | 0;
@@ -220,6 +222,27 @@ function mouseRelease (event) {
         menuClick(newX, newY);
     }*/
     
+}
+
+function touchStart (event) {
+    let touchX = event.changedTouches[0].clientX;
+    let touchY = event.changedTouches[0].clientY;
+
+    mouseX = touchX;
+    mouseY = touchY;
+}
+
+function touchRelease (event) {
+    let touchX = event.changedTouches[0].clientX;
+    let touchY = event.changedTouches[0].clientY;
+    
+    if(sceneManager.actualScene == 1 && !sceneManager.scenes[1].activePause){ //ARREGLAR ESTO 
+        
+        movePlayer(touchX, touchY);
+    }
+    
+    mouseX = touchX;
+    mouseY = touchY;    
 }
 
 function press(e){
