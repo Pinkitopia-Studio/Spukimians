@@ -472,7 +472,7 @@ class Game {
         this.nextSprite = this.nextSprite + 1;
 
         //ACTUALIZACION DE INTERFAZ QUE ESTA POR ENCIMA DE TODO
-        this.interface.update(this.elements[0]);
+        this.interface.update(this.elements[0], this.level);
 
         //ACTUALIZACION DE PAUSE POR ENCIMA DE TODO
         if(this.activePause){

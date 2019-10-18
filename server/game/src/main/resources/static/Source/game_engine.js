@@ -201,12 +201,12 @@ function mouseRelease (event) {
 
     let canvas = getCanvas();
     
-    if(sceneManager.actualScene == 1){ //ARREGLAR ESTO 
+    if(sceneManager.actualScene == 1 && !sceneManager.scenes[1].activePause){ //ARREGLAR ESTO 
         let newX = event.offsetX * canvas.width / canvas.clientWidth | 0;
         let newY = event.offsetY * canvas.height / canvas.clientHeight | 0;
         
         
-        movePlayer(newX, newY);
+        //movePlayer(newX, newY);
     }
     
     mouseX = event.offsetX * canvas.width / canvas.clientWidth | 0;

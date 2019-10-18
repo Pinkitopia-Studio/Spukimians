@@ -24,7 +24,7 @@ var levelsData = {
             playerY: 7,
             enemyX: 7,
             enemyY: 3,
-            ghosts:1,
+            ghosts: 1,
             minMovements:20,
             keyX: 3,
             keyY: 4,

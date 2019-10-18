@@ -17,7 +17,7 @@ class Interface {
         }
     }
 
-    update(player){
+    update(player, level){
         //Actualizacion de elementos
         this.player = player;
         this.key = player.items[1];
@@ -33,12 +33,18 @@ class Interface {
             printImage("trap", [160 + (i*80), 796], [64, 64]); 
         }
 
+        for (var i = 0; i < levelsData.data[level].ghosts; i++){
+            printImage("almaPlaceholder", [mapW - 320 + (i*64), 0], [64, 64]); 
+        }
+
         for (var i = 0; i < this.souls; i++){
             printImage("almaIcon", [mapW - 320 + (i*64), 0], [64, 64]); 
         }
 
         if(this.key >= 1){
             printImage("llaveIcon", [mapW-64, 0], [64, 64]);
+        }else{
+            printImage("llavePlaceHolder", [mapW-64, 0], [64, 64]);
         }
 
     }
