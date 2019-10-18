@@ -163,17 +163,18 @@ class Player {
                 this.lastMoved = 0;
                 this.moving = 0;
                 this.velocity = 0;
+                var instance = this instanceof Enemy; //True si es enemigo, false si es personaje
                 //The player stops moving, so send a signal to all ghosts in board to move
-                if (!(this instanceof Enemy)){
+                if (!instance){ //Personaje
                     sceneManager.scenes[1].elements[0].movements = sceneManager.scenes[1].elements[0].movements + 1;
                     //console.log(sceneManager.scenes[1].elements[0].movements);
 
                     sceneManager.scenes[1].sendEnemySignal();
-                    sceneManager.scenes[1].interact(this.tileX, this.tileY);
+                    sceneManager.scenes[1].interactCharacter(this.tileX, this.tileY);
 
                     
-                } else {
-                    if (sceneManager.scenes[1].interact(this.tileX, this.tileY) == 0){
+                } else { //Enemy
+                    if (sceneManager.scenes[1].interactEnemy(this.tileX, this.tileY) == 0){
                         this.killFantasma();
                     }
                 }

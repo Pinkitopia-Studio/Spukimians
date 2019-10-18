@@ -562,8 +562,8 @@ class Game {
         this.elements[0].items[2]++;
     }
 
-    interact(tileX, tileY){
-        console.log("Personaje encima de "+this.interactiveWorld[tileX][tileY]);
+    interactCharacter(tileX, tileY){
+        
         if (this.soulWorld[tileX][tileY] == 5){
             //CASO ALMA
             this.souls++;
@@ -580,13 +580,12 @@ class Game {
                 }
                 playSound("cogerLlave");
             } else if (this.interactiveWorld[tileX][tileY] == 1){ //CASO TRAMPA
-                console.log("HOLA CABRONES");
+            
                 //COMPROBAR LA TRAMPA QUE HAY QUE QUITAR
                 var trampillas = this.elements[0].traps;
                 var borrar = -1;
                 for(var i = 0; i < trampillas.length; i++){
                     if(trampillas[i].tileX == tileX && trampillas[i].tileY == tileY){
-                        console.log("Borrando trampa del mapa");
                         borrar = i;
                         this.elements[0].traps[i].destroy();
                     }
@@ -597,13 +596,15 @@ class Game {
                 this.elements[0].items[0]++;
                 this.interactiveWorld[tileX][tileY] = 0;
             }
-            
-            
         }
-        
-        
-        
-        
+    }
+
+    interactEnemy(tileX, tileY){
+        if(this.interactiveWorld[tileX][tileY] != 0){
+            if(this.interactiveWorld[tileX][tileY] == 1){
+                return 0;
+            }
+        }
     }
 
     openBarrier(x, y){
