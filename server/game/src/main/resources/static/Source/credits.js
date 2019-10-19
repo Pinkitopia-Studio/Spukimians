@@ -20,6 +20,7 @@ class Credits {
 
         this.twiter = new Button("boton_twitter", (mapW * 0.2) - 32, 300, 64, 64, "");
         this.twiter.create();
+        this.twiter.isSprite = false;
         this.twiter.assignFunction(function(){
             let win = window.open("http://twitter.com/pinkitopia", '_blank');
             win.focus();
@@ -30,6 +31,7 @@ class Credits {
 
         this.instagram = new Button("boton_instagram", (mapW * 0.2) - 32, 400, 64, 64, "");
         this.instagram.create();
+        this.instagram.isSprite = false;
         this.instagram.assignFunction(function(){
             let win = window.open("http://instagram.com/pinkitopia", '_blank');
             win.focus();
@@ -40,6 +42,7 @@ class Credits {
 
         this.webpage = new Button("boton_web", (mapW * 0.2) - 32, 500, 64, 64, "");
         this.webpage.create();
+        this.webpage.isSprite = false;
         this.webpage.assignFunction(function(){
             let win = window.open("https://pinkitopia-studio.github.io/", '_blank');
             win.focus();

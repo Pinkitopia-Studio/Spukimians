@@ -98,8 +98,10 @@ class Button{
                     this.sizeY = this.height;
                 }
 
-                if((mouseX >= this.posX && mouseX <= this.posX+this.sizeX) && (mouseY  >= this.posY && mouseY  <= this.posY + this.sizeY) && !this.active){
+                if(
+                    (mouseX >= this.posX && mouseX <= this.posX+this.sizeX) && (mouseY  >= this.posY && mouseY  <= this.posY + this.sizeY) && !this.active){
                     if(!this.active){
+                        console.log(mouseX, mouseY);
                         console.log("he sido pulsado");
                         
                         this.onClick(this.fn);

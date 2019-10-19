@@ -16,9 +16,7 @@ class Enemy extends Player {
             this.nextMove = 0;
         }
 
-        detectPlayer (ptileX, ptileY) {
-            //CON SUPER ACCEDES AL JUGADOR IVAN PORQUE ESTAS HEREDANDO DE EL
-            
+        detectPlayer (ptileX, ptileY) {            
             return (Math.abs(ptileX-this.tileX) < 3 && Math.abs(ptileY-this.tileY) < 3);
         }
 
@@ -119,7 +117,7 @@ class Enemy extends Player {
         }
 
         killFantasma(){
-            alert("Fantasma muere jeje");
+            
             this.dead = true;
             this.createSoul(this.tileX, this.tileY);
         }

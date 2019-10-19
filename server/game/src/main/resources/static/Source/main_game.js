@@ -37,6 +37,36 @@ class Game {
         this.boxes = [];
 
         this.souls = 0;
+
+        //TIEMPO
+        this.timeTurnD = 0;
+        this.timeTurnU = 9;
+
+        
+    }
+
+    tempo (){
+        var that = this;
+
+        if(this.timeTurnD > 0 || this.timeTurnU > 0){
+            if(this.timeTurnU == 0){
+                this.timeTurnU = 9;
+            }else{
+                this.timeTurnU--;
+            }
+            
+            if(this.timeTurnU == 9){
+                this.timeTurnD--;
+            }
+            console.log(this.timeTurnD, this.timeTurnU);
+        }
+        
+        if(this.activeWorld){
+            setTimeout(function(){
+                that.tempo();
+            }, 1000);
+        }
+        
     }
 
     create (level) {
@@ -117,7 +147,7 @@ class Game {
         this.trapButton.create();
         var that = this;
         this.trapButton.assignFunction(function(){
-            if(that.elements[0].items[0] > 0 || that.puttingTrap){
+            if(that.elements[0].items[0] > 0){
                 if(!that.puttingTrap && that.elements[0].moving === 0){
                     that.puttingTrap = true;
                     that.elements[0].createTrapButtons();
@@ -130,6 +160,7 @@ class Game {
                     }, 500);
                     playSound("cerrarBolsa");
                 }
+            
             }else{
                 alert("No te quedan trampas")
             }
@@ -289,7 +320,10 @@ class Game {
         //INTERFAZ
         this.interface = new Interface(this.elements[0]);
         
-        
+        //TEMPORIZADOR
+        setTimeout(function(){
+            that.tempo();
+        }, 1000);
     }
     reload(){
         var lv = this.level;
@@ -337,7 +371,7 @@ class Game {
         }
     }
     
-    //COMPRUEBA SI EL SUELO ES TRASPASABLE (SUELO = 10)
+    //COMPRUEBA SI EL SUELO ES TRASPASABLE (SUELO = 4)
     checkTile(x, y){
         return (this.world[x][y] == 4);
     }
@@ -499,6 +533,18 @@ class Game {
             this.trapButton.update();
             this.pauseButton.update();
         }
+
+        if(this.timeTurnD == 0 && this.timeTurnU == 0){
+            this.timeTurnD = 2;
+            this.timeTurnU = 9;
+            //COMPROBAMOS SI EL TIEMPO ES 0 y si lo es el jugador debe esperar a que el enemigo se mueva
+            this.elements[0].canMove = false;
+            this.elements[0].movements = sceneManager.scenes[1].elements[0].movements + 1;
+            //console.log(sceneManager.scenes[1].elements[0].movements);
+
+            this.sendEnemySignal();
+        }
+        
        
     }
 
@@ -579,6 +625,7 @@ class Game {
                     
                     this.deleteItem(tileX, tileY);
                     this.elements[0].items[1] = 1;
+                    this.interactiveWorld[tileX][tileY] = 0;
                     //Abrir puerta
                 }
                 playSound("cogerLlave");

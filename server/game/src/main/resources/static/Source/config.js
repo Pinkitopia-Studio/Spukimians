@@ -126,8 +126,12 @@ class Config {
                 this.ghosts[i].x = 1304;
             }
         }
-
-        printImage("letras_config", [mapW / 2 - (1104 / 2), mapH * 0.15 - (192 / 2)], [1104, 192]);
+        if(language == 0){
+            printImage("letras_config", [mapW / 2 - (1104 / 2), mapH * 0.15 - (192 / 2)], [1104, 192]);
+        }else if(language == 1){
+            printImage("english/letras_config_eng", [mapW / 2 - (1104 / 2), mapH * 0.15 - (192 / 2)], [1104, 192]);
+        }
+        
     }
 
     destroy(){

@@ -115,7 +115,7 @@ class Menu {
         }
         
 
-        this.title = printSpriteImg(this.titleImg, this.posTitle, [1240/2 - (1024/2), 0], [1024, 512]);
+        this.title = printSpriteImg(this.titleImg, this.posTitle, [1240/2 - (1024/2), 20], [1024, 512]);
         
         this.velSprite = this.velSprite + 1;
     }

@@ -213,7 +213,8 @@ function mouseRelease (event) {
         let newY = event.offsetY * canvas.height / canvas.clientHeight | 0;
         console.log("Miau: " + mouseX + " " + mouseY);
         
-        if(mouseX != -1) movePlayer(newX, newY);
+        if(mouseX != -1 && newX < GAME.currentWidth * 0.8) //ZONA DE BOTONES) 
+            movePlayer(newX, newY);
     }
     
     mouseX = event.offsetX * canvas.width / canvas.clientWidth | 0;
@@ -238,7 +239,8 @@ function touchRelease (event) {
     let touchY = event.changedTouches[0].clientY;
     
     if(sceneManager.actualScene == 1 && !sceneManager.scenes[1].activePause){ //ARREGLAR ESTO 
-        movePlayer(touchX, touchY);
+        if(touchX < GAME.currentWidth * 0.8) //ZONA DE BOTONES
+            movePlayer(touchX, touchY);
     }
     
     mouseX = touchX;

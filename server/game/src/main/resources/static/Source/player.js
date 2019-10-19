@@ -166,11 +166,16 @@ class Player {
                 var instance = this instanceof Enemy; //True si es enemigo, false si es personaje
                 //The player stops moving, so send a signal to all ghosts in board to move
                 if (!instance){ //Personaje
+                    sceneManager.scenes[1].elements[0].canMove = false;
                     sceneManager.scenes[1].elements[0].movements = sceneManager.scenes[1].elements[0].movements + 1;
                     //console.log(sceneManager.scenes[1].elements[0].movements);
 
                     sceneManager.scenes[1].sendEnemySignal();
                     sceneManager.scenes[1].interactCharacter(this.tileX, this.tileY);
+
+                    //PONEMOS DE NUEVO EL TIEMPO
+                    sceneManager.scenes[1].timeTurnD = 2;
+                    sceneManager.scenes[1].timeTurnU = 9;
 
                     
                 } else { //Enemy
@@ -185,7 +190,7 @@ class Player {
                 (this.lastMoved == 0 && this.nextMove != 0 && sceneManager.scenes[1].elements.length == 1)){
                 //If the player is stopped and has a next move available, start moving in
                 //That direction.
-                this.canMove = false;
+                
                 this.moving = this.nextMove;
                 this.nextMove = 0;
                 this.lastSprite = 0;

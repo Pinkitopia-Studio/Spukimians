@@ -205,13 +205,18 @@ var GAME = {
 window.addEventListener('load', GAME.init, false);
 window.addEventListener('resize', GAME.resize, false);
 
+
+
+window.ontouchstart = touchStart;
+window.ontouchend = touchRelease;
+
 window.onmousemove = mouseOver;
 window.onmousedown = mouseMovement;
 window.onmouseup = mouseRelease;
-window.ontouchstart = touchStart;
-window.ontouchend = touchRelease;
 window.onkeydown = press;
 window.onkeyup = release;
+
+
 
 var inicial = false;
 
