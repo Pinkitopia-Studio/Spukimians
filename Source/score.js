@@ -53,7 +53,6 @@ class Score {
 
         this.setBestScores(compareMoves);
         
-
         
         let back = new Button("ui/salir", 1240/2 - (365/2)-10, 465, 365, 155, "");
 
@@ -170,6 +169,12 @@ class Score {
                 printImage("pasos", [1224-32, 261-16+(i*(32+10))], [32, 32]);
             }
     
+        }else{
+            unidades = this.movements%10;
+            decenas = (this.movements-unidades)/10;
+            printSpriteImg(printeanumero, [decenas*32,32], [1192-64, 261+(0*(32+10))], [32, 32]);
+            printSpriteImg(printeanumero, [unidades*32,32], [1224-64, 261+(0*(32+10))], [32, 32]);
+            printImage("pasos", [1224-32, 261-16+(0*(32+10))], [32, 32]);
         }
         
         //Pintar los pasos que has dado y si es o no best score
