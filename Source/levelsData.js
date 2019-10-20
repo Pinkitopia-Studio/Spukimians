@@ -35,10 +35,16 @@ var levelsData = {
             ]
         },
         { //LEVEL 2
-            ghosts:2,
+            playerX: 1,
+            playerY: 5,
+            ghosts:1,
             minMovements:15,
             keyX: 5,
-            keyY: 2
+            keyY: 2,
+            barriers: [],
+            levers: [],
+            enemyX: 5,
+            enemyY: 1
         }]
 };
 
