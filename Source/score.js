@@ -46,7 +46,7 @@ class Score {
         }
 
         if (this.bestMovements == null || this.bestMovements == undefined){
-            this.bestScore = false;
+            this.bestScore = true;
         } else {
             this.bestScore = (this.bestMovements.scores[0] > compareMoves);
         }

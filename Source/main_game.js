@@ -378,7 +378,7 @@ class Game {
         //COMPROBACIONES DE ACTIVABLES
         let that = this;
 
-        if(this.world[x][y] == 6){ // SI EL JUGADOR TIENE LA LLAVE
+        if(this.world[x][y] == 6 && this.elements[0].tileX == x && this.elements[0].tileY-1 == y){ // SI EL JUGADOR TIENE LA LLAVE
             if(this.elements[0].items[1] >= 1){
                 playSound("abrirPuerta");
                 this.world[x][y] = 7;

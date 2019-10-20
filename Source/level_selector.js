@@ -33,7 +33,7 @@ class LevelSelector {
         
         level1.create();
         level1.assignFunction(function(){
-            sceneManager.changeScenes(1, 2);
+            sceneManager.changeScenes(1, 0);
         });
 
         level2.create();
@@ -43,7 +43,7 @@ class LevelSelector {
 
         level3.create();
         level3.assignFunction(function(){
-            sceneManager.changeScenes(1, 0);
+            sceneManager.changeScenes(1, 2);
         })
 
         //Bloquear level 2
@@ -52,6 +52,7 @@ class LevelSelector {
 
         //Bloquear level 2
         scores = JSON.parse(window.localStorage.getItem("spukimiansMemoryLevel"+0));
+        console.log(scores);
         if(scores==null || scores == undefined || scores.stars==null || scores.stars == undefined){
             starsArray = [false,false,false];
         }else{
