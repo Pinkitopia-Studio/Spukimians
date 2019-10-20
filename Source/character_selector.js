@@ -39,7 +39,7 @@ class CharacterSelector {
         this.buttonGirl.assignFunction(function(){
             that.buttonRobot.pushed = false;
             character = 0;
-            playSound("yourcute");
+            playSound("Maika_letsgo");
         });
 
         
@@ -48,7 +48,7 @@ class CharacterSelector {
         this.buttonRobot.assignFunction(function(){
             that.buttonGirl.pushed = false;
             character = 1;
-            playSound("yourcute");
+            playSound("MIA_whaoh");
         });
 
         switch(character){

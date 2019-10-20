@@ -42,7 +42,10 @@ class Game {
         this.timeTurnD = 0;
         this.timeTurnU = 9;
 
-        
+        this.audio = new Audio("Assets/sounds/suddenStep.mp3");
+        this.audio.loop = true;
+        this.audio.play();
+        this.audio.volume = volume;
     }
 
     tempo (){

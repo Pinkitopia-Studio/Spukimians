@@ -22,20 +22,37 @@ class Config {
         volumeMax.assignFunction(function(){
             volumeLow.pushed = false;
             volumeNO.pushed = false;
+            sceneManager.audio.volume = 1;
+            volume = 1;
         });
 
         volumeLow.create();
         volumeLow.assignFunction(function(){
             volumeMax.pushed = false;
             volumeNO.pushed = false;
+            sceneManager.audio.volume = 0.5;
+            volume = 0.5;
         });
 
         volumeNO.create();
         volumeNO.assignFunction(function(){
             volumeMax.pushed = false;
             volumeLow.pushed = false;
+            sceneManager.audio.volume = 0;
+            volume = 0;
         });
-        volumeMax.pushed = true;
+        switch(volume){
+            case 1:
+                volumeMax.pushed = true;
+            break;
+            case 0.5:
+                volumeLow.pushed = true;
+            break;
+            case 0:
+                volumeNO.pushed = true;
+            break;
+        }
+        
         this.addElement(volumeMax);
         this.addElement(volumeLow);
         this.addElement(volumeNO);

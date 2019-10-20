@@ -21,7 +21,11 @@ class SceneManager {
 
         
         this.actualScene = 8;
-    
+
+        this.audio = new Audio("Assets/sounds/con_violin.mp3");
+        this.audio.play();
+        this.audio.volume = 0.5;
+        this.audio.loop = true;
     }  
     
     update(){
@@ -32,33 +36,43 @@ class SceneManager {
         
         switch(index){
             case 0:
+                this.audio.play();
                 this.scenes[0] = new Menu();
                 break;
             case 1:
+                this.audio.pause();
                 this.scenes[1] = new Game();
                 break;
             case 2:
+                this.audio.play();
                 this.scenes[2] = new LevelSelector();
                 break;
             case 3:
+                this.audio.pause();
                 this.scenes[3] = new Score();
                 break;
             case 4:
+                this.audio.pause();
                 this.scenes[4] = new GameOver();
                 break;
             case 5:
+                this.audio.play();
                 this.scenes[5] = new CharacterSelector();
                 break;
             case 6:
+                this.audio.pause();
                 this.scenes[6] = new Credits();
                 break;
             case 7:
+                this.audio.play();
                 this.scenes[7] = new Config();
                 break;
 
         }
         let pos = this.actualScene;
-
+        if (index != 1 && this.scenes[1] != undefined){
+            this.scenes[1].audio.pause();
+        }
         if (index == 1){
             //If next scene is a level of the game or score of the game
             this.scenes[pos].destroy();
@@ -84,6 +98,7 @@ class SceneManager {
 //CHARACTER
 var character = 0; //0 = chica, 1 = robot, 2 = serpiente, 3 = gato
 var language = 0; //0 = spanish, 1 = english
+var volume = 0.5; //volume (1/0.5/0)
 
 //MAP PARAMETERS
 var tileW = 64;

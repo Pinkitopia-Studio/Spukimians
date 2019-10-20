@@ -363,6 +363,10 @@ function playSound(sound){
     s.play();
 }
 
+function playMusic(audio){
+    audio.play();
+}
+
 function clearCanvas () {
     let context = document.getElementById("game").getContext("2d");
     context.clearRect(0, 0, 1240, 860); //Clears canvas for printing
