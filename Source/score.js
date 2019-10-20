@@ -27,20 +27,28 @@ class Score {
         this.stars = [true, false, false];
         this.bestMovements = JSON.parse(window.localStorage.getItem("spukimiansMemoryLevel"+level));
 
-        if (this.bestMovements == null || this.bestMovements == undefined){
-            this.bestScore = false;
-        } else {
-            this.bestScore = (this.bestMovements.scores[0] > movements);
-        }
+        this.previousStars = this.bestMovements.stars;
         
-
-        this.setBestScores();
         if (levelsData.data[this.level].ghosts == ghosts){
             this.stars[1] = true;
             if (levelsData.data[this.level].minMovements >= this.movements){
                 this.stars[2] = true;
             }
         }
+        
+        var compareMoves = this.movements;
+        if(!this.stars[1]){
+            compareMoves = 100;
+        }
+
+        if (this.bestMovements == null || this.bestMovements == undefined){
+            this.bestScore = false;
+        } else {
+            this.bestScore = (this.bestMovements.scores[0] > compareMoves);
+        }
+
+        this.setBestScores(compareMoves);
+        
 
         
         let back = new Button("ui/salir", 1240/2 - (365/2)-10, 465, 365, 155, "");
@@ -65,7 +73,7 @@ class Score {
         }
     }
 
-    setBestScores () {
+    setBestScores (compareMoves) {
         let previous = undefined;
         if (this.bestMovements == null || this.bestMovements == undefined){
             previous = [];
@@ -73,11 +81,38 @@ class Score {
             previous = this.bestMovements.scores;
         }
         
-        previous.push(this.movements);
+        if(compareMoves < 100){
+            previous.push(this.movements);
+        }
+        
         previous.sort();
+        while(previous.length > 10){
+            previous.pop();
+        }
         let saveScores = {};
         saveScores.scores = previous;
+
+        if(this.previousStars == null || this.previousStars == undefined){
+            saveScores.stars = this.stars;
+        } else {
+            if (this.previousStars[1] == true && this.previousStars[2] == true){
+                saveScores.stars = this.previousStars;
+            } else if (this.previousStars[1] == true){
+                if(this.stars[2] == true){
+                    saveScores.stars = this.stars;
+                } else {
+                    saveScores.stars = this.previousStars;
+                }
+            } else {
+                saveScores.stars = this.stars;
+            }
+        }
+
+        
+        
         window.localStorage.setItem("spukimiansMemoryLevel"+this.level, JSON.stringify(saveScores));
+
+        
     }
 
     update () {
