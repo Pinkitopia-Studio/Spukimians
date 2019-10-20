@@ -1,7 +1,9 @@
 
 
-function parseTiledLevel(file){
-    readTextFile(file);
+function parseTiledLevel(level){
+    processData(levelTiles.data[level]);
+
+    
 }
 
 function processData (text) {

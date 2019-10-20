@@ -121,7 +121,7 @@ class Game {
             var key = new Key(levelsData.data[this.level].keyX, levelsData.data[this.level].keyY);
             this.addItem(key, key.tileX, key.tileY);
         } else {
-            parseTiledLevel("Levels/level"+level+".txt");
+            parseTiledLevel(level);
             
         }
     }
