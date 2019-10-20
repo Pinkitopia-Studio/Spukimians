@@ -106,10 +106,27 @@ class Score {
             }
         }
 
-        printImage("gameover", [210, 210], [800, 464]);
+        printImage("score", [210, 210], [800, 464]);
+        let unidades = this.movements%10;
+        let decenas = (this.movements-unidades)/10;
+        var printeanumero = new Image();
+        printeanumero.src = "Assets/nums/nums.png";
+        if (this.bestScore){
+            printSpriteImg(printeanumero, [decenas*32,32], [554, 365], [32, 32]);
+            printSpriteImg(printeanumero, [unidades*32,32], [584, 365], [32, 32]);
+        }else{
+            printSpriteImg(printeanumero, [decenas*32,0], [554, 365], [32, 32]);
+            printSpriteImg(printeanumero, [unidades*32,0], [584, 365], [32, 32]);
+        }
+        printImage("pasos", [626, 349], [32, 32]);
 
         if (this.bestScore){
             //Print "NEW" bestScore
+            if(language==0){
+                printImage("mejorPuntuacion", [430, 398], [367, 32]); 
+            }else{
+                printImage("newBestScore", [470, 398], [288, 32]);
+            }
         }
 
         for (var i = 0; i < 3; i++){
