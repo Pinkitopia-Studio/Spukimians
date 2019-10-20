@@ -60,7 +60,15 @@ class Interface {
                 printImage("english/letras_turnoEnem_eng64", [mapW * 0.6 - (513/2), mapH * 0.9], [513, 64]);    
             }
         }
+
+        //Imprimir tiempo (Decenas)
+        let numeros = new Image();
+        numeros.src = "Assets/nums/nums.png";
+        printSpriteImg(numeros, [sceneManager.scenes[1].timeTurnD*32,0], [16, 32], [32, 32]);
+        printSpriteImg(numeros, [sceneManager.scenes[1].timeTurnU*32,0], [48, 32], [32, 32]);
         
 
     }
+
+    
 }

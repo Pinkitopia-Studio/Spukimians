@@ -39,8 +39,8 @@ class Game {
         this.souls = 0;
 
         //TIEMPO
-        this.timeTurnD = 0;
-        this.timeTurnU = 9;
+        this.timeTurnD = 3;
+        this.timeTurnU = 0;
 
         this.audio = new Audio("Assets/sounds/suddenStep.mp3");
         this.audio.loop = true;
@@ -61,7 +61,7 @@ class Game {
             if(this.timeTurnU == 9){
                 this.timeTurnD--;
             }
-            console.log(this.timeTurnD, this.timeTurnU);
+            //sconsole.log(this.timeTurnD, this.timeTurnU);
         }
         
         if(this.activeWorld){

@@ -87,8 +87,15 @@ class Character extends Player {
     createTrapButtons(){
         if(sceneManager.scenes[1].puttingTrap){
             //CUADRITOS PARA LAS TRAMPAS (MIRA A VER SI NO ES UN TILE COLISIONABLE)
-            if(sceneManager.scenes[1].checkTile(this.tileX, this.tileY+1)){
-                
+            let positionghost = [-1, -1];
+            if (sceneManager.scenes[1].elements[1] != undefined){
+               positionghost = [sceneManager.scenes[1].elements[1].tileX, sceneManager.scenes[1].elements[1].tileY];
+            }
+            let positionllave = [-1, -1];
+            if (this.items[1] != 1){
+                positionllave = [levelsData.data[sceneManager.scenes[1].level].keyX, levelsData.data[sceneManager.scenes[1].level].keyY];
+            }
+            if(sceneManager.scenes[1].checkTile(this.tileX, this.tileY+1) && !(this.tileX == positionghost[0] && this.tileY+1 == positionghost[1]) && !(this.tileX == positionllave[0] && this.tileY+1 == positionllave[1])){
                 var button = new Button("square", this.tileX*64, (this.tileY+1)*64 + 16, 64, 64, "");
                 button.create();
                 var that = this;
@@ -96,14 +103,13 @@ class Character extends Player {
                     if(that.items[0] > 0){
                         that.createTrap(that.tileX, (that.tileY+1));
                         
-                    }else{
-                        alert("No te quedan trampas");
                     }
                     
                 });
                 this.trapButtons.push(button);
             }
-            if(sceneManager.scenes[1].checkTile(this.tileX+1, this.tileY)){
+            
+            if(sceneManager.scenes[1].checkTile(this.tileX+1, this.tileY) && !(this.tileX+1 == positionghost[0] && this.tileY== positionghost[1]) && !(this.tileX+1 == positionllave[0] && this.tileY == positionllave[1])){
                 var button = new Button("square", (this.tileX+1)*64, this.tileY*64 + 16, 64, 64, "");
                 button.create();
                 var that = this;
@@ -111,14 +117,12 @@ class Character extends Player {
                     if(that.items[0] > 0){
                         that.createTrap((that.tileX+1), that.tileY);
                         
-                    }else{
-                        alert("No te quedan trampas");
                     }
                     
                 });
                 this.trapButtons.push(button);
             }
-            if(sceneManager.scenes[1].checkTile(this.tileX, this.tileY-1)){
+            if(sceneManager.scenes[1].checkTile(this.tileX, this.tileY-1) && !(this.tileX == positionghost[0] && this.tileY-1== positionghost[1]) && !(this.tileX == positionllave[0] && this.tileY-1 == positionllave[1])){
                 var button = new Button("square", this.tileX*64, (this.tileY-1)*64 + 16, 64, 64, "");
                 button.create();
                 var that = this;
@@ -126,14 +130,12 @@ class Character extends Player {
                     if(that.items[0] > 0){
                         that.createTrap(that.tileX, (that.tileY-1));
                         
-                    }else{
-                        alert("No te quedan trampas");
                     }
                     
                 });
                 this.trapButtons.push(button);
             }
-            if(sceneManager.scenes[1].checkTile(this.tileX-1, this.tileY)){
+            if(sceneManager.scenes[1].checkTile(this.tileX-1, this.tileY) && !(this.tileX-1 == positionghost[0] && this.tileY== positionghost[1]) && !(this.tileX-1 == positionllave[0] && this.tileY == positionllave[1])){
                 var button = new Button("square", (this.tileX-1)*64, this.tileY*64 + 16, 64, 64, "");
                 button.create();
                 var that = this;
@@ -141,8 +143,6 @@ class Character extends Player {
                     if(that.items[0] > 0){
                         that.createTrap((that.tileX-1), that.tileY);
                         
-                    }else{
-                        alert("No te quedan trampas");
                     }
                     
                 });
