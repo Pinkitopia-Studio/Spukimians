@@ -17,7 +17,7 @@ class Loading {
     create(){
         this.active = true;
 
-        this.video = document.createElement("video");
+        this.video = document.getElementById("mivideo");
         this.video.src = "assets/carga.mp4";
         this.video.autoplay = false;
         this.video.muted="muted"
@@ -37,6 +37,7 @@ class Loading {
             if (this.video && !this.video.ended) {
                 this.context.drawImage(this.video, this.xStart, this.yStart, this.xEnd - this.xStart, this.yEnd - this.yStart);
             }else{
+                this.video.remove();
                 sceneManager.changeScenes(0);
             }
         }
