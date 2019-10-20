@@ -107,10 +107,32 @@ class Score {
         }
 
         printImage("score", [210, 210], [800, 464]);
-        let unidades = this.movements%10;
-        let decenas = (this.movements-unidades)/10;
+        printImage("bestScoresFrame", [0, 20], [1240, 860]);
+
         var printeanumero = new Image();
         printeanumero.src = "Assets/nums/nums.png";
+
+        //Pintar los best scores
+        let unidades = 0;
+        let decenas = 0;
+        let myScoreChecked = false; //Para comprobar si se ha marcado mi puntuacion en mis Best Scores
+        for(var i=0; i<10; i++){
+            unidades = this.bestMovements.scores[i]%10;
+            decenas = (this.bestMovements.scores[i]-unidades)/10;
+            if(!myScoreChecked && this.bestMovements.scores[i] == this.movements){ //Si es mi score
+                printSpriteImg(printeanumero, [decenas*32,32], [1192-64, 261+(i*(32+10))], [32, 32]);
+                printSpriteImg(printeanumero, [unidades*32,32], [1224-64, 261+(i*(32+10))], [32, 32]);
+                myScoreChecked = true;
+            }else{
+                printSpriteImg(printeanumero, [decenas*32,0], [1192-64, 261+(i*(32+10))], [32, 32]);
+                printSpriteImg(printeanumero, [unidades*32,0], [1224-64, 261+(i*(32+10))], [32, 32]);
+            }
+            printImage("pasos", [1224-32, 261-16+(i*(32+10))], [32, 32]);
+        }
+
+        //Pintar los pasos que has dado y si es o no best score
+        unidades = this.movements%10;
+        decenas = (this.movements-unidades)/10;
         if (this.bestScore){
             printSpriteImg(printeanumero, [decenas*32,32], [554, 365], [32, 32]);
             printSpriteImg(printeanumero, [unidades*32,32], [584, 365], [32, 32]);
