@@ -23,6 +23,7 @@ class Interface {
         this.key = player.items[1];
         this.souls = player.items[2];
         this.traps = player.items[0];
+        this.movements = player.movements;
 
         //Pintado
         printImage(this.srcCharacter, [16, 716], [128, 128]);    
@@ -68,6 +69,15 @@ class Interface {
         printSpriteImg(numeros, [sceneManager.scenes[1].timeTurnU*32,0], [48, 32], [32, 32]);
         
 
+        //Imprimir movimientos
+        let unidades = this.movements%10;
+        let decenas = (this.movements-unidades)/10;
+        var printeanumero = new Image();
+        printeanumero.src = "Assets/nums/nums.png";
+        printImage("pasos", [116, 16], [32, 32]);
+        printSpriteImg(printeanumero, [decenas*32,0], [80+80, 32], [32, 32]);
+        printSpriteImg(printeanumero, [unidades*32,0], [48+128+16, 32], [32, 32]);
+        
     }
 
     

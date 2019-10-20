@@ -36,7 +36,7 @@ class Character extends Player {
        this.items = [3, 0, 0];
 
        //MOVIMIENTOS
-       this.movements = 0;
+       this.movements = -1;
 
        //SPritesheet llave
        

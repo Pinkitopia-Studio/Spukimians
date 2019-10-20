@@ -271,6 +271,7 @@ class Game {
         }
         
         //CAJAS (4)
+        /*
         if(levelsData.data[this.level].boxes != []){
             levelsData.data[this.level].boxes.forEach(element => {
                 var box = new Item(element[0], element[1], "Assets/caja.png", 4);
@@ -312,7 +313,7 @@ class Game {
 
                 });
             });
-        }
+        }*/
 
         //INTERFAZ
         this.interface = new Interface(this.elements[0]);
