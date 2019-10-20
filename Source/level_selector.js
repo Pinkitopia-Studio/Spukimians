@@ -23,6 +23,7 @@ class LevelSelector {
 
         let level1 = new Button("nums/1_xl", 1240/4 - (300/2), 300, 300, 240, "", true,"nums/1_xl");
         let level2 = new Button("nums/2_xl", 1240/2 - (300/2), 300, 300, 240, "", true, "nums/2_xl");
+        let level3 = new Button("nums/3_xl", 790, 300, 300, 240, "", true, "nums/3_xl");
         let back = new Button("volver_boton", (mapW * 0.25) - (204/2), mapH * 0.65, 204, 192, "");
         
         back.create();
@@ -32,12 +33,17 @@ class LevelSelector {
         
         level1.create();
         level1.assignFunction(function(){
-            sceneManager.changeScenes(1, 0);
+            sceneManager.changeScenes(1, 2);
         });
 
         level2.create();
         level2.assignFunction(function(){
             sceneManager.changeScenes(1, 1);
+        })
+
+        level3.create();
+        level3.assignFunction(function(){
+            sceneManager.changeScenes(1, 0);
         })
 
         //Bloquear level 2
@@ -56,10 +62,24 @@ class LevelSelector {
         }else{
             level2.pushed = true;
         }
+
+        //Bloquear level 3
+        scores = JSON.parse(window.localStorage.getItem("spukimiansMemoryLevel"+1));
+        if(scores==null || scores == undefined || scores.stars==null || scores.stars == undefined){
+            starsArray = [false,false,false];
+        }else{
+            starsArray = scores.stars;
+        }
+        if(starsArray[0]==true){
+            level3.pushed = false;
+        }else{
+            level3.pushed = true;
+        }
         
         
         this.addElement(level1);
         this.addElement(level2);
+        this.addElement(level3);
         this.addElement(back);
 
         this.createGhost();
@@ -139,6 +159,25 @@ class LevelSelector {
             }
         }else{
             printImage("scaryLocker", [505+(1*64), 220], [96, 96]);
+        }
+
+        //Nivel 3
+        if(starsArray[0]==true){
+            scores = JSON.parse(window.localStorage.getItem("spukimiansMemoryLevel"+2));
+            if(scores==null || scores == undefined || scores.stars==null || scores.stars == undefined){
+                starsArray = [false,false,false];
+            }else{
+                starsArray = scores.stars;
+            }
+            for (var i = 0; i<3; i++){
+                if(starsArray[i]){
+                    printImage("estrella", [840+(i*64), 230], [64, 64]);
+                }else{
+                    printImage("estrellaPlaceHolder", [840+(i*64), 230], [64, 64]);
+                }
+            }
+        }else{
+            printImage("scaryLocker", [825+(1*64), 220], [96, 96]);
         }
 
         this.elements.forEach(element => {
