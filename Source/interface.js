@@ -48,13 +48,13 @@ class Interface {
         }
         //SI LE TOCA AL JUGADOR MOSTRAMOS TU TURNO
         if(language == 0){
-            if(this.player.canMove){
+            if(this.player.canMove || sceneManager.scenes[1].elements.length == 1){
                 printImage("letras_turno_64", [mapW * 0.6 - (259/2), mapH * 0.9], [259, 64]);    
             }else{
                 printImage("letras_turnoEnem_64", [mapW * 0.6 - (513/2), mapH * 0.9], [513, 64]);    
             }
         }else if(language == 1){
-            if(this.player.canMove){
+            if(this.player.canMove || sceneManager.scenes[1].elements.length == 1){
                 printImage("english/letras_turno_eng64", [mapW * 0.6 - (259/2), mapH * 0.9], [259, 64]);    
             }else{
                 printImage("english/letras_turnoEnem_eng64", [mapW * 0.6 - (513/2), mapH * 0.9], [513, 64]);    
