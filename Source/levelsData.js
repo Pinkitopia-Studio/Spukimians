@@ -6,7 +6,7 @@ var levelsData = {
             enemyX: 2,
             enemyY: 10,
             ghosts: 1,
-            minMovements:0,
+            minMovements:25,
             keyX: 3,
             keyY: 4,
             barriers: [
@@ -25,7 +25,7 @@ var levelsData = {
             enemyX: 7,
             enemyY: 3,
             ghosts: 1,
-            minMovements:20,
+            minMovements:15,
             keyX: 3,
             keyY: 4,
             barriers: [],
