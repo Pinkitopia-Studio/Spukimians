@@ -18,7 +18,7 @@ class Loading {
         this.active = true;
 
         this.video = document.getElementById("mivideo");
-        this.video.src = "assets/carga.mp4";
+        this.video.src = "Assets/carga.mp4";
         this.video.autoplay = false;
         this.video.muted="muted"
         let that = this;
