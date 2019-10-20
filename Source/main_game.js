@@ -183,7 +183,7 @@ class Game {
         
 
         //CREACION DE MENU DE PAUSA INCORPORADO EN ESTA ESCENA
-        var play = new Button("reanudar", (mapW * 0.2) - (204 / 2), 510, 204, 192, "");
+        var play = new Button("reanudar", (mapW * 0.3) - (204 / 2), 510, 204, 192, "");
         play.create();
         play.assignFunction(function(){
             esc = false;
@@ -194,7 +194,7 @@ class Game {
             mouseY = -1;
         });
         this.addElement(play, 1);
-        var replay = new Button("reiniciar", (mapW * 0.4) - (204 / 2), 510, 204, 192, "");
+        var replay = new Button("reiniciar", (mapW * 0.5) - (204 / 2), 510, 204, 192, "");
         replay.create();
         replay.assignFunction(function(){
             esc = false;
@@ -205,18 +205,12 @@ class Game {
             mouseY = -1;
         });
         this.addElement(replay, 1);
-        var options = new Button("options", (mapW * 0.6) - (204 / 2), 510, 204, 192, "");
-        options.create();
-        options.assignFunction(function(){
-
-        });
-        this.addElement(options, 1);
-        var exit = new Button("home", (mapW * 0.8) - (204 / 2), 510, 204, 192, "");
+        var exit = new Button("home", (mapW * 0.7) - (204 / 2), 510, 204, 192, "");
         exit.create();
         exit.assignFunction(function(){
             esc = false;
             that.activePause = false;
-            sceneManager.changeScenes(0);
+            sceneManager.changeScenes(4);
         });
         this.addElement(exit, 1);
 
