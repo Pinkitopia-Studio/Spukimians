@@ -7,7 +7,7 @@ class GameOver {
         this.xFloor = 0;
         this.velFloor = 3;
 
-        let back = new Button("ui/salir", 1240/2 - (365/2), 550, 365, 155, "");
+        let back = new Button("ui/salir", 1240/2 - (365/2)-10, 465, 365, 155, "");
 
         back.create();
         back.assignFunction(function(){
@@ -53,9 +53,12 @@ class GameOver {
             }
         }
 
-        printImage("gameover", [310, 210], [620, 420]);
+        printImage("gameover", [210, 210], [800, 464]);
         
-
+        for (var i = 0; i < 3; i++){
+            printImage("estrellaPlaceHolder", [500+(75*i), 235], [64, 64])
+        }
+        
         this.elements.forEach(element => {
             element.update();
         });

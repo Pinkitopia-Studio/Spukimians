@@ -43,7 +43,7 @@ class Score {
         }
 
         
-        let back = new Button("ui/salir", 1240/2 - (365/2), 550, 365, 155, "");
+        let back = new Button("ui/salir", 1240/2 - (365/2)-10, 465, 365, 155, "");
 
         back.create();
         back.assignFunction(function(){
@@ -106,15 +106,16 @@ class Score {
             }
         }
 
-        printImage("score", [310, 210], [620, 420]);
+        printImage("gameover", [210, 210], [800, 464]);
 
         if (this.bestScore){
             //Print "NEW" bestScore
         }
 
         for (var i = 0; i < 3; i++){
+            printImage("estrellaPlaceHolder", [500+(75*i), 235], [64, 64])
             if (this.stars[i]){
-                printImage("star", [450+(125*i), 365], [64, 64])
+                printImage("estrella", [500+(75*i), 235], [64, 64])
             }
         }
 
