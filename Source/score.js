@@ -27,7 +27,11 @@ class Score {
         this.stars = [true, false, false];
         this.bestMovements = JSON.parse(window.localStorage.getItem("spukimiansMemoryLevel"+level));
 
-        this.previousStars = this.bestMovements.stars;
+        if(!(this.bestMovements==null||this.bestMovements==undefined)){
+            this.previousStars = this.bestMovements.stars;
+        }else{
+            this.previousStars = [false,false,false];
+        }
         
         if (levelsData.data[this.level].ghosts == ghosts){
             this.stars[1] = true;
@@ -151,20 +155,23 @@ class Score {
         let unidades = 0;
         let decenas = 0;
         let myScoreChecked = false; //Para comprobar si se ha marcado mi puntuacion en mis Best Scores
-        for(var i=0; i<10; i++){
-            unidades = this.bestMovements.scores[i]%10;
-            decenas = (this.bestMovements.scores[i]-unidades)/10;
-            if(!myScoreChecked && this.bestMovements.scores[i] == this.movements){ //Si es mi score
-                printSpriteImg(printeanumero, [decenas*32,32], [1192-64, 261+(i*(32+10))], [32, 32]);
-                printSpriteImg(printeanumero, [unidades*32,32], [1224-64, 261+(i*(32+10))], [32, 32]);
-                myScoreChecked = true;
-            }else{
-                printSpriteImg(printeanumero, [decenas*32,0], [1192-64, 261+(i*(32+10))], [32, 32]);
-                printSpriteImg(printeanumero, [unidades*32,0], [1224-64, 261+(i*(32+10))], [32, 32]);
+        if (!(this.bestMovements == null || this.bestMovements == undefined)){
+            for(var i=0; i<10; i++){
+                unidades = this.bestMovements.scores[i]%10;
+                decenas = (this.bestMovements.scores[i]-unidades)/10;
+                if(!myScoreChecked && this.bestMovements.scores[i] == this.movements){ //Si es mi score
+                    printSpriteImg(printeanumero, [decenas*32,32], [1192-64, 261+(i*(32+10))], [32, 32]);
+                    printSpriteImg(printeanumero, [unidades*32,32], [1224-64, 261+(i*(32+10))], [32, 32]);
+                    myScoreChecked = true;
+                }else{
+                    printSpriteImg(printeanumero, [decenas*32,0], [1192-64, 261+(i*(32+10))], [32, 32]);
+                    printSpriteImg(printeanumero, [unidades*32,0], [1224-64, 261+(i*(32+10))], [32, 32]);
+                }
+                printImage("pasos", [1224-32, 261-16+(i*(32+10))], [32, 32]);
             }
-            printImage("pasos", [1224-32, 261-16+(i*(32+10))], [32, 32]);
+    
         }
-
+        
         //Pintar los pasos que has dado y si es o no best score
         unidades = this.movements%10;
         decenas = (this.movements-unidades)/10;

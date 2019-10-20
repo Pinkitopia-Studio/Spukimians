@@ -21,8 +21,8 @@ class LevelSelector {
                 break;
         }
 
-        let level1 = new Button("nums/1_xl", 1240/4 - (300/2), 300, 300, 240, "");
-        let level2 = new Button("nums/2_xl", 1240/2 - (300/2), 300, 300, 240, "");
+        let level1 = new Button("nums/1_xl", 1240/4 - (300/2), 300, 300, 240, "", true,"nums/1_xl");
+        let level2 = new Button("nums/2_xl", 1240/2 - (300/2), 300, 300, 240, "", true, "nums/2_xl");
         let back = new Button("volver_boton", (mapW * 0.25) - (204/2), mapH * 0.65, 204, 192, "");
         
         back.create();
@@ -39,6 +39,23 @@ class LevelSelector {
         level2.assignFunction(function(){
             sceneManager.changeScenes(1, 1);
         })
+
+        //Bloquear level 2
+        let scores;
+        let starsArray;
+
+        //Bloquear level 2
+        scores = JSON.parse(window.localStorage.getItem("spukimiansMemoryLevel"+0));
+        if(scores==null || scores == undefined || scores.stars==null || scores.stars == undefined){
+            starsArray = [false,false,false];
+        }else{
+            starsArray = scores.stars;
+        }
+        if(starsArray[0]==true){
+            level2.pushed = false;
+        }else{
+            level2.pushed = true;
+        }
         
         
         this.addElement(level1);
@@ -59,10 +76,7 @@ class LevelSelector {
             
             var spuki = new Spuki(1250 + 10*i , yPos, i*3, i/2, yPos + 200, yPos - 200, "ghostMenu");
             this.ghosts.push(spuki);
-        }
-        
-        
-        
+        }        
     }
 
     update(){
@@ -87,6 +101,45 @@ class LevelSelector {
         });
 
         printImage(this.source, [1240/2 - (908/2), 100], [908, 128]);
+
+
+        //Poner estrellas en los niveles
+        let scores;
+        let starsArray;
+
+        //Nivel 1 Siempre accesible
+        scores = JSON.parse(window.localStorage.getItem("spukimiansMemoryLevel"+0));
+        if(scores==null || scores == undefined || scores.stars==null || scores.stars == undefined){
+            starsArray = [false,false,false];
+        }else{
+            starsArray = scores.stars;
+        }
+        for (var i = 0; i<3; i++){
+            if(starsArray[i]){
+                printImage("estrella", [210+(i*64), 230], [64, 64]);
+            }else{
+                printImage("estrellaPlaceHolder", [210+(i*64), 230], [64, 64]);
+            }
+        }
+
+        //Nivel 2
+        if(starsArray[0]==true){
+            scores = JSON.parse(window.localStorage.getItem("spukimiansMemoryLevel"+1));
+            if(scores==null || scores == undefined || scores.stars==null || scores.stars == undefined){
+                starsArray = [false,false,false];
+            }else{
+                starsArray = scores.stars;
+            }
+            for (var i = 0; i<3; i++){
+                if(starsArray[i]){
+                    printImage("estrella", [520+(i*64), 230], [64, 64]);
+                }else{
+                    printImage("estrellaPlaceHolder", [520+(i*64), 230], [64, 64]);
+                }
+            }
+        }else{
+            printImage("scaryLocker", [505+(1*64), 220], [96, 96]);
+        }
 
         this.elements.forEach(element => {
             element.update();
